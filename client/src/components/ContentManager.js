@@ -39,7 +39,7 @@ export default class ContentManager extends Component {
         {/* {!empty && <div>Time to add some more content</div>} */}
         {
           this.state.content.map(el => {
-            return <ContentDashCard content={el} />;
+            return <ContentDashCard content={el}  getData={this.getData}/>;
           })}
       </>
     );
