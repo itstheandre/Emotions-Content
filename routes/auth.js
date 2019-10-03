@@ -32,20 +32,14 @@ router.post("/login", (req, res) => {
 
 router.post("/signup", (req, res, next) => {
   const { username, password } = req.body;
-
+  console.log(username, password);
   if (password.length < 8) {
     return res
       .status(400)
       .json({ message: "Need to have more than 8 characters" });
   }
-  // if (!username) {
-  //   return res.status(400).json({ message: "Your username cannot be empty" });
-  // }
-
-  if (username === "" || password === "") {
-    return res
-      .status(400)
-      .json({ message: "Please indicate username and password" });
+  if (!username) {
+    return res.status(400).json({ message: "Your username cannot be empty" });
   }
 
   User.findOne({ username }).then(found => {

@@ -52,6 +52,7 @@ export default class Signup extends Component {
             value={this.state.password}
             onChange={this.handleChange}
           />
+          {this.state.message && <h1>{this.state.message}</h1>}
           <button type='submit'>Create Account</button>
         </form>
       </>
