@@ -83,4 +83,7 @@ app.use("/", index);
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
 
+const contentManager = require("./routes/content");
+app.use("/api/content",contentManager);
+
 module.exports = app;
