@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { signup } from "../services/api";
+import { login } from "../services/api";
 
-export default class Signup extends Component {
+export default class Login extends Component {
   state = {
     username: "",
     password: "",
@@ -34,7 +34,7 @@ export default class Signup extends Component {
     console.log(this.state.username);
     return (
       <>
-        <h1>Sign up</h1>
+        <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor='username'>Username: </label>
           <input
