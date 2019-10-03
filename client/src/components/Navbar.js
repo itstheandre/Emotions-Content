@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../services/api";
 
@@ -11,6 +11,7 @@ const handleLogout = props => {
 const Navbar = props => {
   return (
     <nav>
+      {props.user && <h1>Hey {props.user.username}</h1>}
       <Link to='/'>Home</Link>
       {props.user ? (
         <>
