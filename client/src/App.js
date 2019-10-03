@@ -1,10 +1,10 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
 import { Route } from "react-router-dom";
 import Login from "./components/Login";
+import ContentManager from "./components/ContentManager";
 
 class App extends React.Component {
   state = {
@@ -18,6 +18,7 @@ class App extends React.Component {
   };
 
   render() {
+    console.log(this.state.user._id);
     return (
       <div className='App'>
         <Navbar user={this.state.user} setUser={this.setUser} />
@@ -30,6 +31,11 @@ class App extends React.Component {
           exact
           path='/login'
           render={props => <Login setUser={this.setUser} {...props} />}
+        />
+        <Route
+          exact
+          path='/content'
+          render={props => <ContentManager user={this.state.user} {...props} />}
         />
       </div>
     );
