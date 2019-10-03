@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import ContentDashCard from "./ContentDashCard";
+import { Link } from "react-router-dom";
 
 export default class ContentManager extends Component {
   state = {
@@ -32,6 +33,7 @@ export default class ContentManager extends Component {
     return (
       <>
         <h2>My Content Dashboard</h2>
+        <Link to='/content/add'>Add content</Link>
         {!empty && <div>Time to add some more content</div>}
         {empty &&
           content.map(el => {

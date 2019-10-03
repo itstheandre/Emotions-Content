@@ -5,6 +5,7 @@ import Signup from "./components/Signup";
 import { Route } from "react-router-dom";
 import Login from "./components/Login";
 import ContentManager from "./components/ContentManager";
+import AddContent from "./components/AddContent";
 
 class App extends React.Component {
   state = {
@@ -37,6 +38,7 @@ class App extends React.Component {
           path='/content'
           render={props => <ContentManager user={this.state.user} {...props} />}
         />
+        <Route exact path='/content/add' component={AddContent} />
       </div>
     );
   }
