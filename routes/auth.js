@@ -38,9 +38,9 @@ router.post("/signup", (req, res, next) => {
       .status(400)
       .json({ message: "Need to have more than 8 characters" });
   }
-  if (!username) {
-    return res.status(400).json({ message: "Your username cannot be empty" });
-  }
+  // if (!username) {
+  //   return res.status(400).json({ message: "Your username cannot be empty" });
+  // }
 
   if (username === "" || password === "") {
     return res

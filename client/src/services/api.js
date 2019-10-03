@@ -4,6 +4,7 @@ const signup = (username, password) => {
   return axios
     .post("/api/auth/signup", { username, password })
     .then(response => {
+      console.log("Response: I copied from Montasar:", response.data);
       return response.data;
     })
     .catch(err => {
