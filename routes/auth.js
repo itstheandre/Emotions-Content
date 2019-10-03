@@ -27,7 +27,7 @@ router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   if (username === "" || password === "") {
-    res.render("auth/signup", { message: "Indicate username and password" });
+    res.json("auth/signup", { message: "Indicate username and password" });
     return;
   }
 
@@ -58,6 +58,12 @@ router.post("/signup", (req, res, next) => {
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
+});
+
+// checks if the user has an active session
+// GET /api/auth/loggedin
+router.get("/loggedin", (req, res) => {
+  res.json(req.user);
 });
 
 module.exports = router;
