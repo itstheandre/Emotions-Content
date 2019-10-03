@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 
 const ContentDashCard = props => {
   const handleClick = event => {
-    return Axios.delete(`/content/delete/${props._id}`);
+    return Axios.delete(`/api/content/${props._id}`).then(response => {
+      console.log(response.data);
+      props.getData();
+    });
   };
 
   return (
