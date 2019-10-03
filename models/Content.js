@@ -11,3 +11,8 @@ const contentSchema = new Schema({
 
 const Content = model("Content", contentSchema);
 module.exports = Content;
+
+/* 
+Likes?
+Comments
+*/
