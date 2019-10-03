@@ -15,6 +15,7 @@ const Navbar = props => {
       <Link to='/'>Home</Link>
       {props.user ? (
         <>
+          <Link to='/content'>Content</Link>
           <Link to='/' onClick={() => handleLogout(props)}>
             Logout
           </Link>{" "}
