@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { Schema, model } = mongoose;
 
 const userSchema = new Schema(
   {
     username: String,
-    password: String
+    password: String,
+    socialId: String,
+    profilePicUrl: String
   },
   {
     timestamps: {
@@ -14,7 +16,5 @@ const userSchema = new Schema(
   }
 );
 
-const User = mongoose.model("User", userSchema);
+const User = model("User", userSchema);
 module.exports = User;
-
-// Alfonso is funny
