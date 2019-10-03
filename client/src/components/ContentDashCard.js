@@ -9,10 +9,10 @@ const ContentDashCard = props => {
 
   return (
     <div className='contentCard'>
-      <h2>{props.title}</h2>
-      <h4>{props.date}</h4>
-      <Link to={`/${props._id}`}>View</Link>
-      <Link to={`/edit/${props._id}`}>Edit</Link>
+      <h2>{props.content.title}</h2>
+      <h4>{props.content.date}</h4>
+      <Link to={`/${props.content._id}`}>View</Link>
+      <Link to={`/edit/${props.content._id}`}>Edit</Link>
       <Link onClick={handleClick}>Delete</Link>
 
       <button>Edit</button>
