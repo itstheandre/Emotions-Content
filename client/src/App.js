@@ -4,8 +4,8 @@ import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
 import { Route } from "react-router-dom";
 import Login from "./components/Login";
-import ContentManager from "./components/ContentManager";
-import AddContent from "./components/AddContent";
+import ContentManager from "./components/Content-Dashboard/ContentManager";
+import AddContent from "./components/Content-Dashboard/AddContent";
 
 class App extends React.Component {
   state = {
