@@ -7,6 +7,8 @@ import Login from "./components/Login";
 import ContentManager from "./components/Content-Dashboard/ContentManager";
 import AddContent from "./components/Content-Dashboard/AddContent";
 
+import FaceApi from "./components/face-api/FaceApi";
+
 class App extends React.Component {
   state = {
     user: this.props.user
@@ -20,24 +22,25 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='App'>
+      <div className="App">
         <Navbar user={this.state.user} setUser={this.setUser} />
         <Route
           exact
-          path='/signup'
+          path="/signup"
           render={props => <Signup setUser={this.setUser} {...props} />}
         />
         <Route
           exact
-          path='/login'
+          path="/login"
           render={props => <Login setUser={this.setUser} {...props} />}
         />
         <Route
           exact
-          path='/content'
+          path="/content"
           render={props => <ContentManager user={this.state.user} {...props} />}
         />
-        <Route exact path='/content/add' component={AddContent} />
+        <Route exact path="/content/add" component={AddContent} />
+        <FaceApi />
       </div>
     );
   }

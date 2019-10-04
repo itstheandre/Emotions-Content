@@ -20,3 +20,25 @@
 .App-link {
   color: #09d3ac;
 }
+
+/*FaceApi */
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+video {
+  opacity: 0;
+}
+
+canvas {
+  position: absolute;
+  opacity: 0;
+}
+
+/* /////////////////////// */
