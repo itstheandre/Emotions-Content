@@ -39,8 +39,8 @@ class App extends React.Component {
           path='/content-dashboard'
           render={props => <ContentManager user={this.state.user} {...props} />}
         />
-        <Route exact path='/content-dashboard/:unique' component={Post} />
         <Route exact path='/content-dashboard/add' component={AddContent} />
+        <Route exact path='/content-dashboard/:unique' component={Post} />
         <Route exact path='/edit/:editPost' component={EditContent} />
       </div>
     );

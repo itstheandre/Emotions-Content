@@ -23,7 +23,7 @@ export default class Post extends Component {
         body,
         id,
         owner,
-        textToCopy: `http://localhost:5005/${owner}/${id}`
+        textToCopy: `http://localhost:5005/u/${owner}/${id}`
       });
     });
   };
