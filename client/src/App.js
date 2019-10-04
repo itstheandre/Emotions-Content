@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import ContentManager from "./components/Content-Dashboard/ContentManager";
 import AddContent from "./components/Content-Dashboard/AddContent";
 import Post from "./components/Post";
+import EditContent from "./components/Content-Dashboard/EditContent";
 
 class App extends React.Component {
   state = {
@@ -40,6 +41,7 @@ class App extends React.Component {
         />
         <Route exact path='/content-dashboard/:unique' component={Post} />
         <Route exact path='/content-dashboard/add' component={AddContent} />
+        <Route exact path='/edit/:editPost' component={EditContent} />
       </div>
     );
   }

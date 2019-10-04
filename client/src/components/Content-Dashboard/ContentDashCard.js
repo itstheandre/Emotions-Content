@@ -6,12 +6,12 @@ const ContentDashCard = props => {
   const handleClick = event => {
     event.preventDefault();
     return Axios.delete(`/api/content/${props.content._id}`).then(response => {
-      console.log(response.data);
+      // console.log(response.data);
       props.getData();
     });
   };
 
-  console.log("props here", props.content);
+  // console.log("props here", props.content);
   return (
     <div className='contentCard'>
       <h2>{props.content.title}</h2>
@@ -24,7 +24,14 @@ const ContentDashCard = props => {
           View
         </Link>
       </button>
-      {/* <Link to={`/edit/${props.content._id}`}>Edit</Link> */}
+      <button>
+        <Link
+          style={{ textDecoration: "none", color: "black" }}
+          to={`/edit/${props.content._id}`}
+        >
+          Edit
+        </Link>
+      </button>
       <button onClick={handleClick}>Delete</button>
     </div>
   );

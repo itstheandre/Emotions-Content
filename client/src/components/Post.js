@@ -3,7 +3,10 @@ import axios from "axios";
 
 export default class Post extends Component {
   state = {
-    post: null
+    title: "",
+    body: "",
+    id: "",
+    owner: ""
   };
 
   getPostData = () => {
@@ -11,15 +14,38 @@ export default class Post extends Component {
     axios.get(`/api/content/${unique}`).then(response => {
       const post = response.data;
       console.log("Something to understand what is here  ", post);
+      const { title, body } = post;
+      const id = post._id;
+      const owner = post.owner.username;
+      console.log(post);
+      this.setState({
+        title,
+        body,
+        id,
+        owner,
+        textToCopy: `http://localhost:5005/${owner}/${id}`
+      });
     });
   };
 
   componentDidMount = () => {
-    console.log("Component mounted!");
     this.getPostData();
   };
 
   render() {
-    return <div>Added stuff here</div>;
+    console.log(this.state);
+    return (
+      <div>
+        <h1>{this.state.title}</h1>
+        <p>{this.state.body}</p>
+        <button
+          onClick={() => {
+            navigator.clipboard.writeText(this.state.textToCopy);
+          }}
+        >
+          Share this link and check the emotional responses.
+        </button>
+      </div>
+    );
   }
 }

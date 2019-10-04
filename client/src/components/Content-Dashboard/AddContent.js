@@ -5,15 +5,19 @@ export default class AddContent extends Component {
   state = {
     url: "",
     title: "",
-    contentType: ""
+    contentType: "",
+    body: ""
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    const { url, title, contentType } = this.state;
-    Axios.post("/api/content/add", { url, title, contentType }).then(() => {
-      this.props.history.push("/content-dashboard");
-    });
+    const { url, title, contentType, body } = this.state;
+    console.log("Anyone?");
+    Axios.post("/api/content/add", { url, title, contentType, body }).then(
+      () => {
+        this.props.history.push("/content-dashboard");
+      }
+    );
   };
 
   handleChange = event => {
@@ -49,6 +53,14 @@ export default class AddContent extends Component {
             name='contentType'
             id='contentType'
             value={this.state.contentType}
+            onChange={this.handleChange}
+          />
+          <label htmlFor='body'>Body</label>
+          <input
+            type='text'
+            name='body'
+            id='body'
+            value={this.state.body}
             onChange={this.handleChange}
           />
           <button type='submit'>Add your lovely content now</button>
