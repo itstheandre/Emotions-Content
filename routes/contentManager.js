@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Content = require("../models/Content");
 const User = require("../models/User");
+const uploadCloud = require("../config/cloudinary");
 
 // Get all documents you wrote
 router.get("/", (req, res) => {
@@ -29,8 +30,16 @@ router.get("/:id", (req, res) => {
 });
 
 // Create content
-router.post("/add", (req, res) => {
+router.post("/add", uploadCloud.single("imagePath"), (req, res,next) => {
   const { url, title, contentType, body } = req.body;
+  const image = req.file
+  console.log(image)
+  // const image=req.user.imagePath;
+  // let imagePath = req.file ? req.file.url : req.user.imagePath;
+  // console.log("file url content: ", req.file);
+  // console.log("user content: ", req.user.image);
+
+  // console.log("Gimme da content brah: "+imagePath)
   const owner = req.user;
   const date = new Date()
     .toJSON()
@@ -47,7 +56,7 @@ router.post("/add", (req, res) => {
 });
 
 // Delete Content
-router.delete("/:id/:banana", (req, res) => {
+router.delete("/:id", (req, res) => {
   const contentId = req.params.id;
 
   Content.findById(contentId)

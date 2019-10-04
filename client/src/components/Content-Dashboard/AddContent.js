@@ -6,14 +6,15 @@ export default class AddContent extends Component {
     url: "",
     title: "",
     contentType: "",
-    body: ""
+    body: "",
+    imagePath:''
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    const { url, title, contentType, body } = this.state;
+    const { url, title, contentType, body, imagePath } = this.state;
     console.log("Anyone?");
-    Axios.post("/api/content/add", { url, title, contentType, body }).then(
+    Axios.post("/api/content/add", { url, title, contentType, body, imagePath }).then(
       () => {
         this.props.history.push("/content-dashboard");
       }
@@ -22,6 +23,7 @@ export default class AddContent extends Component {
 
   handleChange = event => {
     const { name, value } = event.target;
+    console.log(value)
     this.setState({
       [name]: value
     });
@@ -30,7 +32,7 @@ export default class AddContent extends Component {
   render() {
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}  encType="multipart/form-data">
           <label htmlFor='url'>URL</label>
           <input
             type='text'
@@ -39,6 +41,9 @@ export default class AddContent extends Component {
             value={this.state.url}
             onChange={this.handleChange}
           />
+          <label htmlFor="content">Content</label>
+          <input type="file" name="imagePath" id="imagePath" value={this.state.imagePath} onChange={this.handleChange} />
+          
           <label htmlFor='title'>Title</label>
           <input
             type='text'

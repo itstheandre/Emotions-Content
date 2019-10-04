@@ -14,7 +14,12 @@ const contentSchema = new Schema({
   title:String,
   body:String,
   averageEmotion: Array,
-  maxEmotion: Array
+  maxEmotion: Array,
+  imagePath: {
+    type: String,
+    // default:
+    //   "https://res.cloudinary.com/itstheandre/image/upload/v1568908103/my-dev-dash/xkg64abvucedo88zeej8.png"
+  },
 });
 
 const Content = model("Content", contentSchema);
