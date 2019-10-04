@@ -12,8 +12,12 @@ const userSchema = new Schema(
     timestamps: {
       createdAt: "created_at",
       updatedAt: "updated_at"
-    }
-  }
+    },
+    content: [{ type: Schema.Types.ObjectId, ref: "Content" },]
+
+  },
+  
+
 );
 
 const User = model("User", userSchema);
