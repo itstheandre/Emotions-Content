@@ -13,6 +13,8 @@ const contentSchema = new Schema({
   url:String,
   title:String,
   body:String,
+  averageEmotion: Array,
+  maxEmotion: Array
 });
 
 const Content = model("Content", contentSchema);
