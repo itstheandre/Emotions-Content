@@ -12,7 +12,7 @@ export default class AddContent extends Component {
     event.preventDefault();
     const { url, title, contentType } = this.state;
     Axios.post("/api/content/add", { url, title, contentType }).then(() => {
-      this.props.history.push("/content");
+      this.props.history.push("/content-dashboard");
     });
   };
 

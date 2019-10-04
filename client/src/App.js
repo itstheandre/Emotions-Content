@@ -6,6 +6,7 @@ import { Route } from "react-router-dom";
 import Login from "./components/Login";
 import ContentManager from "./components/Content-Dashboard/ContentManager";
 import AddContent from "./components/Content-Dashboard/AddContent";
+import Post from "./components/Post";
 
 class App extends React.Component {
   state = {
@@ -34,10 +35,11 @@ class App extends React.Component {
         />
         <Route
           exact
-          path='/content'
+          path='/content-dashboard'
           render={props => <ContentManager user={this.state.user} {...props} />}
         />
-        <Route exact path='/content/add' component={AddContent} />
+        <Route exact path='/content-dashboard/:unique' component={Post} />
+        <Route exact path='/content-dashboard/add' component={AddContent} />
       </div>
     );
   }
