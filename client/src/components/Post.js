@@ -13,17 +13,19 @@ export default class Post extends Component {
     const { unique } = this.props.match.params;
     axios.get(`/api/content/${unique}`).then(response => {
       const post = response.data;
-      console.log("Something to understand what is here  ", post);
+      console.log(
+        "Something to understand what is here  ",
+        post.owner.username
+      );
       const { title, body } = post;
       const id = post._id;
       const owner = post.owner.username;
-      console.log(post);
       this.setState({
         title,
         body,
         id,
         owner,
-        textToCopy: `http://localhost:5005/u/${owner}/${id}`
+        textToCopy: `http://localhost:3000/u/${owner}/${id}`
       });
     });
   };

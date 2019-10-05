@@ -84,6 +84,9 @@ const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
 
 const contentManager = require("./routes/contentManager");
-app.use("/api/content",contentManager);
+app.use("/api/content", contentManager);
+
+const userRoutes = require("./routes/user");
+app.use("/u", userRoutes);
 
 module.exports = app;
