@@ -32,8 +32,8 @@ router.get("/:id", (req, res) => {
 // Create content
 router.post("/add", uploadCloud.single("imagePath"), (req, res,next) => {
   const { url, title, contentType, body } = req.body;
-  const image = req.file
-  console.log(image)
+  // const image = req.file
+  // console.log(image)
   // const image=req.user.imagePath;
   // let imagePath = req.file ? req.file.url : req.user.imagePath;
   // console.log("file url content: ", req.file);
