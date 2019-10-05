@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import FaceApi from "../face-api/FaceApi";
 
 export default class AddContent extends Component {
   state = {
@@ -12,7 +13,7 @@ export default class AddContent extends Component {
     event.preventDefault();
     const { url, title, contentType } = this.state;
     Axios.post("/api/content/add", { url, title, contentType }).then(() => {
-      this.props.history.push("/content");
+      this.props.history.push("/content-dashboard");
     });
   };
 
@@ -53,6 +54,7 @@ export default class AddContent extends Component {
           />
           <button type='submit'>Add your lovely content now</button>
         </form>
+        <FaceApi />
       </>
     );
   }

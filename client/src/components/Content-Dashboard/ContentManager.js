@@ -18,7 +18,7 @@ export default class ContentManager extends Component {
       // const ownerContent = contentArr.owner.filter(
       //   el => el.owner._id === this.state.user._id
       // );
-      console.log(contentArr);
+      // console.log(contentArr);
       this.setState({
         content: contentArr.data
       });
@@ -26,7 +26,7 @@ export default class ContentManager extends Component {
   };
 
   render() {
-    console.log(this.state.content);
+    // console.log(this.state.content);
     const { user, content } = this.state;
     const empty = content.length === 0 ? false : "Not empty";
 
@@ -35,10 +35,12 @@ export default class ContentManager extends Component {
     return (
       <>
         <h2>My Content Dashboard</h2>
-        <Link to='/content/add'>Add content</Link>
+        <Link to='/content-dashboard/add'>Add content</Link>
         {/* {!empty && <div>Time to add some more content</div>} */}
         {this.state.content.map(el => {
-          return <ContentDashCard content={el} getData={this.getData} />;
+          return (
+            <ContentDashCard content={el} getData={this.getData} key={el._id} />
+          );
         })}
       </>
     );
