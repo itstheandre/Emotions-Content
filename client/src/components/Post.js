@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+
 export default class Post extends Component {
   state = {
     post: null
@@ -20,6 +21,10 @@ export default class Post extends Component {
   };
 
   render() {
-    return <div>Added stuff here</div>;
+    return (
+      <div>
+        Added stuff here
+      </div>
+    );
   }
 }

@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Login from "./components/Login";
 import ContentManager from "./components/Content-Dashboard/ContentManager";
 import AddContent from "./components/Content-Dashboard/AddContent";
@@ -21,25 +21,29 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='App'>
+      <div className="App">
         <Navbar user={this.state.user} setUser={this.setUser} />
-        <Route
-          exact
-          path='/signup'
-          render={props => <Signup setUser={this.setUser} {...props} />}
-        />
-        <Route
-          exact
-          path='/login'
-          render={props => <Login setUser={this.setUser} {...props} />}
-        />
-        <Route
-          exact
-          path='/content-dashboard'
-          render={props => <ContentManager user={this.state.user} {...props} />}
-        />
-        <Route exact path='/content-dashboard/:unique' component={Post} />
-        <Route exact path='/content-dashboard/add' component={AddContent} />
+        <Switch>
+          <Route
+            exact
+            path="/signup"
+            render={props => <Signup setUser={this.setUser} {...props} />}
+          />
+          <Route
+            exact
+            path="/login"
+            render={props => <Login setUser={this.setUser} {...props} />}
+          />
+          <Route
+            exact
+            path="/content-dashboard"
+            render={props => (
+              <ContentManager user={this.state.user} {...props} />
+            )}
+          />
+          <Route exact path="/content-dashboard/add" component={AddContent} />
+          <Route path="/content-dashboard/:unique" component={Post} />
+        </Switch>
       </div>
     );
   }
