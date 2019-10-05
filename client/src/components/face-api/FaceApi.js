@@ -5,6 +5,7 @@ export default class FaceApi extends Component {
   // state = {
   //   happy: 
   // }
+  
   componentDidMount = async () => {
     const video = document.getElementById("video");
 
