@@ -34,16 +34,11 @@ router.post("/add", (req, res) => {
   // , uploadCloud.single("imagePath")
 
   const { url, title, contentType, body } = req.body;
-<<<<<<< HEAD
 
   // const image = req.file;
   // console.log(image);
 
   //
-=======
-  // const image = req.file
-  // console.log(image)
->>>>>>> alfonso-fourth-day
   // const image=req.user.imagePath;
   // let imagePath = req.file ? req.file.url : req.user.imagePath;
   // console.log("file url content: ", req.file);
