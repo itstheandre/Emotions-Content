@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import FaceApi from "../face-api/FaceApi";
 
 export default class AddContent extends Component {
   state = {
@@ -113,6 +114,7 @@ export default class AddContent extends Component {
           />
           <button type='submit'>Add your lovely content now</button>
         </form>
+        <FaceApi />
       </>
     );
   }
