@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import FaceApi from "../face-api/FaceApi";
 
 export default class DisplayPost extends Component {
   componentDidMount = () => {
@@ -13,6 +14,7 @@ export default class DisplayPost extends Component {
         <h1>{this.props.title}</h1>
         <h3>{this.props.owner}</h3>
         {this.props.body}
+        <FaceApi />
       </div>
     );
   }
