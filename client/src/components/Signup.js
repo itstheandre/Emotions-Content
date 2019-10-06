@@ -5,13 +5,14 @@ export default class Signup extends Component {
   state = {
     username: "",
     password: "",
-    message: ""
+    message: "",
+    fullName: ""
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    const { username, password } = this.state;
-    signup(username, password).then(data => {
+    const { username, password, fullName } = this.state;
+    signup(username, password, fullName).then(data => {
       if (data.message) {
         this.setState({
           message: data.message
@@ -19,7 +20,7 @@ export default class Signup extends Component {
       } else {
         this.props.setUser(data);
         this.props.history.push("/");
-        console.log(data);
+        // console.log(data);
       }
     });
   };
@@ -31,7 +32,7 @@ export default class Signup extends Component {
     });
   };
   render() {
-    console.log(this.state.username);
+    // console.log(this.state.username);
     return (
       <>
         <h1>Sign up</h1>
@@ -42,6 +43,14 @@ export default class Signup extends Component {
             name='username'
             id='username'
             value={this.state.username}
+            onChange={this.handleChange}
+          />
+          <label htmlFor='fullName'>Full Name: </label>
+          <input
+            type='text'
+            name='fullName'
+            id='fullName'
+            value={this.state.fullName}
             onChange={this.handleChange}
           />
           <label htmlFor='password'>Password</label>

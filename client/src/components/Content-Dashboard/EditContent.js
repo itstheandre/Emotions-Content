@@ -12,7 +12,7 @@ export default class EditContent extends Component {
     const { editPost } = this.props.match.params;
     // console.log(this.props.match.params.editPost);
     axios.get(`/api/content/${editPost}`).then(post => {
-      console.log(post.data);
+      // console.log(post.data);
       this.setState({
         title: post.data.title,
         body: post.data.body,
@@ -22,7 +22,6 @@ export default class EditContent extends Component {
   };
 
   componentDidMount = () => {
-    console.log("Component Mounted");
     this.getData();
   };
 

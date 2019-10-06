@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 export default class ContentManager extends Component {
   state = {
     user: this.props.user,
-    content: []
+    content: [],
+    textToCopy: ""
   };
 
   componentDidMount = () => {
@@ -19,6 +20,14 @@ export default class ContentManager extends Component {
         content: contentArr.data
       });
     });
+  };
+
+  setTextToCopy = id => {
+    const { username } = this.state.user.username;
+    this.setState({
+      textToCopy: `http://localhost:3000/u/${username}/${id}`
+    });
+    navigator.clipboard.writeText(this.state.textToCopy);
   };
 
   render() {
@@ -35,7 +44,12 @@ export default class ContentManager extends Component {
         {!filled && <div>Time to add some more content</div>}
         {this.state.content.reverse().map(el => {
           return (
-            <ContentDashCard content={el} getData={this.getData} key={el._id} />
+            <ContentDashCard
+              content={el}
+              getData={this.getData}
+              key={el._id}
+              user={this.state.user}
+            />
           );
         })}
       </>

@@ -5,21 +5,22 @@ export default class AddContent extends Component {
   state = {
     url: "",
     title: "",
-    contentType: "",
+    contentType: "text",
     body: "",
-    imagePath: ""
+    imagePath: "",
+    encType: false
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    const { url, title, contentType, body, imagePath } = this.state;
-    console.log("Anyone?");
+    // imagePath
+    const { url, title, contentType, body } = this.state;
     Axios.post("/api/content/add", {
       url,
       title,
       contentType,
-      body,
-      imagePath
+      body
+      // imagePath
     }).then(() => {
       this.props.history.push("/content-dashboard");
     });
@@ -27,31 +28,44 @@ export default class AddContent extends Component {
 
   handleChange = event => {
     const { name, value } = event.target;
-    console.log(value);
+    // console.log(name);
+    // console.log(value);
     this.setState({
       [name]: value
     });
   };
 
+  handleSelect = event => {
+    const { name, value } = event.target;
+    if (value !== "text") {
+      this.setState({
+        [name]: value,
+        encType: true
+      });
+    } else if (value === "text") {
+      this.setState({
+        [name]: value,
+        encType: false
+      });
+    }
+  };
+
+  // encType='multipart/form-data'
   render() {
+    const { contentType } = this.state;
+    const notText = contentType !== "text" ? true : false;
+
+    const enctype = this.state.encType ? "multipart/form-data" : "";
+
     return (
       <>
-        <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
+        <form onSubmit={this.handleSubmit} encType={enctype}>
           <label htmlFor='url'>URL</label>
           <input
             type='text'
             name='url'
             id='title'
-            value={this.state.url} 
-            onChange={this.handleChange}
-          />
-          <label htmlFor='content'>Content</label>
-          <input
-            type='file'
-            name='imagePath'
-            id='imagePath'
-            ec
-            value={this.state.imagePath}
+            value={this.state.url}
             onChange={this.handleChange}
           />
 
@@ -64,13 +78,31 @@ export default class AddContent extends Component {
             onChange={this.handleChange}
           />
           <label htmlFor='contentType'>Content Type</label>
-          <input
-            type='text'
-            name='contentType'
+          <select
             id='contentType'
+            name='contentType'
             value={this.state.contentType}
-            onChange={this.handleChange}
-          />
+            onChange={this.handleSelect}
+          >
+            <option value='text'>Text</option>
+            <option value='audio'>Audio</option>
+            <option value='video'>Video</option>
+            <option value='image'>Image</option>
+          </select>
+
+          {notText && (
+            <>
+              <label htmlFor='content'>Content</label>
+              <input
+                type='file'
+                name='imagePath'
+                id='imagePath'
+                ec
+                value={this.state.imagePath}
+                onChange={this.handleChange}
+              />{" "}
+            </>
+          )}
           <label htmlFor='body'>Body</label>
           <input
             type='text'

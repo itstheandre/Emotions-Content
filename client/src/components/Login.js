@@ -36,7 +36,7 @@ export default class Login extends Component {
     });
   };
   render() {
-    console.log(this.state.username);
+    // console.log(this.state.username);
     return (
       <>
         <h1>Login</h1>

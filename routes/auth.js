@@ -31,8 +31,8 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/signup", (req, res, next) => {
-  const { username, password } = req.body;
-  console.log(username, password);
+  const { username, password, fullName } = req.body;
+  console.log(username, password, fullName);
   if (password.length < 8) {
     return res
       .status(400)
@@ -51,7 +51,7 @@ router.post("/signup", (req, res, next) => {
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
 
-    return User.create({ username, password: hashPass })
+    return User.create({ username, password: hashPass, fullName })
       .then(dbUser => {
         req.login(dbUser, err => {
           if (err) {

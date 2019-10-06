@@ -4,14 +4,14 @@ const multer = require("multer");
 //
 
 cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_KEY,
-  api_secret: process.env.CLOUD_SECRET
+  cloud_name: process.env.cloudName,
+  api_key: process.env.cloudKey,
+  api_secret: process.env.cloudSecret
 });
 const storage = cloudinaryStorage({
   cloudinary,
   folder: "motus", // The name of the folder in cloudinary
-  allowedFormats: ["jpg", "png"],
+  allowedFormats: ["jpg", "png", "avi", "mp4"],
   transformation: [
     {
       width: 150,

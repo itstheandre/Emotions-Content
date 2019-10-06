@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const signup = (username, password) => {
+const signup = (username, password, fullName) => {
   return axios
-    .post("/api/auth/signup", { username, password })
+    .post("/api/auth/signup", { username, password, fullName })
     .then(response => {
       console.log("Response: I copied from Montasar:", response.data);
       return response.data;

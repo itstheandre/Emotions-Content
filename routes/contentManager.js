@@ -30,10 +30,15 @@ router.get("/:id", (req, res) => {
 });
 
 // Create content
-router.post("/add", uploadCloud.single("imagePath"), (req, res,next) => {
+router.post("/add", (req, res) => {
+  // , uploadCloud.single("imagePath")
+
   const { url, title, contentType, body } = req.body;
-  const image = req.file
-  console.log(image)
+
+  // const image = req.file;
+  // console.log(image);
+
+  //
   // const image=req.user.imagePath;
   // let imagePath = req.file ? req.file.url : req.user.imagePath;
   // console.log("file url content: ", req.file);
@@ -41,12 +46,13 @@ router.post("/add", uploadCloud.single("imagePath"), (req, res,next) => {
 
   // console.log("Gimme da content brah: "+imagePath)
   const owner = req.user;
+  const views = 0;
   const date = new Date()
     .toJSON()
     .slice(0, 10)
     .replace(/-/g, "/");
   User.findById(req.user._id).then(found => {
-    Content.create({ url, title, date, contentType, owner, body }).then(
+    Content.create({ url, title, date, contentType, owner, body, views }).then(
       response => {
         console.log("response here: ", response);
         res.json(response);
