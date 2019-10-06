@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import FaceApi from "./face-api/FaceApi"
+
 
 
 export default class Post extends Component {
@@ -48,7 +48,7 @@ export default class Post extends Component {
         >
           Share this link and check the emotional responses.
         </button>
-        <FaceApi />
+        
       </div>
     );
   }
