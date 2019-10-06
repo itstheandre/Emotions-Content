@@ -10,7 +10,7 @@ const contentSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref: "User" },
   views: Number,
   date: String,
-  url:String,
+  imageUrl: String,
   title:String,
   body:String,
   averageEmotion: {

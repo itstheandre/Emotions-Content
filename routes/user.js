@@ -3,12 +3,21 @@
 const express = require("express");
 const router = express.Router();
 const Content = require("../models/Content");
+const User=require("../models/User");
+
+router.get("/api/:user",(req,res)=>{
+  const userId=req.params.user;
+  Content.find({owner:userId}).then(userDetails=>{
+    res.json(userDetails);
+  })
+})
+
 
 router.get("/api/:user/:id", (req, res) => {
   console.log(req.params);
   const { id } = req.params;
   console.log("Hello");
-  Content.findById(id)
+  Content.findById(id).populate("owner")
     .then(response => {
       res.json(response);
     })

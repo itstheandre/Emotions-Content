@@ -9,7 +9,6 @@ import AddContent from "./components/Content-Dashboard/AddContent";
 import Post from "./components/Post";
 import EditContent from "./components/Content-Dashboard/EditContent";
 import DetectEmotion from "./components/UserViews/DetectEmotion";
-
 class App extends React.Component {
   state = {
     user: this.props.user
@@ -44,6 +43,7 @@ class App extends React.Component {
         <Route exact path='/content-dashboard/:unique' component={Post} />
         <Route exact path='/edit/:editPost' component={EditContent} />
         <Route path={`/u/:user/:id`} component={DetectEmotion} />
+
       </div>
     );
   }

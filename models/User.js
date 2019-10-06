@@ -6,7 +6,6 @@ const userSchema = new Schema(
     username: String,
     password: String,
     socialId: String,
-    profilePicUrl: String
   },
   {
     timestamps: {
