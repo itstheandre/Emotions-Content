@@ -10,11 +10,31 @@ const contentSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref: "User" },
   views: Number,
   date: String,
-  url:String,
+  imageUrl: String,
   title:String,
   body:String,
-  averageEmotion: Array,
-  maxEmotion: Array,
+  averageEmotion: {
+    angryAvg:Array,
+    disgustedAvg:Array,
+    fearfulAvg:Array,
+    happyAvg:Array,
+    neutralAvg:Array,
+    sadAvg:Array,
+    surprisedAvg:Array,
+    },
+  maxEmotion: {
+    angryMax:Array,
+    disgustedMax:Array,
+    fearfulMax:Array,
+    happyMax:Array,
+    neutralMax:Array,
+    sadMax:Array,
+    surprisedMax:Array,
+    
+
+  },
+  age:Array,
+  gender:Array,
   imagePath: {
     type: String,
     // default:
