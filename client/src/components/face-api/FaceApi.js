@@ -170,6 +170,7 @@ export default class FaceApi extends Component {
 
   //////////////////////COMPONENTS-MOUNT////////////////////////
   componentDidMount = () => {
+    console.log("LOOK HERE", this.props)
     this.faceApi();
   };
   /////////////////////////FEATURE TO IMPLEMENT ///////////////////////////

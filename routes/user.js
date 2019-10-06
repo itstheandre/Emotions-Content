@@ -59,6 +59,7 @@ router.put("/api/:id",(req,res)=>{
       const genderValue = req.body.gender
       const emotions = {angry, disgusted, fearful, happy, neutral, sad, surprised}
       console.log(emotions)
+      console.log(req.params.id)
       Content.findById(req.params.id)
       .then(project=>{
         console.log(project.averageEmotion)
