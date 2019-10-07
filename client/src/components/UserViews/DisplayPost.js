@@ -15,11 +15,7 @@ export default class DisplayPost extends Component {
         <h1>{this.props.title}</h1>
         <h3>{this.props.owner}</h3>
         {this.props.body}
-<<<<<<< HEAD
-        <FaceApi />
-=======
-        <FaceApi id={this.props.id}/>
->>>>>>> e33c13a07a43f1a1fe7b5240eb56d397b81e560e
+        <FaceApi id={this.props.id} />
       </div>
     );
   }
