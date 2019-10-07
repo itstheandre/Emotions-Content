@@ -4,9 +4,9 @@ import FaceApi from "../face-api/FaceApi";
 import ReactPlayer from "react-player";
 
 export default class DisplayPost extends Component {
-  componentDidMount = () => {
-    this.props.newView();
-  };
+  // componentDidMount = () => {
+  //   this.props.newView();
+  // };
 
   render() {
     // console.log("LOOK HERE NOW MOFO", this.props);
@@ -14,7 +14,7 @@ export default class DisplayPost extends Component {
       <div>
         <ReactPlayer url={"https://www.youtube.com/watch?v=8kOiLadbzpM"} />
         <br />
-        HERE
+        HERE {this.props.views} views
         <br />
         <Link to={`/u/${this.props.owner}`}>Check the creator's page</Link>
         <h1>{this.props.title}</h1>
