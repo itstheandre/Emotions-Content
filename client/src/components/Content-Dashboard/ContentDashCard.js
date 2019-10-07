@@ -52,6 +52,12 @@ export default class ContentDashCard extends Component {
         >
           Share now
         </button>
+        <button>
+          <Link to={`/u/${this.props.user.username}/${this.props.content._id}`}>
+            {" "}
+            View as Normal
+          </Link>
+        </button>
       </div>
     );
   }

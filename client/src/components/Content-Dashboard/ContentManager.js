@@ -40,6 +40,8 @@ export default class ContentManager extends Component {
     return (
       <>
         <h2>My Content Dashboard</h2>
+
+        <br />
         <Link to='/content-dashboard/add'>Add content</Link>
         {!filled && <div>Time to add some more content</div>}
         {this.state.content.reverse().map(el => {
