@@ -42,7 +42,7 @@ const Login = props => {
         />
         {message && <h1>{message}</h1>}
 
-        <button type='submit'>Create Account</button>
+        <button type='submit'>Login</button>
       </form>
     </>
   );

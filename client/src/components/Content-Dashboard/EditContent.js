@@ -6,16 +6,16 @@ const EditContent = props => {
   const [body, setBody] = useState("");
   const [id, setId] = useState("");
 
-  const getData = () => {
-    const { editPost } = props.match.params;
-    axios.get(`/api/content/${editPost}`).then(post => {
-      const id = post.data._id;
-      const { title, body } = post.data;
-      setTitle(title);
-      setBody(body);
-      setId(id);
-    });
-  };
+  // const getData = () => {
+  //   const { editPost } = props.match.params;
+  //   axios.get(`/api/content/${editPost}`).then(post => {
+  //     const id = post.data._id;
+  //     const { title, body } = post.data;
+  //     setTitle(title);
+  //     setBody(body);
+  //     setId(id);
+  //   });
+  // };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -25,7 +25,15 @@ const EditContent = props => {
   };
 
   useEffect(() => {
-    getData();
+    // getData(); Same as above. Only written here to stop warning
+    const { editPost } = props.match.params;
+    axios.get(`/api/content/${editPost}`).then(post => {
+      const id = post.data._id;
+      const { title, body } = post.data;
+      setTitle(title);
+      setBody(body);
+      setId(id);
+    });
   }, []);
 
   return (

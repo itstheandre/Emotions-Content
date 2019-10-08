@@ -16,7 +16,7 @@ const Signup = props => {
         setMessage(data.message);
       } else {
         props.setUser(data);
-        props.history.push("/");
+        props.history.push("/content-dashboard");
       }
     });
   };

@@ -6,8 +6,8 @@ import axios from "axios";
 const Post = props => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [id, setId] = useState("");
-  const [owner, setOwner] = useState("");
+  // const [id, setId] = useState("");
+  // const [owner, setOwner] = useState("");
   const [fullName, setFullName] = useState("");
   const [textToCopy, setTextToCopy] = useState("");
 
@@ -42,8 +42,8 @@ const Post = props => {
       const { fullName } = post.owner;
       setTitle(title);
       setBody(body);
-      setId(id);
-      setOwner(owner);
+      // setId(id);
+      // setOwner(owner);
       setFullName(fullName);
       setTextToCopy(`http://localhost:3000/u/${owner}/${id}`);
     });
@@ -51,6 +51,7 @@ const Post = props => {
 
   return (
     <div>
+      <button onClick={() => props.history.goBack()}>Go back</button>
       <h1>{title}</h1>
       <p>{body}</p>
       <button

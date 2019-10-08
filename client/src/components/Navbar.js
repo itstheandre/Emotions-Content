@@ -11,8 +11,7 @@ const handleLogout = props => {
 const Navbar = props => {
   return (
     <nav>
-      {props.user && <h1>Hey {props.user.fullName}</h1>}
-      <Link to='/'>Home</Link>
+      <Link to='/'>Motus </Link>
       {props.user ? (
         <>
           <Link to='/content-dashboard'>Content</Link>
@@ -26,6 +25,7 @@ const Navbar = props => {
           <Link to='/login'>Login</Link>
         </>
       )}
+      {props.user && <h3>Hey {props.user.fullName}</h3>}
     </nav>
   );
 };

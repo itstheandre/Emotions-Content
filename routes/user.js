@@ -82,12 +82,18 @@ router.put("/api/:id", (req, res) => {
       req.params.id,
       { averageEmotion, maxEmotion, age, gender },
       { new: true }
-    ).then(updated => {
-      res.json(updated);
-    });
-    res.json(project);
+    )
+      .then(updated => {
+        res.json(updated);
+      })
+      .catch(err => {
+        console.log("aaaaaaaaaaa", err);
+      });
   });
+
+  // NO LONGER NECESSARYYYYYY
 });
+
 router.put("/api/views/:id", (req, res) => {
   const views = req.body.views;
   Content.findByIdAndUpdate(req.params.id, { views }, { new: true })

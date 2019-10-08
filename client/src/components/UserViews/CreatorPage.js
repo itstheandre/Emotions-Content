@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UserCard from "./UserCard";
 
@@ -9,25 +9,29 @@ const CreatorPage = props => {
   const [user, setUser] = useState("");
 
   useEffect(() => {
-    return getData();
-  }, []);
-
-  const getData = () => {
+    // getData() same thing as below. useEffect gives out a warning
     const { user } = props.match.params;
     axios.get(`/u/api/${user}`).then(contentArr => {
       console.log(contentArr.data);
-      console.log(content);
       const contentData = contentArr.data;
-      setContent(...content, contentData);
+      setContent(contentData);
       setUser(user);
     });
-  };
+  }, []);
 
-  console.log("CONTENT STATE", content);
+  // const getData =() => {
+  //    const { user } = props.match.params;
+  //    axios.get(`/u/api/${user}`).then(contentArr => {
+  //      console.log(contentArr.data);
+  //      const contentData = contentArr.data;
+  //      setContent(contentData);
+  //      setUser(user);
+  //    });
+  // }
+
   return (
     <>
       {content.reverse().map(el => {
-        console.log("CONSOLE LOG THE MAP HERE", el);
         return <UserCard content={el} key={el._id} user={user} />;
       })}
     </>
