@@ -117,9 +117,18 @@ export default class FaceApi extends Component {
     let minEnd = parseInt(this.timeElapsed[1].split(" ")[3].split(":")[1]);
     let secEnd = parseInt(this.timeElapsed[1].split(" ")[3].split(":")[2]);
 
-    let minElapsed = minEnd - minStart;
-    let secElapsed = secEnd - secStart;
-    return { min: minElapsed, sec: secElapsed };
+    let minElapsed = () => {
+      return minEnd - minStart;
+    };
+    let secElapsed = () => {
+      if (minEnd - minStart > 0) {
+        let secInit = 60 - secStart;
+        return secInit + secEnd;
+      } else {
+        return secEnd - secStart;
+      }
+    };
+    return { min: minElapsed(), sec: secElapsed() };
   };
 
   //_______________________________________________________________
@@ -330,8 +339,12 @@ export default class FaceApi extends Component {
     //CHECK THE FOCUS OF THE TAB AND EITHER SEND DATA TO DB OR RESTART DETECTION
     if (this.state.actions[this.state.actions.length - 1] === "hide") {
       console.log("TAB FOCUS IS HIDDEN");
+      this.timeSession();
+      this.timeSessionCalculation();
       this.dataManager();
     } else if (this.state.actions[this.state.actions.length - 1] === "show") {
+      this.timeElapsed = [];
+      this.timeSession();
       this.faceApi();
     }
     return (
@@ -339,15 +352,17 @@ export default class FaceApi extends Component {
         <Beforeunload
           onBeforeunload={() => {
             console.log("DISPLAY PROPS: ----", this.props);
+            this.timeSession();
+            this.timeSessionCalculation();
             this.dataManager();
             return false;
           }}
         />
         <video
           // ref={this.videoTag}
-          id='video'
-          width='720'
-          height='560'
+          id="video"
+          width="720"
+          height="560"
           autoPlay
           muted
         ></video>
