@@ -34,6 +34,12 @@ const contentSchema = new Schema({
 
   },
   age:Array,
+  time:[{
+    fullTime:Array,
+    min:Number,
+    sec:Number,
+
+  }],
   gender:Array,
   imagePath: {
     type: String,
