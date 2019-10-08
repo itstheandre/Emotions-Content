@@ -4,7 +4,6 @@ const Content = require("../models/Content");
 const User = require("../models/User");
 
 router.get("/api/:user", (req, res) => {
-  console.log(req.params.user);
   const user = req.params.user;
   User.find({ username: user }).then(allContent => {
     // console.log("here", allContent);
@@ -23,7 +22,7 @@ router.get("/api/:user/:id", (req, res) => {
   Content.findById(id)
     .populate("owner")
     .then(response => {
-      console.log("LOOK HERE ANDRÈ: ", response.data);
+      console.log("LOOK HERE ANDRÈ: ", response);
       res.json(response);
     })
     .catch(err => {
@@ -91,11 +90,11 @@ router.put("/api/:id", (req, res) => {
 });
 router.put("/api/views/:id", (req, res) => {
   const views = req.body.views;
-  Content.findByIdAndUpdate(req.params.id, { views }, { new: true }).then(
-    updated => {
+  Content.findByIdAndUpdate(req.params.id, { views }, { new: true })
+    .populate("owner")
+    .then(updated => {
       res.json(updated);
-    }
-  );
+    });
 });
 
 module.exports = router;

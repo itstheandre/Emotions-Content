@@ -6,10 +6,13 @@ import ReactPlayer from "react-player";
 // Written in a functional component. Same as below.
 
 const DisplayPost = props => {
-  console.log(props);
+  console.log("PROPS", props);
   return (
     <div>
-      <ReactPlayer url={"https://www.youtube.com/watch?v=8kOiLadbzpM"} />
+      <ReactPlayer
+        url={"https://www.youtube.com/watch?v=8kOiLadbzpM"}
+        controls={true}
+      />
       <br />
       HERE {props.views} views
       <br />

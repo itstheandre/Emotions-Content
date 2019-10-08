@@ -19,6 +19,7 @@ const Post = props => {
       const views = response.data.views + 1;
       const newId = response.data._id;
       axios.put(`/u/api/views/${newId}`, { views }).then(response => {
+        console.log("RESPONSE DATA FROM PUT REQUEST: ", response.data);
         const owner = response.data.owner.username;
         const ownerId = response.data.owner._id;
         const { title, body } = response.data;
@@ -44,7 +45,7 @@ const Post = props => {
     ownerId,
     views
   };
-
+  console.log(state);
   return (
     <div>
       <DisplayPost {...state} />
