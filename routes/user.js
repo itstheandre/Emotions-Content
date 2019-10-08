@@ -7,7 +7,7 @@ router.get("/api/:user", (req, res) => {
   console.log(req.params.user);
   const user = req.params.user;
   User.find({ username: user }).then(allContent => {
-    console.log("here", allContent);
+    // console.log("here", allContent);
     const id = allContent[0]._id;
 
     Content.find({ owner: id }).then(userDetails => {
@@ -19,10 +19,11 @@ router.get("/api/:user", (req, res) => {
 router.get("/api/:user/:id", (req, res) => {
   console.log(req.params);
   const { id } = req.params;
-  console.log("Hello");
+  // console.log("Hello");
   Content.findById(id)
     .populate("owner")
     .then(response => {
+      console.log("LOOK HERE ANDRÈ: ", response.data);
       res.json(response);
     })
     .catch(err => {
@@ -65,16 +66,16 @@ router.put("/api/:id", (req, res) => {
     sad,
     surprised
   };
-  console.log(emotions);
-  console.log(req.params.id);
+  // console.log(emotions);
+  // console.log(req.params.id);
   Content.findById(req.params.id).then(project => {
-    console.log(project.averageEmotion);
-    console.log("HERE MOFO", project.averageEmotion["angryAvg"]);
+    // console.log(project.averageEmotion);
+    // console.log("HERE MOFO", project.averageEmotion["angryAvg"]);
     const avgEm = project.averageEmotion;
     const maxEm = project.maxEmotion;
     let counter = 1;
     const avgEmotionsArr = Object.keys(avgEm);
-    console.log(avgEmotionsArr);
+    // console.log(avgEmotionsArr);
     const maxEmotionsArr = Object.keys(maxEm);
     for (let avg in emotions) {
       maxEm[maxEmotionsArr[counter]].push(avg[0]);
@@ -101,7 +102,7 @@ router.put("/api/:id", (req, res) => {
 
 router.put("/api/views/:id", (req, res) => {
   const views = req.body.views;
-  console.log(views);
+  // console.log(views);
   Content.findByIdAndUpdate(req.params.id, { views }, { new: true })
     .populate("owner")
     .then(updated => {

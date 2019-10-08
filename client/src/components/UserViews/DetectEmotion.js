@@ -5,6 +5,7 @@ import DisplayPost from "./DisplayPost";
 import ReactPlayer from "react-player";
 
 const Post = props => {
+  console.log(props);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [id, setId] = useState("");
@@ -14,8 +15,10 @@ const Post = props => {
 
   const getPostData = () => {
     const { user } = props.match.params;
+    console.log("user", user);
     const contentId = props.match.params.id;
-    axios.get(`u/api/${user}/${contentId}`).then(response => {
+    console.log("CONTENT ID: ", contentId);
+    axios.get(`/u/api/${user}/${contentId}`).then(response => {
       const views = response.data.views + 1;
       const newId = response.data._id;
       axios.put(`/u/api/views/${newId}`, { views }).then(response => {

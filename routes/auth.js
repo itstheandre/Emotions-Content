@@ -32,7 +32,7 @@ router.post("/login", (req, res) => {
 
 router.post("/signup", (req, res, next) => {
   const { username, password, fullName } = req.body;
-  console.log(username, password, fullName);
+  // console.log(username, password, fullName);
   if (password.length < 8) {
     return res
       .status(400)
@@ -66,7 +66,7 @@ router.post("/signup", (req, res, next) => {
               .status(500)
               .json({ message: "Error while attempting to login" });
           }
-          console.log("User created");
+          // console.log("User created");
           res.json(dbUser);
         });
       })

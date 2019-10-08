@@ -17,11 +17,11 @@ router.get("/", (req, res) => {
 
 // Get specific docuemnt. Nobody cares if you wrote it
 router.get("/:id", (req, res) => {
-  console.log(req.params.id);
+  // console.log(req.params.id);
   Content.findById(req.params.id)
     .populate("owner")
     .then(response => {
-      console.log(response);
+      // console.log(response);
       res.json(response);
     })
     .catch(err => {
@@ -31,7 +31,7 @@ router.get("/:id", (req, res) => {
 
 router.post("/add/image", uploader.single("imagePath"), (req, res, next) => {
   // console.log('file is: ', req.file)
-  console.log(req.file);
+  // <console className="l">se </console>og(req.file);
   if (!req.file) {
     next(new Error("No file uploaded!"));
     return;

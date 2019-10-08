@@ -25,7 +25,7 @@ export default class ContentDashCard extends Component {
     );
   };
   render() {
-    // console.log(this.props.user.username);
+    console.log(this.props.content);
     return (
       <div className='contentCard'>
         <h2>{this.props.content.title}</h2>
