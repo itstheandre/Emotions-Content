@@ -171,7 +171,6 @@ export default class FaceApi extends Component {
     return {
       angryMaxValue: Math.max(...this.angryValues),
       disgustedMaxValue: Math.max(...this.disgustedValues),
-      disgustedMaxValue: Math.max(...this.disgustedValues),
       fearfulMaxValue: Math.max(...this.fearfulValues),
       happyMaxValue: Math.max(...this.happyValues),
       neutralMaxValue: Math.max(...this.neutralValues),
