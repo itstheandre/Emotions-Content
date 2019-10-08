@@ -345,9 +345,9 @@ export default class FaceApi extends Component {
         />
         <video
           // ref={this.videoTag}
-          id="video"
-          width="720"
-          height="560"
+          id='video'
+          width='720'
+          height='560'
           autoPlay
           muted
         ></video>

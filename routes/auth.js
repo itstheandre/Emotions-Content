@@ -32,12 +32,19 @@ router.post("/login", (req, res) => {
 
 router.post("/signup", (req, res, next) => {
   const { username, password, fullName } = req.body;
-  console.log(username, password, fullName);
+  // console.log(username, password, fullName);
   if (password.length < 8) {
     return res
       .status(400)
       .json({ message: "Need to have more than 8 characters" });
   }
+
+  if (!/^[a-zA-Z0-9-_.+]+$/.test(username)) {
+    return res
+      .status(400)
+      .json({ message: "Your username can't have any special characters" });
+  }
+
   if (!username) {
     return res.status(400).json({ message: "Your username cannot be empty" });
   }
@@ -59,7 +66,7 @@ router.post("/signup", (req, res, next) => {
               .status(500)
               .json({ message: "Error while attempting to login" });
           }
-          console.log("User created");
+          // console.log("User created");
           res.json(dbUser);
         });
       })

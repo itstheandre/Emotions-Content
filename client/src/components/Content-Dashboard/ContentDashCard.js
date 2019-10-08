@@ -25,7 +25,7 @@ export default class ContentDashCard extends Component {
     );
   };
   render() {
-    // console.log(this.props.user.username);
+    console.log(this.props.content);
     return (
       <div className='contentCard'>
         <h2>{this.props.content.title}</h2>
@@ -51,6 +51,12 @@ export default class ContentDashCard extends Component {
           onClick={() => navigator.clipboard.writeText(this.state.textToCopy)}
         >
           Share now
+        </button>
+        <button>
+          <Link to={`/u/${this.props.user.username}/${this.props.content._id}`}>
+            {" "}
+            View as Normal
+          </Link>
         </button>
       </div>
     );

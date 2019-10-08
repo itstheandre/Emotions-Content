@@ -20,34 +20,36 @@ class App extends React.Component {
       user
     });
   };
-  
 
   render() {
-   
     return (
-      <div className="App">
+      <div className='App'>
         <Navbar user={this.state.user} setUser={this.setUser} />
-        <Route
-          exact
-          path='/signup'
-          render={props => <Signup setUser={this.setUser} {...props} />}
-        />
-        <Route
-          exact
-          path='/login'
-          render={props => <Login setUser={this.setUser} {...props} />}
-        /> 
-        <Route
-          exact
-          path='/content-dashboard'
-          render={props => <ContentManager user={this.state.user} {...props} />}
-        />
-        <Route exact path='/content-dashboard/add' component={AddContent} />
-        <Route exact path='/content-dashboard/:unique' component={Post} />
-        <Route exact path='/edit/:editPost' component={EditContent} />
-        <Route exact path={"/u/:user"} component={CreatorPage} />
-        <Route exact path={`/u/:user/:id`} component={DetectEmotion} />
-         
+        <Switch>
+          {" "}
+          <Route
+            exact
+            path='/signup'
+            render={props => <Signup setUser={this.setUser} {...props} />}
+          />
+          <Route
+            exact
+            path='/login'
+            render={props => <Login setUser={this.setUser} {...props} />}
+          />
+          <Route
+            exact
+            path='/content-dashboard'
+            render={props => (
+              <ContentManager user={this.state.user} {...props} />
+            )}
+          />
+          <Route exact path='/content-dashboard/add' component={AddContent} />
+          <Route exact path='/content-dashboard/:unique' component={Post} />
+          <Route exact path='/edit/:editPost' component={EditContent} />
+          <Route exact path={"/u/:user"} component={CreatorPage} />
+          <Route exact path={`/u/:user/:id`} component={DetectEmotion} />
+        </Switch>
       </div>
     );
   }

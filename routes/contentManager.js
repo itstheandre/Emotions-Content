@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Content = require("../models/Content");
 const User = require("../models/User");
-const uploadCloud = require("../config/cloudinary");
+const uploader = require("../config/cloudinary");
 
 // Get all documents you wrote
 router.get("/", (req, res) => {
@@ -17,11 +17,11 @@ router.get("/", (req, res) => {
 
 // Get specific docuemnt. Nobody cares if you wrote it
 router.get("/:id", (req, res) => {
-  console.log(req.params.id);
+  // console.log(req.params.id);
   Content.findById(req.params.id)
     .populate("owner")
     .then(response => {
-      console.log(response);
+      // console.log(response);
       res.json(response);
     })
     .catch(err => {
@@ -29,37 +29,45 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.post("/add/image", uploader.single("imagePath"), (req, res, next) => {
+  // console.log('file is: ', req.file)
+  // <console className="l">se </console>og(req.file);
+  if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+  // get secure_url from the file object and save it in the
+  // variable 'secure_url', but this can be any name, just make sure you remember to use the same in frontend
+  res.json({ secure_url: req.file.secure_url });
+});
+
 // Create content
 router.post("/add", (req, res) => {
   // , uploadCloud.single("imagePath")
 
-  const { url, title, contentType, body } = req.body;
+  const { url, title, contentType, body, imagePath } = req.body;
 
-  // const image = req.file;
-  // console.log(image);
-
-  //
-  // const image = req.file
-  // console.log(image)
-  // const image=req.user.imagePath;
-  // let imagePath = req.file ? req.file.url : req.user.imagePath;
-  // console.log("file url content: ", req.file);
-  // console.log("user content: ", req.user.image);
-
-  // console.log("Gimme da content brah: "+imagePath)
   const owner = req.user;
   const views = 0;
   const date = new Date()
     .toJSON()
     .slice(0, 10)
     .replace(/-/g, "/");
+
   User.findById(req.user._id).then(found => {
-    Content.create({ url, title, date, contentType, owner, body, views }).then(
-      response => {
-        console.log("response here: ", response);
-        res.json(response);
-      }
-    );
+    Content.create({
+      url,
+      title,
+      date,
+      contentType,
+      owner,
+      body,
+      views,
+      imagePath
+    }).then(response => {
+      console.log("response here: ", response);
+      res.json(response);
+    });
   });
 });
 
@@ -69,12 +77,12 @@ router.delete("/:id", (req, res) => {
 
   Content.findById(contentId)
     .then(proyect => {
-      console.log(proyect.owner);
+      // console.log(proyect.owner);
       if (
         req.user &&
         JSON.stringify(proyect.owner) === JSON.stringify(req.user._id)
       ) {
-        console.log("hello");
+        // console.log("hello");
         Content.findByIdAndDelete(contentId)
           .then(response => {
             res.json({ message: "ok" });

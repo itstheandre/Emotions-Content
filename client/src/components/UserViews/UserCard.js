@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const UserCard = props => {
-  console.log(props);
+  console.log("here", props);
   return (
     <div className='contentCard'>
       <h2>{props.content.title}</h2>
