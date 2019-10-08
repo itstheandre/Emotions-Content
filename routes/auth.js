@@ -38,6 +38,13 @@ router.post("/signup", (req, res, next) => {
       .status(400)
       .json({ message: "Need to have more than 8 characters" });
   }
+
+  if (!/^[a-zA-Z0-9-_.+]+$/.test(username)) {
+    return res
+      .status(400)
+      .json({ message: "Your username can't have any special characters" });
+  }
+
   if (!username) {
     return res.status(400).json({ message: "Your username cannot be empty" });
   }
