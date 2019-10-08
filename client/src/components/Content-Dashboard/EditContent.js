@@ -20,7 +20,7 @@ const EditContent = props => {
   const handleSubmit = e => {
     e.preventDefault();
     axios.put(`/api/content/${id}`, { title, body }).then(() => {
-      this.props.history.push("/content-dashboard");
+      props.history.push("/content-dashboard");
     });
   };
 
