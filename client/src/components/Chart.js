@@ -21,68 +21,66 @@ componentDidMount=()=>{
             const {user} =this.props.match.params
             axios.get(`http://localhost:5005/api/chart/all/${user}`).then(response=>{
                 const allContent = response.data
+                const viewsArr=[];
                 const viewsData=response.data.map(el=>{
                      return el.views;
                     })
-               
-               const allAvg=[];
-               
-               viewsData.forEach((elem)=>{
-                   elem.forEach((el)=>{
-                       allAvg.push(el.averageEmotion)
-                   })
-               })
-               let neutralityArr=[];
-               allAvg.forEach((elem)=>{
-                   neutralityArr.push(elem.neutralAvg)
-               })
-               let sumNet=neutralityArr.reduce((acum,val)=>{
-                   return acum+=val;
-               },0) 
-               let emotionalImpact=(100-(sumNet/neutralityArr.length)).toFixed(2);
-               console.log(emotionalImpact);
-               console.log(neutralityArr)
-
-               function getEmotion(emotion){
-                //    for (let i=0;i<allAvg.length;i++){
-                //        console.log(allAvg[i])
-                //    }
-
-                  const emotionArr= allAvg.reduce((acc,curr)=>{
-                    if(curr && curr[emotion]) acc++
-                    return acc
-                  } ,0)
-                   return emotionArr
-            }
-            let ageAverage=[];
-            console.log("Hola!! ", viewsData)
-            viewsData.forEach((elem)=>{
-                elem.forEach(el=>{
-                    ageAverage.push(el.age);
+                viewsData.forEach(elem=>{
+                    elem.forEach(el=>{
+                        viewsArr.push(el);
+                    })
                 })
-            })
-            let sum=ageAverage.reduce((acum,elem)=>{
-                return acum+=elem;
-                 ;
-            },0);
+                const averageEmotion=  viewsArr.map(el=>{
+                    return el.averageEmotion;
+                 })
+                const maxEmotion=viewsArr.map(el=>{
+                    return el.maxEmotion;
+                 })
 
+
+                function getEmotion(emotion){
+                   const sum= averageEmotion.reduce((acum,value)=>{
+                        if(value && value[emotion]){
+                             acum++;
+                        }
+                        return acum
+                    },0)
+                    return sum;
+                }
+          
+
+               function getAverage(array){
+                let sum = array.reduce((previous, current) => current += previous);
+                 let avg = sum / array.length;
+                 return avg;
+               }
+               
+             let neutralityArr=[];
+              averageEmotion.forEach((elem)=>{
+                  neutralityArr.push(elem.neutralAvg)
+              })
+            let emotionalImpact=(100-getAverage(neutralityArr)).toFixed(2)
+            let ageAverage=[]
+            viewsArr.forEach((elem)=>{
+                    ageAverage.push(elem.age);
+            })
+            let age=Math.floor(getAverage(ageAverage));
+
+           
 
             let genderArr=[];
-            
-            viewsData.forEach((elem)=>{
-                elem.forEach(el=>{
-                    genderArr.push(el.gender);
-                })
+            viewsArr.forEach((elem)=>{
+                
+                    genderArr.push(elem.gender);
+                
             })
             let male=genderArr.filter(el=>{
-                if (el==="male")return el;
-            })
+                 if (el==="male")return el;
+             })
             const malePercent=(male.length/genderArr.length*100).toFixed(2);
-            const femalePercent=((genderArr.length-male.length)/genderArr.length*100).toFixed(2)
-            const views=genderArr.length;
-            
-            
-            const age=Math.floor(sum/ageAverage.length)
+             const femalePercent=((genderArr.length-male.length)/genderArr.length*100).toFixed(2)
+            const views=viewsArr.length;
+
             const emotionsCount={
                 angry:getEmotion("angryAvg"),
                 disgusted:getEmotion("disgustedAvg"),
@@ -91,7 +89,6 @@ componentDidMount=()=>{
                 sad:getEmotion("sadAvg"),
                 surprised:getEmotion("surprisedAvg")
            }
-           console.log(emotionsCount)
            
           const chartData = {
             labels:["Angry", 'Disgusted', 'Fearful', 'Happy', 'Sad', 'Surprised'],
@@ -119,13 +116,13 @@ componentDidMount=()=>{
     
 
            this.setState({
-               chartData,
-               age,
-               femalePercent,
-               malePercent,
-               emotionalImpact,
-               views,
-               content: allContent
+             chartData,
+             age,
+             femalePercent,
+             malePercent,
+            emotionalImpact,
+            views,
+            //    content: allContent
             
            })
                 

@@ -18,6 +18,14 @@ router.get("/all/:name",(req,res)=>{
 })
 
 
+router.get('/:id', (req, res) => {
+  const {id} = req.params
+  Content.findById(id).populate("views").then(response => {
+    // console.log(response.views)
+    res.json(response.views)
+  })
+})
+
 
 
 
