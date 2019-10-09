@@ -3,6 +3,7 @@ const router = express.Router();
 const Content = require("../models/Content");
 const User = require("../models/User");
 const uploader = require("../config/cloudinary");
+const uploadAudio = require("../config/cloudinary-audio");
 
 // Get all documents you created
 router.get("/", (req, res) => {
@@ -19,7 +20,8 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   // console.log(req.params.id);
   Content.findById(req.params.id)
-    .populate("owner").populate("views")
+    .populate("owner")
+    .populate("views")
     .then(response => {
       // console.log(response);
       res.json(response);
@@ -29,7 +31,7 @@ router.get("/:id", (req, res) => {
     });
 });
 // router to create an image
-router.post("/add/image", uploader.single("imagePath"), (req, res, next) => {
+router.post("/add/image", uploader.single("urlPath"), (req, res, next) => {
   // console.log('file is: ', req.file)
   // <console className="l">se </console>og(req.file);
   if (!req.file) {
@@ -41,11 +43,26 @@ router.post("/add/image", uploader.single("imagePath"), (req, res, next) => {
   res.json({ secure_url: req.file.secure_url });
 });
 
+router.post(
+  "/add/audio",
+  uploadAudio.single("urlPath", { resource_type: "video" }),
+  (req, res, next) => {
+    console.log("audio axios", req.file);
+    if (!req.file) {
+      next(new Error("No file uploaded"));
+      return;
+    }
+    console.log(req.file);
+    res.json({ secure_url: req.file.secure_url });
+  }
+);
+
 // Create content
 router.post("/add", (req, res) => {
   // , uploadCloud.single("imagePath")
 
-  const { url, title, contentType, body, imagePath } = req.body;
+  const { url, title, contentType, body, urlPath } = req.body;
+  console.log(urlPath);
 
   const owner = req.user;
   const date = new Date()
@@ -61,9 +78,10 @@ router.post("/add", (req, res) => {
       contentType,
       owner,
       body,
-      imagePath
+      urlPath
     }).then(response => {
       console.log("response here: ", response);
+      console.log("aaaaaaaa", response);
       res.json(response);
     });
   });
