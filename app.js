@@ -98,5 +98,8 @@ app.use("/u", userRoutes);
 const test=require('./routes/fileUpload');
 app.use('/api',test );
 
-
+const chart=require("./routes/chart");
+app.use("/api/chart", chart);
+const viewsRoutes=require("./routes/viewsRoutes");
+app.use("/api/views",viewsRoutes)
 module.exports = app;
