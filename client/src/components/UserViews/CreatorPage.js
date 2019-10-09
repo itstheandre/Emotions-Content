@@ -12,7 +12,6 @@ const CreatorPage = props => {
     // getData() same thing as below. useEffect gives out a warning
     const { user } = props.match.params;
     axios.get(`/u/api/${user}`).then(contentArr => {
-      console.log(contentArr.data);
       const contentData = contentArr.data;
       setContent(contentData);
       setUser(user);

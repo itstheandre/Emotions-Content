@@ -10,6 +10,8 @@ const Post = props => {
   const [ownerId, setOwnerId] = useState("");
   const [viewId, setViewId] = useState("");
   const [viewTotal, setViewTotal] = useState(0);
+  const [urlPath, setUrlPath] = useState("");
+  const [contentType, setContentType] = useState("");
 
   // const getPostData = () => {
   //    axios.get(`/u / api / ${ user } /${contentId}`).then(response => {
@@ -40,7 +42,8 @@ const Post = props => {
       const owner = response.data.owner.username;
       const ownerId = response.data.owner._id;
       const viewTotal = response.data.views.length;
-      const { title, body } = response.data;
+      const { title, body, contentType, urlPath } = response.data;
+
       axios.post(`/api/views/${newId}`).then(created => {
         const viewId = created.data._id;
         setBody(body);
@@ -50,6 +53,8 @@ const Post = props => {
         setViewId(viewId);
         setContentId(newId);
         setViewTotal(viewTotal);
+        setContentType(contentType);
+        setUrlPath(urlPath);
       });
     });
   }, []);
@@ -60,11 +65,16 @@ const Post = props => {
     contentId,
     owner,
     ownerId,
-    viewId
+    viewId,
+    viewTotal,
+    contentType,
+    urlPath
   };
 
   return (
     <div>
+      <h1>{contentType}</h1>
+      <br />
       <h1>#of Views {viewTotal}</h1>
       <h1>{title} </h1>
       <h2>{body}</h2>
