@@ -22,7 +22,7 @@ const Navbar = props => {
           <Link className='navbar-brand' to='/content-dashboard'>
             Content
           </Link>
-          <Link className='navbar-brand' to={`/charts/${props.username}`}>
+          <Link className='navbar-brand' to={`/charts/${props.user.username}`}>
             Analytics
           </Link>
           <Link
