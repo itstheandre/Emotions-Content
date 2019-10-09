@@ -48,7 +48,9 @@ const Navbar = props => {
           Hey {props.user.fullName}
         </h3>
       )}
-      <Link to='/settings'>Edit your profile</Link>
+      <Link style={{ marginTop: "5px" }} to="/settings">
+        <i class="fas fa-user-edit white-text"></i>
+      </Link>
     </nav>
   );
 };

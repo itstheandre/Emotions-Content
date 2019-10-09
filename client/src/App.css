@@ -120,7 +120,8 @@ label {
 }
 
 .addBtn {
-  margin: 20px 20px 20px 90%;
+  margin: 20px 20px 20px 82%;
+
 }
 
 i {
@@ -130,4 +131,8 @@ i {
 .borderCard {
   border: #00CCB7;
   border-radius: 5%;
+}
+
+.videoPlayer {
+  margin: 1% 1%;
 }
