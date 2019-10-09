@@ -80,7 +80,7 @@ export default class FaceApi extends Component {
 
     // SEND faceDetection Object to the DB
     axios
-      .put(`/u/api/${this.props.id}`, faceDetection)
+      .put(`/api/views/${this.props.id}`, faceDetection)
       .then(detectionValues => {
         console.log(detectionValues);
       })
