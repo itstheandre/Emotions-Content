@@ -45,14 +45,14 @@ const Post = props => {
       // setId(id);
       // setOwner(owner);
       setFullName(fullName);
-      setTextToCopy(`http://localhost:3000/u/${owner}/${id}`);
+      setTextToCopy(`https://motus-app.herokuapp.com//u/${owner}/${id}`);
     });
   }, []);
 
   return (
     <div>
       <button onClick={() => props.history.goBack()}>
-        <i class="fas fa-3x fa-angle-left"></i>
+        <i class='fas fa-3x fa-angle-left'></i>
       </button>
       <h1>{title}</h1>
       <p>{body}</p>

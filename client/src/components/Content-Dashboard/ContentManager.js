@@ -25,7 +25,7 @@ export default class ContentManager extends Component {
   setTextToCopy = id => {
     const { username } = this.state.user.username;
     this.setState({
-      textToCopy: `http://localhost:3000/u/${username}/${id}`
+      textToCopy: `https://motus-app.herokuapp.com/u/${username}/${id}`
     });
     navigator.clipboard.writeText(this.state.textToCopy);
   };
@@ -40,7 +40,7 @@ export default class ContentManager extends Component {
     return (
       <>
         <div>
-          <h2 style={{ textAlign: "center" }} className="logIn">
+          <h2 style={{ textAlign: "center" }} className='logIn'>
             My Content Dashboard
           </h2>
 
@@ -48,7 +48,7 @@ export default class ContentManager extends Component {
           {!filled && <div>Click above </div>}
           {this.state.content.reverse().map(el => {
             return (
-              <div className="text-center dashCard">
+              <div className='text-center dashCard'>
                 <ContentDashCard
                   content={el}
                   getData={this.getData}
@@ -59,9 +59,9 @@ export default class ContentManager extends Component {
             );
           })}
         </div>
-        <div className="fixed-bottom addBtn">
-          <Link to="/content-dashboard/add">
-            <i className="fas fa-3x fa-plus-circle text-default"></i>
+        <div className='fixed-bottom addBtn'>
+          <Link to='/content-dashboard/add'>
+            <i className='fas fa-3x fa-plus-circle text-default'></i>
           </Link>
         </div>
       </>
