@@ -48,6 +48,7 @@ const Navbar = props => {
           Hey {props.user.fullName}
         </h3>
       )}
+      <Link to='/settings'>Edit your profile</Link>
     </nav>
   );
 };
