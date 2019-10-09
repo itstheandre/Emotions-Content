@@ -53,7 +53,7 @@ const EditContent = props => {
           <MDBCol>
             <form onSubmit={handleSubmit}>
               <div className="text-default">
-                <label className="logIn" htmlFor="title">
+                <label className="text-default logIn" htmlFor="title">
                   Title
                 </label>
                 <MDBInput
@@ -64,7 +64,9 @@ const EditContent = props => {
                   onChange={e => setTitle(e.target.value)}
                 />
 
-                <label htmlFor="body">Description</label>
+                <label className="text-default" htmlFor="body">
+                  Description
+                </label>
                 <MDBInput
                   type="text"
                   id="body"

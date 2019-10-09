@@ -5,7 +5,7 @@ const contentSchema = new Schema({
   name: String,
   contentType: {
     type: String,
-    enum: ["text", "audio", "image", "video"]
+    enum: ["audio", "image", "video"]
   },
   owner: { type: Schema.Types.ObjectId, ref: "User" },
   views: Number,

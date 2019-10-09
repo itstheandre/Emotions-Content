@@ -3,6 +3,7 @@ const router = express.Router();
 const Content = require("../models/Content");
 const User = require("../models/User");
 const uploader = require("../config/cloudinary");
+const uploadAudio = require("../config/cloudinary-audio");
 
 // Get all documents you created
 router.get("/", (req, res) => {
@@ -30,7 +31,7 @@ router.get("/:id", (req, res) => {
     });
 });
 // router to create an image
-router.post("/add/image", uploader.single("imagePath"), (req, res, next) => {
+router.post("/add/image", uploader.single("urlPath"), (req, res, next) => {
   // console.log('file is: ', req.file)
   // <console className="l">se </console>og(req.file);
   if (!req.file) {
@@ -41,6 +42,20 @@ router.post("/add/image", uploader.single("imagePath"), (req, res, next) => {
   // variable 'secure_url', but this can be any name, just make sure you remember to use the same in frontend
   res.json({ secure_url: req.file.secure_url });
 });
+
+router.post(
+  "/add/audio",
+  uploadAudio.single("urlPath", { resource_type: "video" }),
+  (req, res, next) => {
+    console.log("audio axios", req.file);
+    if (!req.file) {
+      next(new Error("No file uploaded"));
+      return;
+    }
+    console.log(req.file);
+    res.json({ secure_url: req.file.secure_url });
+  }
+);
 
 // Create content
 router.post("/add", (req, res) => {
@@ -65,6 +80,7 @@ router.post("/add", (req, res) => {
       urlPath
     }).then(response => {
       console.log("response here: ", response);
+      console.log("aaaaaaaa", response);
       res.json(response);
     });
   });

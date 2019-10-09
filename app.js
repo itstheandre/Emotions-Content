@@ -107,4 +107,7 @@ app.use("/api/chart", chart);
 const viewsRoutes = require("./routes/viewsRoutes");
 app.use("/api/views", viewsRoutes);
 
+const userSettingsRoutes = require("./routes/userSettings");
+app.use("/api/userSettings", userSettingsRoutes);
+
 module.exports = app;

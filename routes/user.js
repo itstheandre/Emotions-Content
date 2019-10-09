@@ -4,8 +4,6 @@ const Content = require("../models/Content");
 const User = require("../models/User");
 const Views = require("../models/Views");
 
-
-
 //Getting all the documents from a user
 router.get("/api/:user", (req, res) => {
   const user = req.params.user;
@@ -13,12 +11,15 @@ router.get("/api/:user", (req, res) => {
     // console.log("here", allContent);
     const id = allContent[0]._id;
 
-    Content.find({ owner: id }).then(userDetails => {
-      res.json(userDetails);
-    });
+    Content.find({ owner: id })
+      .then(userDetails => {
+        res.json(userDetails);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   });
 });
-
 
 // Get all the data from a content Id and a User
 router.get("/api/:user/:id", (req, res) => {
@@ -28,7 +29,6 @@ router.get("/api/:user/:id", (req, res) => {
   Content.findById(id)
     .populate("owner")
     .then(response => {
-      console.log("LOOK HERE ANDRÈ: ", response);
       res.json(response);
     })
     .catch(err => {
@@ -37,7 +37,6 @@ router.get("/api/:user/:id", (req, res) => {
 });
 
 //This is for the face detections route
-
 
 //For the moment we use this one to update the content data
 // router.put("/api/:id", (req, res) => {

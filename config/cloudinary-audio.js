@@ -8,18 +8,14 @@ cloudinary.config({
 });
 const storage = cloudinaryStorage({
   cloudinary,
-  folder: "motus", // The name of the folder in cloudinary
-  allowedFormats: ["jpg", "png", "jpeg"],
-  transformation: [
-    {
-      // width: 350,
-      height: 600
-    }
-  ],
+  folder: "motus-audio", // The name of the folder in cloudinary
+  allowedFormats: ["mp3", "ogg"],
+  params: { resource_type: "raw", format: "mp3" },
+
   // params: { resource_type: 'raw' }, => this is in case you want to upload other type of files, not just images
   filename: function(req, res, cb) {
     cb(null, res.originalname); // The file on cloudinary would have the same name as the original file name
   }
 });
-const uploader = multer({ storage });
-module.exports = uploader;
+const uploadAudio = multer({ storage });
+module.exports = uploadAudio;

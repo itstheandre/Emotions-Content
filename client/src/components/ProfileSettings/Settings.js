@@ -79,7 +79,7 @@ const Settings = ({ user: { _id }, history }) => {
         onImageUpload={onImageUpload}
         user={user}
       />
-      {message}
+      <p style={{ textAlign: "center" }}>{message}</p>
     </div>
   );
 };

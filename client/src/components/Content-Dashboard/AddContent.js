@@ -98,15 +98,20 @@ const AddContent = props => {
         <MDBRow>
           <MDBCol>
             <form onSubmit={handleSubmit} encType={formInfo}>
-              <label htmlFor="title">Title</label>
+              <label className="text-default logIn" htmlFor="title">
+                Title
+              </label>
               <MDBInput
+                label=""
                 type="text"
                 name="title"
                 id="title"
                 value={title}
                 onChange={e => setTitle(e.target.value)}
               />
-              <label htmlFor="contentType">Content Type</label>
+              <label className="text-default logIn" htmlFor="contentType">
+                Content Type
+              </label>
               <select
                 className="browser-default custom-select"
                 id="contentType"
@@ -121,20 +126,41 @@ const AddContent = props => {
               </select>
               {image && (
                 <>
-                  {/* <label htmlFor="file">Upload your image</label> */}
-                  <MDBInput
+                  <label className="text-default logIn" htmlFor="file">
+                    Upload your image
+                  </label>
+                  <div className="input-group">
+                    <div className="custom-file">
+                      <input
+                        type="file"
+                        name="urlPath"
+                        id="urlPath"
+                        onChange={onImageUpload}
+                        className="custom-file-input"
+                        aria-describedby="inputGroupFileAddon01"
+                      />
+                      <label
+                        className="custom-file-label grey-text"
+                        htmlFor="file"
+                      >
+                        choose file
+                      </label>
+                    </div>
+                    <img src={urlPath} />
+                  </div>
+                  {/* <MDBInput
                     type="file"
                     name="urlPath"
                     id="urlPath"
                     onChange={onImageUpload}
-                  />
-
-                  <img src={urlPath} />
+                  /> */}
                 </>
               )}
               {audio && (
                 <>
-                  <label htmlFor="file">Upload your audio</label>
+                  <label className="text-default logIn" htmlFor="file">
+                    Upload your audio
+                  </label>
                   <MDBInput
                     type="file"
                     name="urlPath"
