@@ -53,7 +53,10 @@ class App extends React.Component {
           <Route exact path={"/u/:user"} component={CreatorPage} />
           <Route exact path={`/u/:user/:id`} component={DetectEmotion} />
           <Route exact path="/" component={Header} />
-          <Route exact path="/chart/:user" component={Chart} />
+          <Route exact path="/chart/:user" render={props => (
+              <Chart user={this.state.user} {...props} />
+            )} />
+
         </Switch>
       </div>
     );
