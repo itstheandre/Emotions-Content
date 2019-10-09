@@ -56,7 +56,7 @@ router.put("/:id",(req,res)=>{
   }
  
    
-      Views.findByIdAndUpdate(req.params.id,{averageEmotion,maxEmotion,contentId, age, gender,time},{new:true}).then(updated=>{
+      Views.findByIdAndUpdate(req.params.id,{averageEmotion,maxEmotion, age, gender,time},{new:true}).then(updated=>{
         res.json(updated);
       
     }).catch(err=>{res.json(err)})
