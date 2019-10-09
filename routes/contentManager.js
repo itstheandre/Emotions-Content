@@ -19,7 +19,8 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   // console.log(req.params.id);
   Content.findById(req.params.id)
-    .populate("owner").populate("views")
+    .populate("owner")
+    .populate("views")
     .then(response => {
       // console.log(response);
       res.json(response);
@@ -45,7 +46,7 @@ router.post("/add/image", uploader.single("imagePath"), (req, res, next) => {
 router.post("/add", (req, res) => {
   // , uploadCloud.single("imagePath")
 
-  const { url, title, contentType, body, imagePath } = req.body;
+  const { url, title, contentType, body, urlPath } = req.body;
 
   const owner = req.user;
   const date = new Date()
@@ -61,7 +62,7 @@ router.post("/add", (req, res) => {
       contentType,
       owner,
       body,
-      imagePath
+      urlPath
     }).then(response => {
       console.log("response here: ", response);
       res.json(response);

@@ -7,11 +7,12 @@ import ReactAudioPlayer from "react-audio-player";
 // Written in a functional component. Same as below.
 
 const DisplayPost = props => {
-  console.log("PROPS: ", props.contentType);
+  console.log("PROPS: ", props);
 
   const video = props.contentType === "video";
   const audio = props.contentType === "audio";
   const image = props.contentType === "image";
+  console.log(video);
 
   return (
     <div>

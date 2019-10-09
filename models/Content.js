@@ -10,15 +10,10 @@ const contentSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref: "User" },
   views: Number,
   date: String,
-  imagePath: String,
+  urlPath: String,
   title: String,
   body: String,
-  views:[{type:Schema.Types.ObjectId, ref:"Views"}],
-  imagePath: {
-    type: String
-    // default:
-    //   "https://res.cloudinary.com/itstheandre/image/upload/v1568908103/my-dev-dash/xkg64abvucedo88zeej8.png"
-  }
+  views: [{ type: Schema.Types.ObjectId, ref: "Views" }]
 });
 
 const Content = model("Content", contentSchema);

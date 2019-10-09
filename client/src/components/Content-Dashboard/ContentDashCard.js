@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBInput,
+  MDBLabel
+} from "mdbreact";
 
 export default class ContentDashCard extends Component {
   state = {
@@ -25,39 +35,43 @@ export default class ContentDashCard extends Component {
     );
   };
   render() {
-    console.log(this.props.content);
     return (
-      <div className='contentCard'>
-        <h2>{this.props.content.title}</h2>
-        <h4>{this.props.content.date}</h4>
-        <button>
+      <div className="borderCard">
+        <div className="contentCard">
+          <h2>{this.props.content.title}</h2>
+          <h4>{this.props.content.date}</h4>
+
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to={`/content-dashboard/${this.props.content._id}`}
           >
-            View
+            <i className="fas fa-lg fa-eye"></i>
           </Link>
-        </button>
-        <button>
+
+          {/* EDIT */}
+
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to={`/edit/${this.props.content._id}`}
           >
-            Edit
+            <i className="fas fa-lg fa-edit"></i>
           </Link>
-        </button>
-        <button onClick={this.handleClick}>Delete</button>
-        <button
-          onClick={() => navigator.clipboard.writeText(this.state.textToCopy)}
-        >
-          Share now
-        </button>
-        <button>
+
+          {/* DELETE */}
+          <i className="fas fa-lg fa-trash-alt" onClick={this.handleClick}></i>
+
+          {/* SHARE */}
+          <i
+            className="far fa-lg fa-share-square"
+            onClick={() => navigator.clipboard.writeText(this.state.textToCopy)}
+          ></i>
+
           <Link to={`/u/${this.props.user.username}/${this.props.content._id}`}>
             {" "}
             View as Normal
           </Link>
-        </button>
+        </div>
+        <hr width="80%" />
       </div>
     );
   }
