@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../services/api";
+import "../App.css";
 
 const handleLogout = props => {
   logout().then(() => {
@@ -10,22 +11,39 @@ const handleLogout = props => {
 
 const Navbar = props => {
   return (
-    <nav>
-      <Link to='/'>Motus </Link>
+    <nav className="navbar navbar-expand-lg navbar-dark default-color">
+      <Link className="navbar-brand" to="/">
+        <img src="motus-logo2.png" style={{ height: "30px" }}></img>
+      </Link>
+
       {props.user ? (
         <>
-          <Link to='/content-dashboard'>Content</Link>
-          <Link to='/' onClick={() => handleLogout(props)}>
+          <Link className="navbar-brand" to="/content-dashboard">
+            Content
+          </Link>
+          <Link
+            className="navbar-brand my-2 my-lg-0 ml-auto"
+            to="/"
+            onClick={() => handleLogout(props)}
+          >
             Logout
           </Link>{" "}
         </>
       ) : (
         <>
-          <Link to='/signup'>Signup</Link>
-          <Link to='/login'>Login</Link>
+          <Link className="navbar-brand my-2 my-lg-0 ml-auto" to="/signup">
+            Signup
+          </Link>
+          <Link className="navbar-brand my-2 my-lg-0 ml-auto" to="/login">
+            Login
+          </Link>
         </>
       )}
-      {props.user && <h3>Hey {props.user.fullName}</h3>}
+      {props.user && (
+        <h3 className="heyUser my-2 my-lg-0 ml-auto">
+          Hey {props.user.fullName}
+        </h3>
+      )}
     </nav>
   );
 };

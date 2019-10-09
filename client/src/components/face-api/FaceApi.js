@@ -347,7 +347,7 @@ export default class FaceApi extends Component {
       this.faceApi();
     }
     return (
-      <div>
+      <div class="faceApi">
         <Beforeunload
           onBeforeunload={() => {
             console.log("DISPLAY PROPS: ----", this.props);
