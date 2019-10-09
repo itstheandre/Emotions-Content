@@ -38,7 +38,7 @@ router.put("/:id",(req,res)=>{
   
   averageEmotion={
     angryAvg: (angry[1]>0.1?true:false),
-    disgustedAvg: (disgusted[1]>0,1?true:false),
+    disgustedAvg: (disgusted[1]>0.1?true:false),
     fearfulAvg: (fearful[1]>0.1?true:false),
     happyAvg: (happy[1]>0.1?true:false),
     neutralAvg: neutral[1]*100,
@@ -55,7 +55,7 @@ router.put("/:id",(req,res)=>{
     surprisedMax: surprised[0]
   }
  
-   
+    console.log(req.body)
       Views.findByIdAndUpdate(req.params.id,{averageEmotion,maxEmotion, age, gender,time},{new:true}).then(updated=>{
         res.json(updated);
       
