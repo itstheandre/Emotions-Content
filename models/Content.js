@@ -13,33 +13,7 @@ const contentSchema = new Schema({
   imagePath: String,
   title: String,
   body: String,
-  averageEmotion: {
-    angryAvg: Array,
-    disgustedAvg: Array,
-    fearfulAvg: Array,
-    happyAvg: Array,
-    neutralAvg: Array,
-    sadAvg: Array,
-    surprisedAvg: Array
-  },
-  maxEmotion: {
-    angryMax: Array,
-    disgustedMax: Array,
-    fearfulMax: Array,
-    happyMax: Array,
-    neutralMax: Array,
-    sadMax: Array,
-    surprisedMax: Array
-  },
-  age: Array,
-  time: [
-    {
-      fullTime: Array,
-      min: Number,
-      sec: Number
-    }
-  ],
-  gender: Array,
+  views:[{type:Schema.Types.ObjectId, ref:"Views"}],
   imagePath: {
     type: String
     // default:

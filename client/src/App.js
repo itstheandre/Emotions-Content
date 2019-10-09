@@ -10,6 +10,8 @@ import Post from "./components/Post";
 import EditContent from "./components/Content-Dashboard/EditContent";
 import DetectEmotion from "./components/UserViews/DetectEmotion";
 import CreatorPage from "./components/UserViews/CreatorPage";
+import Chart from "./components/Chart"
+
 class App extends React.Component {
   state = {
     user: this.props.user
@@ -27,6 +29,7 @@ class App extends React.Component {
         <Navbar user={this.state.user} setUser={this.setUser} />
         <Switch>
           {" "}
+         
           <Route
             exact
             path='/signup'
@@ -49,7 +52,10 @@ class App extends React.Component {
           <Route exact path='/edit/:editPost' component={EditContent} />
           <Route exact path={"/u/:user"} component={CreatorPage} />
           <Route exact path={`/u/:user/:id`} component={DetectEmotion} />
+          <Route exact path="/chart/:user" component={Chart} />
+
         </Switch>
+
       </div>
     );
   }

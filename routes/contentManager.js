@@ -4,7 +4,7 @@ const Content = require("../models/Content");
 const User = require("../models/User");
 const uploader = require("../config/cloudinary");
 
-// Get all documents you wrote
+// Get all documents you created
 router.get("/", (req, res) => {
   Content.find({ owner: req.user._id })
     .then(response => {
@@ -15,11 +15,11 @@ router.get("/", (req, res) => {
     });
 });
 
-// Get specific docuemnt. Nobody cares if you wrote it
+// Get specific document. Nobody cares if you created it
 router.get("/:id", (req, res) => {
   // console.log(req.params.id);
   Content.findById(req.params.id)
-    .populate("owner")
+    .populate("owner").populate("views")
     .then(response => {
       // console.log(response);
       res.json(response);
@@ -28,7 +28,7 @@ router.get("/:id", (req, res) => {
       console.log(err);
     });
 });
-
+// router to create an image
 router.post("/add/image", uploader.single("imagePath"), (req, res, next) => {
   // console.log('file is: ', req.file)
   // <console className="l">se </console>og(req.file);
@@ -48,7 +48,6 @@ router.post("/add", (req, res) => {
   const { url, title, contentType, body, imagePath } = req.body;
 
   const owner = req.user;
-  const views = 0;
   const date = new Date()
     .toJSON()
     .slice(0, 10)
@@ -62,7 +61,6 @@ router.post("/add", (req, res) => {
       contentType,
       owner,
       body,
-      views,
       imagePath
     }).then(response => {
       console.log("response here: ", response);
@@ -99,6 +97,7 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+//Update content
 router.put("/:id", (req, res) => {
   const { url, title, contentType, body } = req.body;
   Content.findById(req.params.id).then(project => {
