@@ -62,7 +62,6 @@ router.post("/add", (req, res) => {
   // , uploadCloud.single("imagePath")
 
   const { url, title, contentType, body, urlPath } = req.body;
-  console.log(urlPath);
 
   const owner = req.user;
   const date = new Date()

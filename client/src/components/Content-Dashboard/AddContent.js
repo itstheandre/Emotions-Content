@@ -1,5 +1,15 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBInput,
+  MDBLabel
+} from "mdbreact";
 
 const AddContent = props => {
   const [urlPath, setUrlPath] = useState("");
@@ -31,6 +41,7 @@ const AddContent = props => {
     event.preventDefault();
 
     if (urlPath && title && contentType && body) {
+      console.log(urlPath);
       axios
         .post("/api/content/add", {
           urlPath,
@@ -83,75 +94,112 @@ const AddContent = props => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} encType={formInfo}>
-        <label htmlFor='title'>Title</label>
-        <input
-          type='text'
-          name='title'
-          id='title'
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-        <label htmlFor='contentType'>Content Type</label>
-        <select
-          id='contentType'
-          name='contentType'
-          value={contentType}
-          onChange={handleChange}
-        >
-          <option value='image'>Image</option>
-          <option value='text'>Text</option>
-          <option value='audio'>Audio</option>
-          <option value='video'>Video</option>
-        </select>
-        {image && (
-          <>
-            <label htmlFor='file'>Upload your image</label>
-            <input
-              type='file'
-              name='urlPath'
-              id='urlPath'
-              onChange={onImageUpload}
-            />
-
-            <img src={urlPath} />
-          </>
-        )}
-        {audio && (
-          <>
-            <label htmlFor='file'>Upload your audio</label>
-            <input
-              type='file'
-              name='urlPath'
-              id='urlPath'
-              onChange={onAudioUpload}
-            />
-          </>
-        )}
-        {video && (
-          <>
-            <label htmlFor='file'>Paste your Youtube Link</label>
-            <input
-              type='text'
-              name='urlPath'
-              id='urlPath'
-              onChange={e => setUrlPath(e.target.value)}
-              value={urlPath}
-            />
-          </>
-        )}
-        {text && <div>{message}</div>}
-        <label htmlFor='body'>Add a description</label>
-        <input
-          name='body'
-          id='body'
-          type='text'
-          value={body}
-          onChange={e => setBody(e.target.value)}
-        />
-        {!text && <button type='submit'>Upload your content</button>}
-        {message}
-      </form>
+      <MDBContainer>
+        <MDBRow>
+          <MDBCol>
+            <form onSubmit={handleSubmit} encType={formInfo}>
+              <label className="text-default logIn" htmlFor="title">
+                Title
+              </label>
+              <MDBInput
+                label=""
+                type="text"
+                name="title"
+                id="title"
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+              />
+              <label className="text-default logIn" htmlFor="contentType">
+                Content Type
+              </label>
+              <select
+                className="browser-default custom-select"
+                id="contentType"
+                name="contentType"
+                value={contentType}
+                onChange={handleChange}
+              >
+                <option value="image">Image</option>
+                <option value="text">Text</option>
+                <option value="audio">Audio</option>
+                <option value="video">Video</option>
+              </select>
+              {image && (
+                <>
+                  <label className="text-default logIn" htmlFor="file">
+                    Upload your image
+                  </label>
+                  <div className="input-group">
+                    <div className="custom-file">
+                      <input
+                        type="file"
+                        name="urlPath"
+                        id="urlPath"
+                        onChange={onImageUpload}
+                        className="custom-file-input"
+                        aria-describedby="inputGroupFileAddon01"
+                      />
+                      <label
+                        className="custom-file-label grey-text"
+                        htmlFor="file"
+                      >
+                        choose file
+                      </label>
+                    </div>
+                    <img src={urlPath} />
+                  </div>
+                  {/* <MDBInput
+                    type="file"
+                    name="urlPath"
+                    id="urlPath"
+                    onChange={onImageUpload}
+                  /> */}
+                </>
+              )}
+              {audio && (
+                <>
+                  <label className="text-default logIn" htmlFor="file">
+                    Upload your audio
+                  </label>
+                  <MDBInput
+                    type="file"
+                    name="urlPath"
+                    id="urlPath"
+                    onChange={onAudioUpload}
+                  />
+                </>
+              )}
+              {video && (
+                <>
+                  <label htmlFor="file">Paste your Youtube Link</label>
+                  <MDBInput
+                    type="text"
+                    name="urlPath"
+                    id="urlPath"
+                    onChange={e => setUrlPath(e.target.value)}
+                    value={urlPath}
+                  />
+                </>
+              )}
+              {text && <div>{message}</div>}
+              <label htmlFor="body">Add a description</label>
+              <MDBInput
+                name="body"
+                id="body"
+                type="text"
+                value={body}
+                onChange={e => setBody(e.target.value)}
+              />
+              {!text && (
+                <div className="text-center">
+                  <MDBBtn type="submit">Upload</MDBBtn>
+                </div>
+              )}
+              {message}
+            </form>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
     </>
   );
 };

@@ -35,25 +35,35 @@ export default class ContentManager extends Component {
     const { user, content } = this.state;
     const filled = content.length === 0 ? false : "Not empty";
 
-    if (!user) return <h1>You are not logged in, so no dashboard fot you</h1>;
+    if (!user) return <h1>You are not logged in, so no dashboard for you</h1>;
 
     return (
       <>
-        <h2>My Content Dashboard</h2>
+        <div>
+          <h2 style={{ textAlign: "center" }} className="logIn">
+            My Content Dashboard
+          </h2>
 
-        <br />
-        <Link to='/content-dashboard/add'>Add content</Link>
-        {!filled && <div>Time to add some more content</div>}
-        {this.state.content.reverse().map(el => {
-          return (
-            <ContentDashCard
-              content={el}
-              getData={this.getData}
-              key={el._id}
-              user={this.state.user}
-            />
-          );
-        })}
+          <br />
+          {!filled && <div>Click above </div>}
+          {this.state.content.reverse().map(el => {
+            return (
+              <div className="text-center dashCard">
+                <ContentDashCard
+                  content={el}
+                  getData={this.getData}
+                  key={el._id}
+                  user={this.state.user}
+                />
+              </div>
+            );
+          })}
+        </div>
+        <div className="fixed-bottom addBtn">
+          <Link to="/content-dashboard/add">
+            <i className="fas fa-3x fa-plus-circle text-default"></i>
+          </Link>
+        </div>
       </>
     );
   }

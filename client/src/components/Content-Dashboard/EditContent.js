@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBInput,
+  MDBLabel
+} from "mdbreact";
 
 const EditContent = props => {
   const [title, setTitle] = useState("");
@@ -38,26 +48,40 @@ const EditContent = props => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='title'>Title</label>
-        <input
-          type='text'
-          id='title'
-          name='title'
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
+      <MDBContainer>
+        <MDBRow>
+          <MDBCol>
+            <form onSubmit={handleSubmit}>
+              <div className="text-default">
+                <label className="text-default logIn" htmlFor="title">
+                  Title
+                </label>
+                <MDBInput
+                  type="text"
+                  id="title"
+                  name="title"
+                  value={title}
+                  onChange={e => setTitle(e.target.value)}
+                />
 
-        <label htmlFor='body'>Body</label>
-        <input
-          type='text'
-          id='body'
-          name='body'
-          value={body}
-          onChange={e => setBody(e.target.value)}
-        />
-        <button type='submit'>Edit your content</button>
-      </form>
+                <label className="text-default" htmlFor="body">
+                  Description
+                </label>
+                <MDBInput
+                  type="text"
+                  id="body"
+                  name="body"
+                  value={body}
+                  onChange={e => setBody(e.target.value)}
+                />
+                <div className="text-center">
+                  <MDBBtn type="submit">Save</MDBBtn>
+                </div>
+              </div>
+            </form>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
     </>
   );
 };
