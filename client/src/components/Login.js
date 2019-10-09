@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { login } from "../services/api";
-
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBInput,
+  MDBLabel
+} from "mdbreact";
+import "../App.css";
 // Written in props. Equivalent in Classes below
 
 const Login = props => {
@@ -22,28 +32,48 @@ const Login = props => {
 
   return (
     <>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='username'>Username: </label>
-        <input
-          type='text'
-          name='username'
-          id='username'
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-        />
-        <label htmlFor='password'>Password</label>
-        <input
-          type='password'
-          name='password'
-          id='password'
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-        {message && <h1>{message}</h1>}
+      <MDBContainer>
+        <MDBRow>
+          <MDBCol>
+            <h1 className=" text-center mb-4 logIn">Log in</h1>
+            <form onSubmit={handleSubmit}>
+              <div className="grey-text">
+                {/* <label htmlFor="username"></label> */}
+                <MDBInput
+                  label="username"
+                  validate
+                  group
+                  error="wrong"
+                  success="right"
+                  type="text"
+                  name="username"
+                  id="username"
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                />
+                {/* <label htmlFor="password"></label> */}
+                <MDBInput
+                  label="password"
+                  validate
+                  group
+                  error="wrong"
+                  success="right"
+                  type="password"
+                  name="password"
+                  id="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                />
+              </div>
+              {message && <h1>{message}</h1>}
 
-        <button type='submit'>Login</button>
-      </form>
+              <div className="text-center">
+                <MDBBtn type="submit">Login</MDBBtn>
+              </div>
+            </form>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
     </>
   );
 };

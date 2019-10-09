@@ -10,7 +10,8 @@ import Post from "./components/Post";
 import EditContent from "./components/Content-Dashboard/EditContent";
 import DetectEmotion from "./components/UserViews/DetectEmotion";
 import CreatorPage from "./components/UserViews/CreatorPage";
-import Chart from "./components/Chart"
+import Chart from "./components/Chart";
+import Header from "./components/Header";
 
 class App extends React.Component {
   state = {
@@ -25,37 +26,35 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='App'>
+      <div className="App">
         <Navbar user={this.state.user} setUser={this.setUser} />
         <Switch>
           {" "}
-         
           <Route
             exact
-            path='/signup'
+            path="/signup"
             render={props => <Signup setUser={this.setUser} {...props} />}
           />
           <Route
             exact
-            path='/login'
+            path="/login"
             render={props => <Login setUser={this.setUser} {...props} />}
           />
           <Route
             exact
-            path='/content-dashboard'
+            path="/content-dashboard"
             render={props => (
               <ContentManager user={this.state.user} {...props} />
             )}
           />
-          <Route exact path='/content-dashboard/add' component={AddContent} />
-          <Route exact path='/content-dashboard/:unique' component={Post} />
-          <Route exact path='/edit/:editPost' component={EditContent} />
+          <Route exact path="/content-dashboard/add" component={AddContent} />
+          <Route exact path="/content-dashboard/:unique" component={Post} />
+          <Route exact path="/edit/:editPost" component={EditContent} />
           <Route exact path={"/u/:user"} component={CreatorPage} />
           <Route exact path={`/u/:user/:id`} component={DetectEmotion} />
+          <Route exact path="/" component={Header} />
           <Route exact path="/chart/:user" component={Chart} />
-
         </Switch>
-
       </div>
     );
   }

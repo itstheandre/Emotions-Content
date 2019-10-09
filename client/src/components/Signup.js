@@ -1,5 +1,16 @@
 import React, { useState } from "react";
 import { signup } from "../services/api";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBInput,
+  MDBLabel
+} from "mdbreact";
+import "../App.css";
 
 // Written in props. Equivalent in Classes below
 
@@ -23,35 +34,60 @@ const Signup = props => {
 
   return (
     <>
-      <h1>Sign up</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='username'>Username: </label>
-        <input
-          type='text'
-          name='username'
-          id='username'
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-        />
-        <label htmlFor='fullName'>Full Name: </label>
-        <input
-          type='text'
-          name='fullName'
-          id='fullName'
-          value={fullName}
-          onChange={e => setFullName(e.target.value)}
-        />
-        <label htmlFor='password'>Password</label>
-        <input
-          type='password'
-          name='password'
-          id='password'
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-        {message && <h1>{message}</h1>}
-        <button type='submit'>Create Account</button>
-      </form>
+      <MDBContainer>
+        <MDBRow>
+          <MDBCol>
+            <h1 className="text-center mb-4 logIn">Sign up</h1>
+            <form onSubmit={handleSubmit}>
+              <div className="grey-text">
+                {/* <label htmlFor="username">Username: </label> */}
+                <MDBInput
+                  label="username"
+                  validate
+                  group
+                  error="wrong"
+                  success="right"
+                  type="text"
+                  name="username"
+                  id="username"
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                />
+                {/* <label htmlFor="fullName">Full Name: </label> */}
+                <MDBInput
+                  label="name"
+                  validate
+                  group
+                  error="wrong"
+                  success="right"
+                  type="text"
+                  name="fullName"
+                  id="fullName"
+                  value={fullName}
+                  onChange={e => setFullName(e.target.value)}
+                />
+                {/* <label htmlFor="password">Password</label> */}
+                <MDBInput
+                  label="password"
+                  validate
+                  group
+                  error="wrong"
+                  success="right"
+                  type="password"
+                  name="password"
+                  id="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                />
+              </div>
+              {message && <h1>{message}</h1>}
+              <div className="text-center">
+                <MDBBtn type="submit">Create Account</MDBBtn>
+              </div>
+            </form>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
     </>
   );
 };
