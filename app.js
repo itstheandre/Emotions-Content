@@ -79,10 +79,12 @@ app.use(flash());
 require("./passport")(app);
 
 // allow access to the API from different domains/origins
-app.use(cors({
-  // this could be multiple domains/origins, but we will allow just our React app
-  origin: [ "http://localhost:3000" ]
-}));
+app.use(
+  cors({
+    // this could be multiple domains/origins, but we will allow just our React app
+    origin: ["http://localhost:3000"]
+  })
+);
 
 const index = require("./routes/index");
 app.use("/", index);
@@ -95,11 +97,14 @@ app.use("/api/content", contentManager);
 
 const userRoutes = require("./routes/user");
 app.use("/u", userRoutes);
-const test=require('./routes/fileUpload');
-app.use('/api',test );
 
-const chart=require("./routes/chart");
+const test = require("./routes/fileUpload");
+app.use("/api", test);
+
+const chart = require("./routes/chart");
 app.use("/api/chart", chart);
-const viewsRoutes=require("./routes/viewsRoutes");
-app.use("/api/views",viewsRoutes)
+
+const viewsRoutes = require("./routes/viewsRoutes");
+app.use("/api/views", viewsRoutes);
+
 module.exports = app;

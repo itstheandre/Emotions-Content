@@ -5,30 +5,30 @@ import DisplayPost from "./DisplayPost";
 const Post = props => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [id, setId] = useState("");
+  const [contentId, setContentId] = useState("");
   const [owner, setOwner] = useState("");
   const [ownerId, setOwnerId] = useState("");
-  const [views, setViews] = useState(0);
+  const [viewId, setViewId] = useState("");
+  const [viewTotal, setViewTotal] = useState(0);
 
   // const getPostData = () => {
-  //   const { user } = props.match.params;
-  //   const contentId = props.match.params.id;
-  //   axios.get(`/u/api/${user}/${contentId}`).then(response => {
-  //     const views = response.data.views + 1;
-  //     const newId = response.data._id;
-  //     axios.put(`/u/api/views/${newId}`, { views }).then(response => {
-  //       console.log("RESPONSE DATA FROM PUT REQUEST: ", response.data);
-  //       const owner = response.data.owner.username;
-  //       const ownerId = response.data.owner._id;
-  //       const { title, body } = response.data;
-  //       setTitle(title);
-  //       setBody(body);
-  //       setOwner(owner);
-  //       setOwnerId(ownerId);
-  //       setViews(response.data.views);
-  //       setId(contentId);
-  //     });
+  //    axios.get(`/u / api / ${ user } /${contentId}`).then(response => {
+  //   const newId = response.data._id;
+  //   const owner = response.data.owner.username;
+  //   const ownerId = response.data.owner._id;
+  //   const viewTotal = response.data.views.length;
+  //   const { title, body } = response.data;
+  //   axios.post(`/api/views/${newId}`).then(created => {
+  //     const viewId = created.data._id;
+  //     setBody(body);
+  //     setTitle(title);
+  //     setOwner(owner);
+  //     setOwnerId(ownerId);
+  //     setViewId(viewId);
+  //     setContentId(newId);
+  //     setViewTotal(viewTotal);
   //   });
+  // });
   // };
 
   useEffect(() => {
@@ -36,19 +36,20 @@ const Post = props => {
     const { user } = props.match.params;
     const contentId = props.match.params.id;
     axios.get(`/u/api/${user}/${contentId}`).then(response => {
-      const views = response.data.views + 1;
       const newId = response.data._id;
-      axios.put(`/u/api/views/${newId}`, { views }).then(response => {
-        console.log("RESPONSE DATA FROM PUT REQUEST: ", response.data);
-        const owner = response.data.owner.username;
-        const ownerId = response.data.owner._id;
-        const { title, body } = response.data;
-        setTitle(title);
+      const owner = response.data.owner.username;
+      const ownerId = response.data.owner._id;
+      const viewTotal = response.data.views.length;
+      const { title, body } = response.data;
+      axios.post(`/api/views/${newId}`).then(created => {
+        const viewId = created.data._id;
         setBody(body);
+        setTitle(title);
         setOwner(owner);
         setOwnerId(ownerId);
-        setViews(response.data.views);
-        setId(contentId);
+        setViewId(viewId);
+        setContentId(newId);
+        setViewTotal(viewTotal);
       });
     });
   }, []);
@@ -56,14 +57,22 @@ const Post = props => {
   const state = {
     title,
     body,
-    id,
+    contentId,
     owner,
     ownerId,
-    views
+    viewId
   };
-  console.log(state);
+
   return (
     <div>
+      <h1>#of Views {viewTotal}</h1>
+      <h1>{title} </h1>
+      <h2>{body}</h2>
+      <h3>CONTENT ID: {contentId}</h3>
+      <h4>OWNER: {owner} </h4>
+      <h5>OWNERID: {ownerId} </h5>
+      <h6>viewID: {viewId} </h6>
+
       <DisplayPost {...state} />
     </div>
   );

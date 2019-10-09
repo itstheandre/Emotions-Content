@@ -20,7 +20,7 @@ const DisplayPost = props => {
       <h1>{props.title}</h1>
       <h3>{props.owner}</h3>
       {props.body}
-      <FaceApi id={props.id} />
+      <FaceApi id={props.viewId} />
     </div>
   );
 };
