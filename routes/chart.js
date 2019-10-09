@@ -4,7 +4,7 @@ const Content = require("../models/Content");
 const User = require("../models/User");
 const Views = require("../models/Views");
 
-router.get("/:name",(req,res)=>{
+router.get("/all/:name",(req,res)=>{
   const username = req.params.name;
   console.log(username)
   User.find({ username }).then(allContent => {
