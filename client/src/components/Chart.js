@@ -12,7 +12,7 @@ export default class Chart extends Component{
             age:0,
             views:0,
             content : []
-
+            
         }
 componentDidMount=()=>{
     this.getData()
