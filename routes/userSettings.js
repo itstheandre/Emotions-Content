@@ -35,14 +35,14 @@ router.put("/:id", (req, res) => {
     fullName,
     username,
     newPasswordTest,
-    profilePictureTest,
+    profilePicture,
     oldPasswordTest
   } = req.body;
   console.log(req.body);
 
   User.findById(req.params.id).then(dbUser => {
     User.findOne({ username }).then(found => {
-      if (found) {
+      if (found && username !== dbUser.username) {
         return res
           .status(400)
           .json({ message: "This username is already taken" });
@@ -61,9 +61,27 @@ router.put("/:id", (req, res) => {
           .json({ message: "You're using the same password as before" });
       }
 
-      const password = newPasswordTest ? newHashPass : dbUser.password;
-      const profilePicture = profilePictureTest
-        ? profilePictureTest
+      if (newPasswordTest.length < 8) {
+        return res
+          .status(400)
+          .json({
+            message: "Please make sure your password has 8 characters, at least"
+          });
+      }
+
+      let password;
+      // if (!oldPasswordTest %) {
+      //   password = newHashPass;
+      // }
+      if (!oldPasswordTest || !newPasswordTest) {
+        password = dbUser.password;
+      } else {
+        password = newHashPass;
+      }
+
+      // const password = newPasswordTest ? newHashPass : dbUser.password;
+      const profilePicture = profilePicture
+        ? profilePicture
         : dbUser.profilePicture;
       User.findByIdAndUpdate(
         req.params.id,

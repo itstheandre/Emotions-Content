@@ -17,7 +17,7 @@ const Settings = ({ user: { _id }, history }) => {
   const [user, setUser] = useState({
     fullName: "",
     username: "",
-    profilePictureTest: "",
+    profilePicture: "",
     oldPasswordTest: "",
     newPasswordTest: ""
   });
@@ -63,8 +63,8 @@ const Settings = ({ user: { _id }, history }) => {
     // req.body to .create() method when creating a new thing in '/api/things/create' POST route
     uploadData.append("profilePicture", files);
     axios.post("/api/userSettings/add/image", uploadData).then(response => {
-      const profilePictureTest = response.data.secure_url;
-      setUser(...user, profilePictureTest);
+      const profilePicture = response.data.secure_url;
+      setUser({ ...user, profilePicture });
     });
   };
 

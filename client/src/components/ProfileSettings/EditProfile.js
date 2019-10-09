@@ -39,8 +39,8 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
       <label htmlFor='file'>Profile Picture</label>
       <input
         type='file'
-        name='profilePictureTest'
-        id='profilePictureTest'
+        name='profilePicture'
+        id='profilePicture'
         onChange={onImageUpload}
       />
       <button type='submit'>Submit your changes</button>
