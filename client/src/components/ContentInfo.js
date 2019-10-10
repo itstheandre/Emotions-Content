@@ -167,14 +167,18 @@ export default class Chart extends Component {
     return (
       <div>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
+        
           <h4>Number of views {this.props.content.views.length} </h4>
+
           <h4>Date: {this.props.content.date}</h4>
           <button onClick={() => this.setNewData(this.state.avgChartData)}>
             Average
           </button>
+
           <button onClick={() => this.setNewData(this.state.maxChartData)}>
             Maximus
           </button>
+
         </div>
       </div>
     );

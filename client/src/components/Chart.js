@@ -170,6 +170,7 @@ export default class Chart extends Component {
     return (
       <>
         <h1>{this.state.title} </h1>
+
         <div className="chart">
           <Bar
             data={this.state.chartData}
@@ -183,11 +184,13 @@ export default class Chart extends Component {
             <h5>Female:{this.state.femalePercent}%</h5>
             <h5>Total views:{this.state.views}</h5>
           </div>
+
           <button onClick={() => this.resetData()}>Show all Data</button>
 
           {this.state.content.map(el => {
             console.log(el);
             return (
+
               <div>
                 <h1>{el.title}</h1>
                 <ContentInfo
@@ -196,6 +199,7 @@ export default class Chart extends Component {
                   //   getData={this.getData}
                 />
               </div>
+              
             );
           })}
         </div>
