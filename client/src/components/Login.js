@@ -25,7 +25,7 @@ const Login = props => {
         setMessage(data.message);
       } else {
         props.setUser(data);
-        props.history.push("/projects");
+        props.history.push("/content-dashboard");
       }
     });
   };
@@ -35,40 +35,40 @@ const Login = props => {
       <MDBContainer>
         <MDBRow>
           <MDBCol>
-            <h1 className=" text-center mb-4 logIn">Log in</h1>
+            <h1 className=' text-center mb-4 logIn'>Log in</h1>
             <form onSubmit={handleSubmit}>
-              <div className="grey-text">
+              <div className='grey-text'>
                 {/* <label htmlFor="username"></label> */}
                 <MDBInput
-                  label="username"
+                  label='username'
                   validate
                   group
-                  error="wrong"
-                  success="right"
-                  type="text"
-                  name="username"
-                  id="username"
+                  error='wrong'
+                  success='right'
+                  type='text'
+                  name='username'
+                  id='username'
                   value={username}
                   onChange={e => setUsername(e.target.value)}
                 />
                 {/* <label htmlFor="password"></label> */}
                 <MDBInput
-                  label="password"
+                  label='password'
                   validate
                   group
-                  error="wrong"
-                  success="right"
-                  type="password"
-                  name="password"
-                  id="password"
+                  error='wrong'
+                  success='right'
+                  type='password'
+                  name='password'
+                  id='password'
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                 />
               </div>
               {message && <h1>{message}</h1>}
 
-              <div className="text-center">
-                <MDBBtn type="submit">Login</MDBBtn>
+              <div className='text-center'>
+                <MDBBtn type='submit'>Login</MDBBtn>
               </div>
             </form>
           </MDBCol>

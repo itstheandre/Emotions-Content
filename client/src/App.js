@@ -13,7 +13,7 @@ import CreatorPage from "./components/UserViews/CreatorPage";
 import Chart from "./components/Chart";
 import Header from "./components/Header";
 import Settings from "./components/ProfileSettings/Settings";
-import SingleChart from "./components/SingleChart"
+import SingleChart from "./components/SingleChart";
 class App extends React.Component {
   state = {
     user: this.props.user
@@ -26,7 +26,7 @@ class App extends React.Component {
   };
 
   render() {
-    console.log(this.state.user)
+    console.log(this.state.user);
     return (
       <div className='App'>
         <Navbar user={this.state.user} setUser={this.setUser} />
@@ -49,27 +49,39 @@ class App extends React.Component {
               <ContentManager user={this.state.user} {...props} />
             )}
           />
+          <Route
+            exact
+            path='/content'
+            render={props => (
+              <ContentManager user={this.state.user} {...props} />
+            )}
+          />
           <Route exact path='/content-dashboard/add' component={AddContent} />
           <Route exact path='/content-dashboard/:unique' component={Post} />
           <Route exact path='/edit/:editPost' component={EditContent} />
           <Route exact path={"/u/:user"} component={CreatorPage} />
           <Route exact path={`/u/:user/:id`} component={DetectEmotion} />
           <Route exact path='/' component={Header} />
-          
-        {/*   <Route
+          {/*   <Route
             exact
             path='/chart/:user'
             render={props => <Chart user={this.state.user} {...props} />}
           /> */}
-          <Route exact path="/chart"
-          render={props=><Chart user={this.state.user}/>}
+          <Route
+            exact
+            path='/chart'
+            render={props => <Chart user={this.state.user} />}
           />
           <Route
             exact
             path='/settings'
             render={props => <Settings user={this.state.user} {...props} />}
           />
-          <Route exact path="/chart/content/:contentId" component={SingleChart}/>
+          <Route
+            exact
+            path='/chart/content/:contentId'
+            component={SingleChart}
+          />
         </Switch>
       </div>
     );

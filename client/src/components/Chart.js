@@ -192,7 +192,7 @@ export default class Chart extends Component {
           {this.state.content.map(el => {
             console.log(el);
             return (
-              <div>
+              <div key={el._id}>
                 <h1>{el.title}</h1>
                 <ContentInfo
                   updateState={this.updateState}
