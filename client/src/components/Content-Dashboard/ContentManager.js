@@ -7,7 +7,8 @@ export default class ContentManager extends Component {
   state = {
     user: this.props.user,
     content: [],
-    textToCopy: ""
+    textToCopy: "",
+    message: ""
   };
 
   componentDidMount = () => {
@@ -22,12 +23,13 @@ export default class ContentManager extends Component {
     });
   };
 
-  setTextToCopy = id => {
-    const { username } = this.state.user.username;
+  setNewMessage = () => {
     this.setState({
-      textToCopy: `http://localhost:3000/u/${username}/${id}`
+      message: "Your link has been copied to the clipboard"
     });
-    navigator.clipboard.writeText(this.state.textToCopy);
+    setTimeout(() => {
+      this.setState({ message: "" });
+    }, 2000);
   };
 
   render() {
@@ -43,7 +45,7 @@ export default class ContentManager extends Component {
           <h2 style={{ textAlign: "center" }} className='logIn h3'>
             My Content Dashboard
           </h2>
-
+          <p>{this.state.message}</p>
           <br />
           {!filled && <div>Click above </div>}
           {this.state.content.map(el => {
@@ -54,6 +56,7 @@ export default class ContentManager extends Component {
                   getData={this.getData}
                   key={el._id}
                   user={this.state.user}
+                  setNewMessage={this.setNewMessage}
                 />
               </div>
             );

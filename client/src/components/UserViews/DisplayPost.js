@@ -26,7 +26,7 @@ const DisplayPost = props => {
   const video = props.contentType === "video";
   const audio = props.contentType === "audio";
   const image = props.contentType === "image";
-
+  console.log(props);
   return (
     <>
       <div>
@@ -40,7 +40,8 @@ const DisplayPost = props => {
         )}
         {audio && <ReactAudioPlayer src={props.urlPath} controls />}
         <br />
-        HERE {props.views} views
+        <p>{props.viewTotal} views</p>
+        <p>{props.body}</p>
         <br />
         <Link to={`/u/${props.owner}`}>Check the creator's page</Link>
         {/* <FaceApi id={this.props.viewId} /> */}
