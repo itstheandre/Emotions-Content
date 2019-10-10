@@ -98,8 +98,12 @@ export default class Chart extends Component {
       let age = Math.floor(getAverage(ageAverage));
       let genderArr = [];
       viewsArr.forEach(elem => {
-        genderArr.push(elem.gender);
+        if (elem.gender) {
+          genderArr.push(elem.gender);
+        } else {
+        }
       });
+      console.log(genderArr);
       let male = genderArr.filter(el => {
         if (el === "male") return el;
       });
