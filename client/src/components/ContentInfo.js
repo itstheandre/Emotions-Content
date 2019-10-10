@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Bar } from "react-chartjs-2";
 import axios from "axios";
+import { MDBBtn } from "mdbreact";
 export default class Chart extends Component {
   state = {
     chartData: {},
@@ -128,7 +129,7 @@ export default class Chart extends Component {
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <h4>Number of views {this.props.content.views.length} </h4>
           <h4>{this.props.content.title}</h4>
-          <button
+          <MDBBtn
             onClick={() =>
               this.props.updateState(
                 this.state.chartData,
@@ -140,8 +141,8 @@ export default class Chart extends Component {
               )
             }
           >
-            Average
-          </button>
+            Show
+          </MDBBtn>
         </div>
       </div>
     );

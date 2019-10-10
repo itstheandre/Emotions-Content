@@ -3,6 +3,8 @@ import { Bar } from "react-chartjs-2";
 import axios from "axios";
 import ContentInfo from "./ContentInfo";
 import { Link, Switch, Route } from "react-router-dom";
+
+
 export default class Chart extends Component {
   state = {
     chartData: {},
@@ -289,10 +291,11 @@ export default class Chart extends Component {
             <h5>Female:{this.state.femalePercent}%</h5>
             <h5>Total views:{this.state.views}</h5>
           </div>
+          
           {this.state.content.map(el => {
             return (
               <div>
-                <h1>Hi</h1>
+                {/* <h1>Hi</h1> */}
                 <ContentInfo
                   updateState={this.updateState}
                   content={el}
