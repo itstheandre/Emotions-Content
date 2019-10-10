@@ -13,7 +13,6 @@ import CreatorPage from "./components/UserViews/CreatorPage";
 import Chart from "./components/Chart";
 import Header from "./components/Header";
 import Settings from "./components/ProfileSettings/Settings";
-import SingleChart from "./components/SingleChart";
 class App extends React.Component {
   state = {
     user: this.props.user
@@ -76,11 +75,6 @@ class App extends React.Component {
             exact
             path='/settings'
             render={props => <Settings user={this.state.user} {...props} />}
-          />
-          <Route
-            exact
-            path='/chart/content/:contentId'
-            component={SingleChart}
           />
         </Switch>
       </div>

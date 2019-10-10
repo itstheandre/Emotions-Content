@@ -101,6 +101,7 @@ export default class Chart extends Component {
         if (elem.gender) {
           genderArr.push(elem.gender);
         } else {
+          return;
         }
       });
       console.log(genderArr);
