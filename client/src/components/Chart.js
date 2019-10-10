@@ -3,6 +3,7 @@ import { Bar } from "react-chartjs-2";
 import axios from "axios";
 import ContentInfo from "./ContentInfo";
 import { Link, Switch, Route } from "react-router-dom";
+
 export default class Chart extends Component {
   state = {
     chartData: {},
@@ -17,8 +18,10 @@ export default class Chart extends Component {
   };
   componentDidMount = () => {
     const user = this.props.user.username;
+    console.log(user);
     axios.get(`/api/chart/all/${user}`).then(response => {
       const allContent = response.data;
+      console.log(allContent);
       const viewsArr = [];
       const viewsData = response.data.map(el => {
         return el.views;
@@ -28,8 +31,9 @@ export default class Chart extends Component {
           viewsArr.push(el);
         });
       });
+      console.log("views Data", viewsData);
       this.getData(viewsArr);
-      this.setState({ content: allContent, viewsArr });
+      this.setState({ content: allContent.reverse(), viewsArr });
     });
 
     // this.getData();
@@ -52,11 +56,11 @@ export default class Chart extends Component {
       return sum;
     }
 
-    function getAverage(array) {
+    const getAverage = array => {
       let sum = array.reduce((previous, current) => (current += previous));
       let avg = sum / array.length;
       return avg;
-    }
+    };
     function getMaxEmotion(emotion) {
       const emotionArr = maxEmotion.map(el => {
         return el[emotion];
@@ -173,7 +177,8 @@ export default class Chart extends Component {
     return (
       <>
         <h1>{this.state.title} </h1>
-        <div className="chart">
+
+        <div className='chart'>
           <Bar
             data={this.state.chartData}
             options={{ maintainAspectRatio: false }}
@@ -186,6 +191,7 @@ export default class Chart extends Component {
             <h5>Female:{this.state.femalePercent}%</h5>
             <h5>Total views:{this.state.views}</h5>
           </div>
+
           <button onClick={() => this.resetData()}>Show all Data</button>
 
           {this.state.content.map(el => {
