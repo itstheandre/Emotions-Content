@@ -21,19 +21,16 @@ const viewsSchema = new Schema({
     surprisedMax: Number
   },
   age: Number,
-  time: [
-    {
-      fullTime: Array,
-      min: Number,
-      sec: Number
-    }
-  ],
+  time: {
+    fullTime: Array,
+    min: Number,
+    sec: Number
+  },
   gender: String,
-  contentId:
-    { 
-      type: Schema.Types.ObjectId, 
-      ref: "Content" 
-    }  
+  contentId: {
+    type: Schema.Types.ObjectId,
+    ref: "Content"
+  }
 });
 
 const Views = model("Views", viewsSchema);

@@ -73,8 +73,16 @@ export default class Chart extends Component {
     viewsArr.forEach(elem => {
       ageAverage.push(elem.age);
     });
+    let timeArr = [];
+    // views.forEach(el => {
+    //   el.time.forEach(elem => {
+    //     elem.fullTime.forEach(single => {
+    //       single.push;
+    //     });
+    //   });
+    // });
+    console.log("Time-----", viewsArr[0].time);
     let age = Math.floor(getAverage(ageAverage));
-    console.log("Age ", age);
     let genderArr = [];
     viewsArr.forEach(elem => {
       genderArr.push(elem.gender);
@@ -162,9 +170,6 @@ export default class Chart extends Component {
   };
 
   render() {
-    console.log(this.state.content);
-    console.log("Age ", this.state.age);
-    console.log("Emoti ", this.state.emotionalImpact);
     return (
       <>
         <h1>{this.state.title} </h1>
@@ -184,7 +189,6 @@ export default class Chart extends Component {
           <button onClick={() => this.resetData()}>Show all Data</button>
 
           {this.state.content.map(el => {
-            console.log(el);
             return (
               <div>
                 <h1>{el.title}</h1>
