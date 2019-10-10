@@ -3,7 +3,8 @@ import { Bar } from "react-chartjs-2";
 import axios from "axios";
 export default class Chart extends Component {
   state = {
-    chartData: {},
+    avgChartData: {},
+    maxChartData: {},
     emotionalImpact: 0,
     malePercent: 0,
     femalePercent: 0,
@@ -80,7 +81,7 @@ export default class Chart extends Component {
       surprised: getEmotion("surprisedAvg")
     };
 
-    const chartData = {
+    const avgChartData = {
       labels: ["Angry", "Disgusted", "Fearful", "Happy", "Sad", "Surprised"],
       datasets: [
         {
@@ -105,8 +106,35 @@ export default class Chart extends Component {
         }
       ]
     };
+    const maxChartData = {
+      labels: ["Angry", "Disgusted", "Fearful", "Happy", "Sad", "Surprised"],
+      datasets: [
+        {
+          label: "Max emotion by %",
+          data: [
+            getMaxEmotion("angryMax") * 100,
+            getMaxEmotion("disgustedMax") * 100,
+            getMaxEmotion("fearfulMax") * 100,
+            getMaxEmotion("happyMax") * 100,
+            getMaxEmotion("sadMax") * 100,
+            getMaxEmotion("surprisedMax") * 100
+          ],
+          backgroundColor: [
+            "rgba(255, 95, 132, 0.6)",
+            "rgba(54, 162, 235, 0.6)",
+            "rgba(255, 206, 86, 0.6)",
+            "rgba(75, 192, 192, 0.6)",
+            "rgba(153, 102, 255, 0.6)",
+            "rgba(255, 159, 64, 0.6)",
+            "rgba(255, 99, 132, 0.6)"
+          ]
+        }
+      ]
+    };
+
     this.setState({
-      chartData: chartData,
+      avgChartData: avgChartData,
+      maxChartData,
       age: age,
       femalePercent: femalePercent,
       malePercent: malePercent,
@@ -119,6 +147,18 @@ export default class Chart extends Component {
   //     this.props.getData(this.props.content.views);
   //   };
 
+  setNewData = state => {
+    this.props.updateState(
+      state,
+      this.state.emotionalImpact,
+      this.state.malePercent,
+      this.state.femalePercent,
+      this.state.age,
+      this.state.views,
+      this.props.content.title
+    );
+  };
+
   render() {
     console.log("ANOTHER: ", this.props);
     console.log("THIS IS STATE: ", this.state);
@@ -127,20 +167,12 @@ export default class Chart extends Component {
       <div>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <h4>Number of views {this.props.content.views.length} </h4>
-          <h4>{this.props.content.title}</h4>
-          <button
-            onClick={() =>
-              this.props.updateState(
-                this.state.chartData,
-                this.state.emotionalImpact,
-                this.state.malePercent,
-                this.state.femalePercent,
-                this.state.age,
-                this.state.views
-              )
-            }
-          >
+          <h4>Date: {this.props.content.date}</h4>
+          <button onClick={() => this.setNewData(this.state.avgChartData)}>
             Average
+          </button>
+          <button onClick={() => this.setNewData(this.state.maxChartData)}>
+            Maximus
           </button>
         </div>
       </div>
