@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../services/api";
+import logo from "../motus-logo2.png";
 import "../App.css";
 
 const handleLogout = props => {
@@ -14,7 +15,7 @@ const Navbar = props => {
   return (
     <nav className=" sticky-top navbar navbar-expand-lg navbar-dark default-color">
       <Link className="navbar-brand" to="/">
-        <img src="motus-logo2.png" style={{ height: "30px" }}></img>
+        <img src={logo} style={{ height: "30px" }}></img>
       </Link>
 
       {props.user ? (

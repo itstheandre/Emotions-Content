@@ -51,18 +51,29 @@ const Post = props => {
 
   return (
     <div>
-      <button onClick={() => props.history.goBack()}>
-        <i class="fas fa-3x fa-angle-left"></i>
-      </button>
-      <h1>{title}</h1>
-      <p>{body}</p>
-      <button
-        onClick={() => {
-          navigator.clipboard.writeText(textToCopy);
-        }}
-      >
-        Share this link and check the emotional responses.
-      </button>
+      <i
+        class="fas fa-3x fa-angle-left"
+        onClick={() => props.history.goBack()}
+      ></i>
+
+      <div className="motusHeader">
+        <iframe
+          style={{ pointerEvents: "none" }}
+          src="https://giphy.com/embed/d2YVPRhQXI5FxJRe"
+          width="480"
+          height="240"
+          frameBorder="0"
+          className="giphy-embed"
+        ></iframe>
+        <h1>{title}</h1>
+        <p>{body}</p>
+        <i
+          class="fas fa-2x fa-share-square"
+          onClick={() => {
+            navigator.clipboard.writeText(textToCopy);
+          }}
+        ></i>
+      </div>
     </div>
   );
 };

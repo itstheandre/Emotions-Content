@@ -40,7 +40,7 @@ export default class ContentManager extends Component {
     return (
       <>
         <div>
-          <h2 style={{ textAlign: "center" }} className="logIn">
+          <h2 style={{ textAlign: "center" }} className="logIn h3">
             My Content Dashboard
           </h2>
 
