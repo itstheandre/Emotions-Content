@@ -126,28 +126,37 @@ const AddContent = props => {
               </select>
               {image && (
                 <>
-                  <label className="text-default logIn" htmlFor="file">
-                    Upload your image
-                  </label>
-                  <div className="input-group">
-                    <div className="custom-file">
-                      <input
-                        type="file"
-                        name="urlPath"
-                        id="urlPath"
-                        onChange={onImageUpload}
-                        className="custom-file-input"
-                        aria-describedby="inputGroupFileAddon01"
-                      />
-                      <label
-                        className="custom-file-label grey-text"
-                        htmlFor="file"
-                      >
-                        choose file
-                      </label>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <label className="text-default logIn" htmlFor="file">
+                      Upload your image
+                    </label>
+                    <div className="input-group">
+                      <div className="custom-file">
+                        <input
+                          type="file"
+                          name="urlPath"
+                          id="urlPath"
+                          onChange={onImageUpload}
+                          className="custom-file-input"
+                          aria-describedby="inputGroupFileAddon01"
+                        />
+                        <label
+                          className="custom-file-label grey-text"
+                          htmlFor="file"
+                        >
+                          choose file
+                        </label>
+                      </div>
                     </div>
-                    <img src={urlPath} />
+                    <br />
+                    <div>
+                      <img
+                        style={{ height: "100px", textAlign: "center" }}
+                        src={urlPath}
+                      />
+                    </div>
                   </div>
+                  <br />
                   {/* <MDBInput
                     type="file"
                     name="urlPath"

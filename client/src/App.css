@@ -48,7 +48,7 @@ canvas {
   position: static;
   z-index: 1;
   width: 200px;
-  height: 200px;
+  height: 0px;
 
 }
 
@@ -133,4 +133,35 @@ i {
 
 .videoPlayer {
   margin: 1% 1%;
+}
+
+
+/* CHART */
+
+.displayPie {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 0;
+  padding: 0 10px;
+  width: 100vw;
+}
+
+.doughnut canvas {
+  opacity: 1;
+  position: relative;
+  z-index: 1;
+  width: 100px;
+  height: 150px;
+  margin: 0;
+  padding: 0;
+}
+
+.textChart {
+  display: flex;
+  justify-content: space-around;
+}
+
+.headingTable {
+  display: flex;
+  justify-content: space-around;
 }

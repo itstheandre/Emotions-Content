@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Bar } from "react-chartjs-2";
+import { Bar, Doughnut } from "react-chartjs-2";
 import axios from "axios";
 import ContentInfo from "./ContentInfo";
+import { MDBBtn } from "mdbreact";
 import { Link, Switch, Route } from "react-router-dom";
-
 
 export default class Chart extends Component {
   state = {
@@ -167,42 +167,110 @@ export default class Chart extends Component {
     console.log(this.state.content);
     console.log("Age ", this.state.age);
     console.log("Emoti ", this.state.emotionalImpact);
+
+    // GENDER DOUGHNUT
+    const gender = {
+      labels: ["Male", "Female"],
+      datasets: [
+        {
+          data: [this.state.malePercent, this.state.femalePercent],
+          backgroundColor: ["#36A2EB", "#ff8173"],
+          hoverBackgroundColor: ["#36A2EB", "#ff8173"]
+        }
+      ]
+    };
+
+    const emotions = {
+      labels: ["No", "Yes"],
+      datasets: [
+        {
+          data: [100 - this.state.emotionalImpact, this.state.emotionalImpact],
+          backgroundColor: ["#cfcfcf", "#000000"],
+          hoverBackgroundColor: ["#cfcfcf", "#000000"]
+        }
+      ]
+    };
     return (
       <>
-        <h1>{this.state.title} </h1>
-
+        <br />
+        <br />
+        <h1 style={{ textAlign: "center" }} className="h1">
+          {this.state.title}
+        </h1>
+        {/* CHART */}
         <div className="chart">
           <Bar
             data={this.state.chartData}
             options={{ maintainAspectRatio: false }}
           />
-
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <h5>Emotional Impact: {this.state.emotionalImpact}%</h5>
-            <h5>Average Age: {this.state.age} </h5>
-            <h5>Male:{this.state.malePercent}%</h5>
-            <h5>Female:{this.state.femalePercent}%</h5>
-            <h5>Total views:{this.state.views}</h5>
-          </div>
-
-          <button onClick={() => this.resetData()}>Show all Data</button>
-
-          {this.state.content.map(el => {
-            console.log(el);
-            return (
-
-              <div>
-                <h1>{el.title}</h1>
-                <ContentInfo
-                  updateState={this.updateState}
-                  content={el}
-                  //   getData={this.getData}
-                />
-              </div>
-              
-            );
-          })}
         </div>
+
+        <hr width="80%" />
+
+        {/* DOUGHNUT GENDER*/}
+        <div className="displayPie">
+          <div className="doughnut">
+            <h5 className="h5" style={{ textAlign: "center" }}>
+              Gender
+            </h5>
+            <Doughnut data={gender} options={{ maintainAspectRatio: true }} />
+          </div>
+          {/* DOUGHNUT EMOTIONS*/}
+          <div className="doughnut">
+            <h5 className="h5" style={{ textAlign: "center" }}>
+              Emotional Impact
+            </h5>
+            <Doughnut data={emotions} options={{ maintainAspectRatio: true }} />
+          </div>
+        </div>
+
+        <hr width="80%" />
+        {/* VIEW AND TIME */}
+        <div className="textChart">
+          <div>
+            <h5 className="h5">Views</h5>
+            <p>{this.state.views}</p>
+          </div>
+          <h5 className="h5">Time spent</h5>
+        </div>
+
+        <hr width="80%" />
+        {/* SHOW ALL DATA */}
+        <div style={{ textAlign: "center", marginRight: "5%" }}>
+          <MDBBtn onClick={() => this.resetData()}>Show all Data</MDBBtn>
+        </div>
+
+        <hr width="95%" />
+
+        {/* TABLE */}
+        <div className="headingTable">
+          <h5 style={{ width: "100px" }} className="h5 text-center">
+            Title
+          </h5>
+          <h5 style={{ width: "100px" }} className="h5 text-center">
+            Type
+          </h5>
+          <h5 style={{ width: "100px" }} className="h5 text-center">
+            Views
+          </h5>
+          <h5 style={{ width: "100px" }} className="h5 text-center">
+            Created
+          </h5>
+          <h5 style={{ width: "100px" }} className="h5 text-center">
+            Overview
+          </h5>
+          <h5 style={{ width: "100px" }} className="h5 text-center">
+            Peaks
+          </h5>
+        </div>
+        {this.state.content.map(el => {
+          console.log(el);
+          return (
+            <>
+              <ContentInfo updateState={this.updateState} content={el} />
+            </>
+          );
+        })}
       </>
     );
   }

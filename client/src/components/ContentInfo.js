@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Bar } from "react-chartjs-2";
 import axios from "axios";
 import { MDBBtn } from "mdbreact";
+
 export default class Chart extends Component {
   state = {
     avgChartData: {},
@@ -165,20 +166,43 @@ export default class Chart extends Component {
     console.log("THIS IS STATE: ", this.state);
     // this.getDato();
     return (
-      <div>
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
-        
-          <h4>Number of views {this.props.content.views.length} </h4>
+      <div className="headingTable">
+        {/* Title */}
+        <div style={{ width: "100px" }} className="h5 text-center">
+          <h5>{this.props.content.title} </h5>
+        </div>
+        {/* Type */}
+        <div style={{ width: "100px" }} className="h5 text-center">
+          <h5>{this.props.content.contentType} </h5>
+        </div>
+        {/* views */}
+        <div style={{ width: "100px" }} className="h5 text-center">
+          <h5>{this.props.content.views.length} </h5>
+        </div>
+        {/* date */}
+        <div style={{ width: "100px" }} className="h5 text-center">
+          <h5>{this.props.content.date}</h5>
+        </div>
+        {/* overview */}
+        <div style={{ width: "100px" }} className="h5 text-center">
+          <i
+            class="fas fa-eye"
+            onClick={() => this.setNewData(this.state.avgChartData)}
+          ></i>
+          {/* <MDBBtn onClick={() => this.setNewData(this.state.avgChartData)}>
+            show
+          </MDBBtn> */}
+        </div>
+        {/* peaks */}
+        <div style={{ width: "85px" }} className="h5 text-center">
+          <i
+            class="fas fa-eye"
+            onClick={() => this.setNewData(this.state.maxChartData)}
+          ></i>
 
-          <h4>Date: {this.props.content.date}</h4>
-          <button onClick={() => this.setNewData(this.state.avgChartData)}>
-            Average
-          </button>
-
-          <button onClick={() => this.setNewData(this.state.maxChartData)}>
-            Maximus
-          </button>
-
+          {/* <MDBBtn onClick={() => this.setNewData(this.state.maxChartData)}>
+            show
+          </MDBBtn> */}
         </div>
       </div>
     );
