@@ -196,7 +196,7 @@ export default class Chart extends Component {
       <>
         <h1>{this.state.title} </h1>
         {this.state.content.length && (
-          <div className="chart">
+          <div className='chart'>
             <Bar
               data={this.state.chartData}
               options={{ maintainAspectRatio: false }}
@@ -215,7 +215,7 @@ export default class Chart extends Component {
 
             {this.state.content.map(el => {
               return (
-                <div>
+                <div key={el._id}>
                   <h1>{el.title}</h1>
                   <ContentInfo
                     updateState={this.updateState}
