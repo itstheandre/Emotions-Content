@@ -36,7 +36,7 @@ router.put("/:id", (req, res) => {
     fullName,
     username,
     newPasswordTest,
-    profilePicture,
+    // profilePicture,
     oldPasswordTest
   } = req.body;
   console.log(req.body);
@@ -79,12 +79,13 @@ router.put("/:id", (req, res) => {
       }
 
       // const password = newPasswordTest ? newHashPass : dbUser.password;
-      const profilePicture = profilePicture
-        ? profilePicture
-        : dbUser.profilePicture;
+      // const profilePicture = profilePicture
+      //   ? profilePicture
+      //   : dbUser.profilePicture;
       User.findByIdAndUpdate(
         req.params.id,
-        { username, fullName, profilePicture, password },
+        { username, fullName, password },
+        // { username, fullName, profilePicture, password },
         { new: true }
       )
         .then(response => {

@@ -58,13 +58,13 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
     <MDBContainer>
       <MDBRow>
         <MDBCol>
-          <form onSubmit={handleSubmit} encType='multipart/form-data'>
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
             {/* <label htmlFor="fullName">Name</label> */}
             <MDBInput
-              label='name'
-              type='text'
-              name='fullName'
-              id='fullName'
+              label="name"
+              type="text"
+              name="fullName"
+              id="fullName"
               value={user.fullName}
               onChange={({ target: { name, value } }) =>
                 setUser({ ...user, [name]: value })
@@ -72,10 +72,10 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
             />
             {/* <label htmlFor="username">Username</label> */}
             <MDBInput
-              label='username'
-              type='text'
-              name='username'
-              id='username'
+              label="username"
+              type="text"
+              name="username"
+              id="username"
               value={user.username}
               onChange={({ target: { name, value } }) =>
                 setUser({ ...user, [name]: value })
@@ -83,10 +83,10 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
             />
             {/* <label htmlFor="oldPasswordTest">Old Password</label> */}
             <MDBInput
-              label='oldpassword'
-              type='password'
-              name='oldPasswordTest'
-              id='oldPasswordTest'
+              label="oldpassword"
+              type="password"
+              name="oldPasswordTest"
+              id="oldPasswordTest"
               value={user.oldPasswordTest}
               onChange={({ target: { name, value } }) =>
                 setUser({ ...user, [name]: value })
@@ -94,10 +94,10 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
             />
             {/* <label htmlFor="newPasswordTest">Password</label> */}
             <MDBInput
-              label='new password'
-              type='password'
-              name='newPasswordTest'
-              id='newPasswordTest'
+              label="new password"
+              type="password"
+              name="newPasswordTest"
+              id="newPasswordTest"
               value={user.newPasswordTest}
               onChange={({ target: { name, value } }) =>
                 setUser({ ...user, [name]: value })
@@ -110,7 +110,7 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
               id="profilePictureTest"
               onChange={onImageUpload}
             /> */}
-            <div className='input-group'>
+            {/* <div className='input-group'>
               <div className='custom-file'>
                 <input
                   type='file'
@@ -124,9 +124,9 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
                   choose file
                 </label>
               </div>
-            </div>
-            <div className='text-center'>
-              <MDBBtn type='submit'>Save</MDBBtn>
+            </div> */}
+            <div className="text-center">
+              <MDBBtn type="submit">Save</MDBBtn>
             </div>
           </form>
         </MDBCol>
