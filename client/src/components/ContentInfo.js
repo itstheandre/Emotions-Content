@@ -120,8 +120,8 @@ export default class Chart extends Component {
               emotionsCount.surprised
             ],
             backgroundColor: [
-              "rgba(255, 95, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
+              "rgba(255, 0, 0, 1)",
+              "rgba(0, 255, 0, 1)",
               "rgba(255, 206, 86, 0.6)",
               "rgba(75, 192, 192, 0.6)",
               "rgba(153, 102, 255, 0.6)",
@@ -145,8 +145,8 @@ export default class Chart extends Component {
               getMaxEmotion("surprisedMax") * 100
             ],
             backgroundColor: [
-              "rgba(255, 95, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
+              "rgba(255, 0, 0, 1)",
+              "rgba(0, 255, 0, 1)",
               "rgba(255, 206, 86, 0.6)",
               "rgba(75, 192, 192, 0.6)",
               "rgba(153, 102, 255, 0.6)",
