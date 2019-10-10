@@ -53,7 +53,7 @@ const Post = props => {
       setContentType(contentType);
       // setOwner(owner);
       setFullName(fullName);
-      setTextToCopy(`http://localhost:3000/u/${owner}/${id}`);
+      setTextToCopy(`https://motus-app.herokuapp.com//u/${owner}/${id}`);
     });
   }, []);
 

@@ -21,6 +21,7 @@ export default class Chart extends Component {
   componentDidMount = () => {
     const user = this.props.user.username;
     axios.get(`/api/chart/all/${user}`).then(response => {
+      console.log(response);
       const allContent = response.data;
       const viewsArr = [];
       const viewsData = response.data.map(el => {
@@ -215,27 +216,34 @@ export default class Chart extends Component {
         }
       ]
     };
+    console.log("look", this.state.title);
     return (
       <>
         <br />
         <br />
-        <h1 style={{ textAlign: "center" }} className="h1">
+        {!this.state.title && (
+          <h1 style={{ textAlign: "center" }}>
+            Try sharing your content with more people. We still need to check
+            more analytics
+          </h1>
+        )}
+        <h1 style={{ textAlign: "center" }} className='h1'>
           {this.state.title}
         </h1>
         {this.state.content.length && (
           <div>
-            <div className="chart">
+            <div className='chart'>
               <Bar
                 data={this.state.chartData}
                 options={{ maintainAspectRatio: false }}
               />
             </div>
 
-            <hr width="80%" />
+            <hr width='80%' />
 
-            <div className="displayPie">
-              <div className="doughnut">
-                <h5 className="h5" style={{ textAlign: "center" }}>
+            <div className='displayPie'>
+              <div className='doughnut'>
+                <h5 className='h5' style={{ textAlign: "center" }}>
                   Gender
                 </h5>
                 <Doughnut
@@ -244,8 +252,8 @@ export default class Chart extends Component {
                 />
               </div>
 
-              <div className="doughnut">
-                <h5 className="h5" style={{ textAlign: "center" }}>
+              <div className='doughnut'>
+                <h5 className='h5' style={{ textAlign: "center" }}>
                   Emotional Impact
                 </h5>
                 <Doughnut
@@ -255,44 +263,44 @@ export default class Chart extends Component {
               </div>
             </div>
 
-            <hr width="80%" />
+            <hr width='80%' />
 
-            <div className="textChart">
+            <div className='textChart'>
               <div>
-                <h5 className="h5">Views</h5>
+                <h5 className='h5'>Views</h5>
                 <p>{this.state.views}</p>
               </div>
               <div>
-                <h5 className="h5">Time spent</h5>
+                <h5 className='h5'>Time spent</h5>
                 <p>{this.state.time}</p>
               </div>
             </div>
 
-            <hr width="80%" />
+            <hr width='80%' />
 
             <div style={{ textAlign: "center", marginRight: "5%" }}>
               <MDBBtn onClick={() => this.resetData()}>Show all Data</MDBBtn>
             </div>
 
-            <hr width="95%" />
+            <hr width='95%' />
 
-            <div className="headingTable">
-              <h5 style={{ width: "100px" }} className="h5 text-center">
+            <div className='headingTable'>
+              <h5 style={{ width: "100px" }} className='h5 text-center'>
                 Title
               </h5>
-              <h5 style={{ width: "100px" }} className="h5 text-center">
+              <h5 style={{ width: "100px" }} className='h5 text-center'>
                 Type
               </h5>
-              <h5 style={{ width: "100px" }} className="h5 text-center">
+              <h5 style={{ width: "100px" }} className='h5 text-center'>
                 Views
               </h5>
-              <h5 style={{ width: "100px" }} className="h5 text-center">
+              <h5 style={{ width: "100px" }} className='h5 text-center'>
                 Created
               </h5>
-              <h5 style={{ width: "100px" }} className="h5 text-center">
+              <h5 style={{ width: "100px" }} className='h5 text-center'>
                 Overview
               </h5>
-              <h5 style={{ width: "100px" }} className="h5 text-center">
+              <h5 style={{ width: "100px" }} className='h5 text-center'>
                 Peaks
               </h5>
             </div>

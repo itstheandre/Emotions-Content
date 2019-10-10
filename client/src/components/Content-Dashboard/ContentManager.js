@@ -33,7 +33,7 @@ export default class ContentManager extends Component {
     return (
       <>
         <div>
-          <h2 style={{ textAlign: "center" }} className="logIn h3">
+          <h2 style={{ textAlign: "center" }} className='logIn h3'>
             My Content Dashboard
           </h2>
 
@@ -42,7 +42,7 @@ export default class ContentManager extends Component {
           {!filled && <div> </div>}
           {this.state.content.map(el => {
             return (
-              <div className="text-center dashCard" key={el._id}>
+              <div className='text-center dashCard' key={el._id}>
                 <ContentDashCard
                   content={el}
                   getData={this.getData}
@@ -53,9 +53,9 @@ export default class ContentManager extends Component {
             );
           })}
         </div>
-        <div className="fixed-bottom addBtn">
-          <Link to="/content-dashboard/add">
-            <i className="fas fa-3x fa-plus-circle text-default"></i>
+        <div className='fixed-bottom addBtn'>
+          <Link to='/content-dashboard/add'>
+            <i className='fas fa-3x fa-plus-circle text-default'></i>
           </Link>
         </div>
       </>
