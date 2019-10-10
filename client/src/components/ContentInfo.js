@@ -24,7 +24,7 @@ export default class Chart extends Component {
     if (!viewsArr.length) {
       return;
     } else {
-      console.log("ARRAY OF VIEWS???", viewsArr);
+      // console.log("ARRAY OF VIEWS???", viewsArr);
       const averageEmotion = viewsArr.map(el => {
         return el.averageEmotion;
       });
@@ -76,13 +76,13 @@ export default class Chart extends Component {
         neutralityArr.push(elem.neutralAvg);
       });
       let emotionalImpact = (100 - getAverage(neutralityArr)).toFixed(2);
-      console.log("Emo ", emotionalImpact);
+      // console.log("Emo ", emotionalImpact);
       let ageAverage = [];
       viewsArr.forEach(elem => {
         ageAverage.push(elem.age);
       });
       let age = Math.floor(getAverage(ageAverage));
-      console.log("Age ", age);
+      // console.log("Age ", age);
       let genderArr = [];
       viewsArr.forEach(elem => {
         genderArr.push(elem.gender);
@@ -122,11 +122,11 @@ export default class Chart extends Component {
             backgroundColor: [
               "rgba(255, 0, 0, 1)",
               "rgba(0, 255, 0, 1)",
-              "rgba(255, 206, 86, 0.6)",
-              "rgba(75, 192, 192, 0.6)",
-              "rgba(153, 102, 255, 0.6)",
-              "rgba(255, 159, 64, 0.6)",
-              "rgba(255, 99, 132, 0.6)"
+              "rgba(0, 0, 0, 1)",
+              "rgba(255, 149, 125, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(0, 136, 255, 1)",
+              "rgba(251, 255, 0, 1)"
             ]
           }
         ]
@@ -147,11 +147,11 @@ export default class Chart extends Component {
             backgroundColor: [
               "rgba(255, 0, 0, 1)",
               "rgba(0, 255, 0, 1)",
-              "rgba(255, 206, 86, 0.6)",
-              "rgba(75, 192, 192, 0.6)",
-              "rgba(153, 102, 255, 0.6)",
-              "rgba(255, 159, 64, 0.6)",
-              "rgba(255, 99, 132, 0.6)"
+              "rgba(0, 0, 0, 1)",
+              "rgba(247, 214, 0, 1)",
+              "rgba(0, 136, 255, 1)",
+              "rgba(251, 255, 0, 1)",
+              "rgba(251, 255, 0, 1)"
             ]
           }
         ]
@@ -175,6 +175,7 @@ export default class Chart extends Component {
   //   };
 
   setNewData = state => {
+    // console.log("CLICKED", this.state);
     this.props.updateState(
       state,
       this.state.emotionalImpact,
@@ -188,7 +189,7 @@ export default class Chart extends Component {
   };
 
   render() {
-    // this.getDato();
+    // console.log(this.state);
     return (
       <div className="headingTable">
         {/* Title */}

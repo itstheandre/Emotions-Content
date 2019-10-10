@@ -22,7 +22,6 @@ export default class Chart extends Component {
     const user = this.props.user.username;
     axios.get(`/api/chart/all/${user}`).then(response => {
       const allContent = response.data;
-      console.log(allContent);
       const viewsArr = [];
       const viewsData = response.data.map(el => {
         return el.views;
@@ -32,7 +31,6 @@ export default class Chart extends Component {
           viewsArr.push(el);
         });
       });
-      console.log("views Data", viewsData);
       this.getData(viewsArr);
       this.setState({ content: allContent.reverse(), viewsArr });
     });
@@ -71,7 +69,6 @@ export default class Chart extends Component {
         neutralityArr.push(elem.neutralAvg);
       });
       let emotionalImpact = (100 - getAverage(neutralityArr)).toFixed(2);
-      console.log("Emo ", emotionalImpact);
       let ageAverage = [];
       viewsArr.forEach(elem => {
         ageAverage.push(elem.age);
@@ -96,7 +93,7 @@ export default class Chart extends Component {
       const secsAvg = Math.round(getAverage(timeArr));
       const time = myTime(secsAvg);
 
-      console.log("Time-----", time);
+      // console.log("Time-----", time);
       let age = Math.floor(getAverage(ageAverage));
       let genderArr = [];
       viewsArr.forEach(elem => {
@@ -192,10 +189,6 @@ export default class Chart extends Component {
   };
 
   render() {
-    console.log(this.state.content);
-    console.log("Age ", this.state.age);
-    console.log("Emoti ", this.state.emotionalImpact);
-
     // GENDER DOUGHNUT
     const gender = {
       labels: ["Male", "Female"],
@@ -301,7 +294,6 @@ export default class Chart extends Component {
             </div>
 
             {this.state.content.map(el => {
-              console.log(el);
               return (
                 <>
                   <ContentInfo updateState={this.updateState} content={el} />

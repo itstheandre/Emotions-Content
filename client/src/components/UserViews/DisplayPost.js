@@ -26,14 +26,14 @@ const DisplayPost = props => {
   const video = props.contentType === "video";
   const audio = props.contentType === "audio";
   const image = props.contentType === "image";
-  console.log(props);
+  // console.log(props);
   return (
     <>
       <div>
         {image && <img src={props.urlPath} />}
         {video && (
-          <div className='videoPlayer'>
-            <div className='embed-responsive'>
+          <div className="videoPlayer">
+            <div className="embed-responsive">
               <ReactPlayer url={props.urlPath} controls={true} />
             </div>
           </div>

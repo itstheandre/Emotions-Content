@@ -23,15 +23,6 @@ export default class ContentManager extends Component {
     });
   };
 
-  setNewMessage = () => {
-    this.setState({
-      message: "Your link has been copied to the clipboard"
-    });
-    setTimeout(() => {
-      this.setState({ message: "" });
-    }, 2000);
-  };
-
   render() {
     // console.log(this.state.content);
     const { user, content } = this.state;
@@ -42,29 +33,29 @@ export default class ContentManager extends Component {
     return (
       <>
         <div>
-          <h2 style={{ textAlign: "center" }} className='logIn h3'>
+          <h2 style={{ textAlign: "center" }} className="logIn h3">
             My Content Dashboard
           </h2>
-          <p>{this.state.message}</p>
+
           <br />
-          {!filled && <div>Click above </div>}
+
+          {!filled && <div> </div>}
           {this.state.content.map(el => {
             return (
-              <div className='text-center dashCard' key={el._id}>
+              <div className="text-center dashCard" key={el._id}>
                 <ContentDashCard
                   content={el}
                   getData={this.getData}
                   key={el._id}
                   user={this.state.user}
-                  setNewMessage={this.setNewMessage}
                 />
               </div>
             );
           })}
         </div>
-        <div className='fixed-bottom addBtn'>
-          <Link to='/content-dashboard/add'>
-            <i className='fas fa-3x fa-plus-circle text-default'></i>
+        <div className="fixed-bottom addBtn">
+          <Link to="/content-dashboard/add">
+            <i className="fas fa-3x fa-plus-circle text-default"></i>
           </Link>
         </div>
       </>
