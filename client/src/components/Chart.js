@@ -3,6 +3,8 @@ import { Bar } from "react-chartjs-2";
 import axios from "axios";
 import ContentInfo from "./ContentInfo";
 import { Link, Switch, Route } from "react-router-dom";
+
+
 export default class Chart extends Component {
   state = {
     chartData: {},

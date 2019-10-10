@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Bar } from "react-chartjs-2";
 import axios from "axios";
+import { MDBBtn } from "mdbreact";
 export default class Chart extends Component {
   state = {
     avgChartData: {},
