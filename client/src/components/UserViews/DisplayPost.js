@@ -30,15 +30,23 @@ const DisplayPost = props => {
   return (
     <>
       <div>
-        {image && <img src={props.urlPath} />}
+        {image && (
+          <div className='motusHeader'>
+            <img className='' src={props.urlPath} />
+          </div>
+        )}
         {video && (
-          <div className="videoPlayer">
-            <div className="embed-responsive">
+          <div className='motusHeader'>
+            <div className='embed-responsive'>
               <ReactPlayer url={props.urlPath} controls={true} />
             </div>
           </div>
         )}
-        {audio && <ReactAudioPlayer src={props.urlPath} controls />}
+        {audio && (
+          <div className='motusHeader'>
+            <ReactAudioPlayer src={props.urlPath} controls />
+          </div>
+        )}
         <br />
         <p>{props.viewTotal} views</p>
         <p>{props.body}</p>

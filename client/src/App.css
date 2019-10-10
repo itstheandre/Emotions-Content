@@ -49,38 +49,36 @@ canvas {
   z-index: 1;
   width: 200px;
   height: 0px;
-
 }
 
 /* /////////////////////// */
-
 
 .form-simple .font-small {
   font-size: 0.8rem;
 }
 
 .form-simple .header {
-  border-top-left-radius: .3rem;
-  border-top-right-radius: .3rem;
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
 }
 
-.form-simple input[type=text]:focus:not([readonly]) {
-  border-bottom: 1px solid #00CCB7;
-  -webkit-box-shadow: 0 1px 0 0 #00CCB7;
-  box-shadow: 0 1px 0 0 #00CCB7;
+.form-simple input[type="text"]:focus:not([readonly]) {
+  border-bottom: 1px solid #00ccb7;
+  -webkit-box-shadow: 0 1px 0 0 #00ccb7;
+  box-shadow: 0 1px 0 0 #00ccb7;
 }
 
-.form-simple input[type=text]:focus:not([readonly])+label {
+.form-simple input[type="text"]:focus:not([readonly]) + label {
   color: #4f4f4f;
 }
 
-.form-simple input[type=password]:focus:not([readonly]) {
-  border-bottom: 1px solid #00CCB7;
+.form-simple input[type="password"]:focus:not([readonly]) {
+  border-bottom: 1px solid #00ccb7;
   -webkit-box-shadow: 0 1px 0 0 rgb(225, 233, 232);
-  box-shadow: 0 1px 0 0 #00CCB7;
+  box-shadow: 0 1px 0 0 #00ccb7;
 }
 
-.form-simple input[type=password]:focus:not([readonly])+label {
+.form-simple input[type="password"]:focus:not([readonly]) + label {
   color: #4f4f4f;
 }
 
@@ -106,7 +104,6 @@ label {
   margin-right: auto;
   width: 50%;
   text-align: center;
-
 }
 
 .plusIcon {
@@ -119,7 +116,6 @@ label {
 
 .addBtn {
   margin: 20px 20px 20px 82%;
-
 }
 
 i {
@@ -127,14 +123,13 @@ i {
 }
 
 .borderCard {
-  border: #00CCB7;
+  border: #00ccb7;
   border-radius: 5%;
 }
 
 .videoPlayer {
   margin: 1% 1%;
 }
-
 
 /* CHART */
 
