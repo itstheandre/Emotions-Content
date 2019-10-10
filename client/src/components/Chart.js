@@ -21,6 +21,7 @@ export default class Chart extends Component {
   componentDidMount = () => {
     const user = this.props.user.username;
     axios.get(`/api/chart/all/${user}`).then(response => {
+      console.log(response);
       const allContent = response.data;
       const viewsArr = [];
       const viewsData = response.data.map(el => {
@@ -211,10 +212,17 @@ export default class Chart extends Component {
         }
       ]
     };
+    console.log("look", this.state.title);
     return (
       <>
         <br />
         <br />
+        {!this.state.title && (
+          <h1 style={{ textAlign: "center" }}>
+            Try sharing your content with more people. We still need to check
+            more analytics
+          </h1>
+        )}
         <h1 style={{ textAlign: "center" }} className='h1'>
           {this.state.title}
         </h1>

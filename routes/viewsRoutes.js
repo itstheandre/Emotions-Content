@@ -57,7 +57,7 @@ router.put("/:id", (req, res) => {
     surprisedMax: surprised[0]
   };
 
-  console.log(req.body);
+  console.log("Check   ", req.body);
   Views.findByIdAndUpdate(
     req.params.id,
     { averageEmotion, maxEmotion, age, gender, time },
