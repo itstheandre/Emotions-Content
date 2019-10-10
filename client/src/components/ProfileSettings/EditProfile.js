@@ -58,49 +58,49 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
     <MDBContainer>
       <MDBRow>
         <MDBCol>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} encType='multipart/form-data'>
             {/* <label htmlFor="fullName">Name</label> */}
             <MDBInput
-              label="name"
-              type="text"
-              name="fullName"
-              id="fullName"
+              label='name'
+              type='text'
+              name='fullName'
+              id='fullName'
               value={user.fullName}
-              onChange={e =>
-                setUser({ ...user, [e.target.name]: e.target.value })
+              onChange={({ target: { name, value } }) =>
+                setUser({ ...user, [name]: value })
               }
             />
             {/* <label htmlFor="username">Username</label> */}
             <MDBInput
-              label="username"
-              type="text"
-              name="username"
-              id="username"
+              label='username'
+              type='text'
+              name='username'
+              id='username'
               value={user.username}
-              onChange={e =>
-                setUser({ ...user, [e.target.name]: e.target.value })
+              onChange={({ target: { name, value } }) =>
+                setUser({ ...user, [name]: value })
               }
             />
             {/* <label htmlFor="oldPasswordTest">Old Password</label> */}
             <MDBInput
-              label="oldpassword"
-              type="password"
-              name="oldPasswordTest"
-              id="oldPasswordTest"
+              label='oldpassword'
+              type='password'
+              name='oldPasswordTest'
+              id='oldPasswordTest'
               value={user.oldPasswordTest}
-              onChange={e =>
-                setUser({ ...user, [e.target.name]: e.target.value })
+              onChange={({ target: { name, value } }) =>
+                setUser({ ...user, [name]: value })
               }
             />
             {/* <label htmlFor="newPasswordTest">Password</label> */}
             <MDBInput
-              label="new password"
-              type="password"
-              name="newPasswordTest"
-              id="newPasswordTest"
+              label='new password'
+              type='password'
+              name='newPasswordTest'
+              id='newPasswordTest'
               value={user.newPasswordTest}
-              onChange={e =>
-                setUser({ ...user, [e.target.name]: e.target.value })
+              onChange={({ target: { name, value } }) =>
+                setUser({ ...user, [name]: value })
               }
             />
             {/* <label htmlFor="file">Profile Picture</label>
@@ -110,23 +110,23 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
               id="profilePictureTest"
               onChange={onImageUpload}
             /> */}
-            <div className="input-group">
-              <div className="custom-file">
+            <div className='input-group'>
+              <div className='custom-file'>
                 <input
-                  type="file"
-                  name="profilePictureTest"
-                  id="profilePictureTest"
+                  type='file'
+                  name='profilePictureTest'
+                  id='profilePictureTest'
                   onChange={onImageUpload}
-                  className="custom-file-input"
-                  aria-describedby="inputGroupFileAddon01"
+                  className='custom-file-input'
+                  aria-describedby='inputGroupFileAddon01'
                 />
-                <label className="custom-file-label grey-text" htmlFor="file">
+                <label className='custom-file-label grey-text' htmlFor='file'>
                   choose file
                 </label>
               </div>
             </div>
-            <div className="text-center">
-              <MDBBtn type="submit">Save</MDBBtn>
+            <div className='text-center'>
+              <MDBBtn type='submit'>Save</MDBBtn>
             </div>
           </form>
         </MDBCol>

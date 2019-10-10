@@ -24,11 +24,13 @@ router.get("/api/:user", (req, res) => {
 // Get all the data from a content Id and a User
 router.get("/api/:user/:id", (req, res) => {
   console.log(req.params);
+  console.log(req.params);
   const { id } = req.params;
   // console.log("Hello");
   Content.findById(id)
     .populate("owner")
     .then(response => {
+      console.log("AAAAAAAAAH", response);
       res.json(response);
     })
     .catch(err => {

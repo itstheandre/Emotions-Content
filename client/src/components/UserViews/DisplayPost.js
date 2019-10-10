@@ -5,7 +5,10 @@ import ReactPlayer from "react-player";
 import ReactAudioPlayer from "react-audio-player";
 
 // Written in a functional component. Same as below.
-class DisplayPost extends Component {
+
+const DisplayPost = props => {
+  // }
+  // class DisplayPost extends Component {
   // state = {
   //   loading: true
   // };
@@ -19,48 +22,35 @@ class DisplayPost extends Component {
   // };
   // const [loading, setLoading] = useState(true)
 
-  render() {
-    const video = this.props.contentType === "video";
-    const audio = this.props.contentType === "audio";
-    const image = this.props.contentType === "image";
+  // render() {
+  const video = props.contentType === "video";
+  const audio = props.contentType === "audio";
+  const image = props.contentType === "image";
 
-    return (
-      <>
-        {/* {this.state.loading ? (
-          <div className="motusHeader" style={{ marginTop: "5%" }}>
-            <iframe
-              style={{ pointerEvents: "none" }}
-              src="https://giphy.com/embed/EuGRTGxtIDG92"
-              width="480"
-              height="200"
-              frameBorder="0"
-              class="giphy-embed"
-              allowFullScreen
-            ></iframe>
+  return (
+    <>
+      <div>
+        {image && <img src={props.urlPath} />}
+        {video && (
+          <div className='videoPlayer'>
+            <div className='embed-responsive'>
+              <ReactPlayer url={props.urlPath} controls={true} />
+            </div>
           </div>
-        ) : ( */}
-          <div>
-            {image && <img src={this.props.urlPath} />}
-            {video && (
-              <div className="videoPlayer">
-                <div className="embed-responsive">
-                  <ReactPlayer url={this.props.urlPath} controls={true} />
-                </div>
-              </div>
-            )}
-            {audio && <ReactAudioPlayer src={this.props.urlPath} controls />}
-            <br />
-            HERE {this.props.views} views
-            <br />
-            <Link to={`/u/${this.props.owner}`}>Check the creator's page</Link>
-            {/* <FaceApi id={this.props.viewId} /> */}
-          </div>
-        {/* )} */}
-        <FaceApi id={this.props.viewId} />
-      </>
-    );
-  }
-}
+        )}
+        {audio && <ReactAudioPlayer src={props.urlPath} controls />}
+        <br />
+        HERE {props.views} views
+        <br />
+        <Link to={`/u/${props.owner}`}>Check the creator's page</Link>
+        {/* <FaceApi id={this.props.viewId} /> */}
+      </div>
+      {/* )} */}
+      <FaceApi id={props.viewId} />
+    </>
+  );
+  // }
+};
 
 export default DisplayPost;
 
