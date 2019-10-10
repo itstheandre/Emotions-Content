@@ -30,9 +30,17 @@ const CreatorPage = props => {
 
   return (
     <>
-      {content.reverse().map(el => {
-        return <UserCard content={el} key={el._id} user={user} />;
-      })}
+      <div>
+        <h2 style={{ textAlign: "center" }} className='logIn h3'>
+          My Content Dashboard
+        </h2>
+
+        <br />
+
+        {content.reverse().map(el => {
+          return <UserCard content={el} key={el._id} user={user} />;
+        })}
+      </div>
     </>
   );
 };

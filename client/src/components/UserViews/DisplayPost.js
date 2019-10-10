@@ -23,20 +23,22 @@ const DisplayPost = props => {
   // const [loading, setLoading] = useState(true)
 
   // render() {
+  console.log(props);
   const video = props.contentType === "video";
   const audio = props.contentType === "audio";
   const image = props.contentType === "image";
   // console.log(props);
   return (
     <>
-      <div>
+      <div className='motusHeader'>
+        <h1 className='h1'>{props.title}</h1>
+        <Link to={`/u/${props.owner}`}>{props.owner}</Link>
+
         {image && (
-          <div className='motusHeader'>
-            <img className='' src={props.urlPath} />
-          </div>
+          <img className='' src={props.urlPath} style={{ width: "100%" }} />
         )}
         {video && (
-          <div className='motusHeader'>
+          <div className='videoPlayer'>
             <div className='embed-responsive'>
               <ReactPlayer url={props.urlPath} controls={true} />
             </div>
@@ -48,10 +50,11 @@ const DisplayPost = props => {
           </div>
         )}
         <br />
-        <p>{props.viewTotal} views</p>
+        <h5 className='h5'>Description</h5>
         <p>{props.body}</p>
         <br />
-        <Link to={`/u/${props.owner}`}>Check the creator's page</Link>
+        <h5 className='h5'>{props.viewTotal} views</h5>
+        <br />
         {/* <FaceApi id={this.props.viewId} /> */}
       </div>
       {/* )} */}

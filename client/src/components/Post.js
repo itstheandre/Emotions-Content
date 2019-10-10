@@ -86,7 +86,7 @@ const Post = props => {
           className='giphy-embed'
         ></iframe> */}
         <h1>{title}</h1>
-        {image && <img src={urlPath} />}
+        {image && <img src={urlPath} style={{ width: "100%" }} />}
         {video && (
           <div className='videoPlayer'>
             <div className='embed-responsive'>
