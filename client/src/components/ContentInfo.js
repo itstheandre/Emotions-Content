@@ -93,11 +93,14 @@ export default class Chart extends Component {
       let male = genderArr.filter(el => {
         if (el === "male") return el;
       });
-      const malePercent = ((male.length / genderArr.length) * 100).toFixed(2);
-      const femalePercent = (
-        ((genderArr.length - male.length) / genderArr.length) *
-        100
-      ).toFixed(2);
+      const malePercent = genderArr.length
+        ? ((male.length / genderArr.length) * 100).toFixed(2)
+        : 0;
+      const femalePercent = genderArr.length
+        ? (((genderArr.length - male.length) / genderArr.length) * 100).toFixed(
+            2
+          )
+        : 0;
       const views = viewsArr.length;
 
       const emotionsCount = {
@@ -193,27 +196,27 @@ export default class Chart extends Component {
   render() {
     // this.getDato();
     return (
-      <div className='headingTable'>
+      <div className="headingTable">
         {/* Title */}
-        <div style={{ width: "100px" }} className='h5 text-center'>
+        <div style={{ width: "100px" }} className="h5 text-center">
           <h5>{this.props.content.title} </h5>
         </div>
         {/* Type */}
-        <div style={{ width: "100px" }} className='h5 text-center'>
+        <div style={{ width: "100px" }} className="h5 text-center">
           <h5>{this.props.content.contentType} </h5>
         </div>
         {/* views */}
-        <div style={{ width: "100px" }} className='h5 text-center'>
+        <div style={{ width: "100px" }} className="h5 text-center">
           <h5>{this.props.content.views.length} </h5>
         </div>
         {/* date */}
-        <div style={{ width: "100px" }} className='h5 text-center'>
+        <div style={{ width: "100px" }} className="h5 text-center">
           <h5>{this.props.content.date}</h5>
         </div>
         {/* overview */}
-        <div style={{ width: "100px" }} className='h5 text-center'>
+        <div style={{ width: "100px" }} className="h5 text-center">
           <i
-            className='fas fa-eye'
+            className="fas fa-eye"
             onClick={() => this.setNewData(this.state.avgChartData)}
           ></i>
           {/* <MDBBtn onClick={() => this.setNewData(this.state.avgChartData)}>
@@ -221,9 +224,9 @@ export default class Chart extends Component {
           </MDBBtn> */}
         </div>
         {/* peaks */}
-        <div style={{ width: "85px" }} className='h5 text-center'>
+        <div style={{ width: "85px" }} className="h5 text-center">
           <i
-            className='fas fa-eye'
+            className="fas fa-eye"
             onClick={() => this.setNewData(this.state.maxChartData)}
           ></i>
 
