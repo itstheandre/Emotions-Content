@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, Component } from "react";
 import { Link } from "react-router-dom";
 import FaceApi from "../face-api/FaceApi";
 import ReactPlayer from "react-player";
@@ -7,10 +7,26 @@ import ReactAudioPlayer from "react-audio-player";
 // Written in a functional component. Same as below.
 
 const DisplayPost = props => {
+  // }
+  // class DisplayPost extends Component {
+  // state = {
+  //   loading: true
+  // };
+
+  // componentDidMount = () => {
+  //   setTimeout(() => {
+  //     this.setState({
+  //       loading: false
+  //     });
+  //   },8000);
+  // };
+  // const [loading, setLoading] = useState(true)
+
+  // render() {
   const video = props.contentType === "video";
   const audio = props.contentType === "audio";
   const image = props.contentType === "image";
-
+  // console.log(props);
   return (
     <>
       <div>
@@ -24,13 +40,17 @@ const DisplayPost = props => {
         )}
         {audio && <ReactAudioPlayer src={props.urlPath} controls />}
         <br />
-        HERE {props.views} views
+        <p>{props.viewTotal} views</p>
+        <p>{props.body}</p>
         <br />
         <Link to={`/u/${props.owner}`}>Check the creator's page</Link>
-        <FaceApi id={props.viewId} />
+        {/* <FaceApi id={this.props.viewId} /> */}
       </div>
+      {/* )} */}
+      <FaceApi id={props.viewId} />
     </>
   );
+  // }
 };
 
 export default DisplayPost;

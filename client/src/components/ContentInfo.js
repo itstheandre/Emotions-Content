@@ -1,60 +1,91 @@
 import React, { Component } from "react";
 import { Bar } from "react-chartjs-2";
 import axios from "axios";
-export default class Chart extends Component {
-  getDato() {
-    const { user } = this.props.match.params;
-    axios.get(`/api/chart/${user}`).then(response => {
-      const viewsData = response.data.map(el => {
-        return el.views;
-      });
-      console.log("Conten info!!! ", viewsData);
-      const allAvg = [];
+import { MDBBtn } from "mdbreact";
 
-      viewsData.forEach((elem, index) => {
-        elem.forEach((el, index) => {
-          allAvg.push(el.averageEmotion);
-        });
+export default class Chart extends Component {
+  state = {
+    avgChartData: {},
+    maxChartData: {},
+    emotionalImpact: 0,
+    malePercent: 0,
+    femalePercent: 0,
+    age: 0,
+    views: 0,
+    content: [],
+    time: ""
+  };
+
+  componentDidMount = () => {
+    this.getData(this.props.content.views);
+  };
+
+  getData = viewsArr => {
+    if (!viewsArr.length) {
+      return;
+    } else {
+      // console.log("ARRAY OF VIEWS???", viewsArr);
+      const averageEmotion = viewsArr.map(el => {
+        return el.averageEmotion;
       });
+      const maxEmotion = viewsArr.map(el => {
+        return el.maxEmotion;
+      });
+      function getEmotion(emotion) {
+        const sum = averageEmotion.reduce((acum, value) => {
+          if (value && value[emotion]) {
+            acum++;
+          }
+          return acum;
+        }, 0);
+        return sum;
+      }
+      let timeArr = [];
+      viewsArr.forEach(el => {
+        timeArr.push(el.time.min * 60);
+        timeArr.push(el.time.sec);
+      });
+      function myTime(time) {
+        const hr = ~~(time / 3600);
+        const min = ~~((time % 3600) / 60);
+        const sec = time % 60;
+        let sec_min = "";
+        if (hr > 0) {
+          sec_min += "" + hr + ":" + (min < 10 ? "0" : "");
+        }
+        sec_min += "" + min + ":" + (sec < 10 ? "0" : "");
+        sec_min += "" + sec;
+        return sec_min + " min";
+      }
+      const secsAvg = Math.round(getAverage(timeArr));
+      const time = myTime(secsAvg);
+
+      function getAverage(array) {
+        let sum = array.reduce((previous, current) => (current += previous));
+        let avg = sum / array.length;
+        return avg;
+      }
+      function getMaxEmotion(emotion) {
+        const emotionArr = maxEmotion.map(el => {
+          return el[emotion];
+        });
+        return getAverage(emotionArr);
+      }
       let neutralityArr = [];
-      allAvg.forEach((elem, index) => {
+      averageEmotion.forEach(elem => {
         neutralityArr.push(elem.neutralAvg);
       });
-      let sumNet = neutralityArr.reduce((acum, val) => {
-        return (acum += val);
-      }, 0);
-      let emotionalImpact = (100 - sumNet / neutralityArr.length).toFixed(2);
-      console.log(emotionalImpact);
-      console.log(neutralityArr);
-
-      function getEmotion(emotion) {
-        //    for (let i=0;i<allAvg.length;i++){
-        //        console.log(allAvg[i])
-        //    }
-
-        const emotionArr = allAvg.reduce((acc, curr) => {
-          if (curr && curr[emotion]) acc++;
-          return acc;
-        }, 0);
-        return emotionArr;
-      }
+      let emotionalImpact = (100 - getAverage(neutralityArr)).toFixed(2);
+      // console.log("Emo ", emotionalImpact);
       let ageAverage = [];
-      console.log("Hola!! ", viewsData);
-      viewsData.forEach((elem, index) => {
-        elem.forEach(el => {
-          ageAverage.push(el.age);
-        });
+      viewsArr.forEach(elem => {
+        ageAverage.push(elem.age);
       });
-      let sum = ageAverage.reduce((acum, elem) => {
-        return (acum += elem);
-      }, 0);
-
+      let age = Math.floor(getAverage(ageAverage));
+      // console.log("Age ", age);
       let genderArr = [];
-
-      viewsData.forEach((elem, index) => {
-        elem.forEach(el => {
-          genderArr.push(el.gender);
-        });
+      viewsArr.forEach(elem => {
+        genderArr.push(elem.gender);
       });
       let male = genderArr.filter(el => {
         if (el === "male") return el;
@@ -64,9 +95,8 @@ export default class Chart extends Component {
         ((genderArr.length - male.length) / genderArr.length) *
         100
       ).toFixed(2);
-      const views = genderArr.length;
+      const views = viewsArr.length;
 
-      const age = Math.floor(sum / ageAverage.length);
       const emotionsCount = {
         angry: getEmotion("angryAvg"),
         disgusted: getEmotion("disgustedAvg"),
@@ -75,26 +105,131 @@ export default class Chart extends Component {
         sad: getEmotion("sadAvg"),
         surprised: getEmotion("surprisedAvg")
       };
-      console.log(emotionsCount);
-    });
-  }
+
+      const avgChartData = {
+        labels: ["Angry", "Disgusted", "Fearful", "Happy", "Sad", "Surprised"],
+        datasets: [
+          {
+            label: "Emotions detected",
+            data: [
+              emotionsCount.angry,
+              emotionsCount.disgusted,
+              emotionsCount.fearful,
+              emotionsCount.happy,
+              emotionsCount.sad,
+              emotionsCount.surprised
+            ],
+            backgroundColor: [
+              "rgba(255, 0, 0, 1)",
+              "rgba(0, 255, 0, 1)",
+              "rgba(0, 0, 0, 1)",
+              "rgba(255, 149, 125, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(0, 136, 255, 1)",
+              "rgba(251, 255, 0, 1)"
+            ]
+          }
+        ]
+      };
+      const maxChartData = {
+        labels: ["Angry", "Disgusted", "Fearful", "Happy", "Sad", "Surprised"],
+        datasets: [
+          {
+            label: "Max emotion by %",
+            data: [
+              getMaxEmotion("angryMax") * 100,
+              getMaxEmotion("disgustedMax") * 100,
+              getMaxEmotion("fearfulMax") * 100,
+              getMaxEmotion("happyMax") * 100,
+              getMaxEmotion("sadMax") * 100,
+              getMaxEmotion("surprisedMax") * 100
+            ],
+            backgroundColor: [
+              "rgba(255, 0, 0, 1)",
+              "rgba(0, 255, 0, 1)",
+              "rgba(0, 0, 0, 1)",
+              "rgba(247, 214, 0, 1)",
+              "rgba(0, 136, 255, 1)",
+              "rgba(251, 255, 0, 1)",
+              "rgba(251, 255, 0, 1)"
+            ]
+          }
+        ]
+      };
+
+      this.setState({
+        avgChartData: avgChartData,
+        maxChartData,
+        age: age,
+        femalePercent: femalePercent,
+        malePercent: malePercent,
+        emotionalImpact: emotionalImpact,
+        views: views,
+        time: time
+        //   content: content
+      });
+    }
+  };
+  //   componentDidMount = () => {
+  //     this.props.getData(this.props.content.views);
+  //   };
+
+  setNewData = state => {
+    // console.log("CLICKED", this.state);
+    this.props.updateState(
+      state,
+      this.state.emotionalImpact,
+      this.state.malePercent,
+      this.state.femalePercent,
+      this.state.age,
+      this.state.views,
+      this.props.content.title,
+      this.state.time
+    );
+  };
 
   render() {
-    console.log(this.props.content);
-    // this.getDato();
+    // console.log(this.state);
     return (
-      <div>
-        <h4>Number of views {this.props.content.views.length} </h4>
-        <h1>Hello</h1>
-      </div>
-      // <div className="chart">
-      //    content name
-      //    neutrality
-      //    views.
-      //    type of
-      //    Avg time
+      <div className='headingTable'>
+        {/* Title */}
+        <div style={{ width: "100px" }} className='h5 text-center'>
+          <h5>{this.props.content.title} </h5>
+        </div>
+        {/* Type */}
+        <div style={{ width: "100px" }} className='h5 text-center'>
+          <h5>{this.props.content.contentType} </h5>
+        </div>
+        {/* views */}
+        <div style={{ width: "100px" }} className='h5 text-center'>
+          <h5>{this.props.content.views.length} </h5>
+        </div>
+        {/* date */}
+        <div style={{ width: "100px" }} className='h5 text-center'>
+          <h5>{this.props.content.date}</h5>
+        </div>
+        {/* overview */}
+        <div style={{ width: "100px" }} className='h5 text-center'>
+          <i
+            class='fas fa-eye'
+            onClick={() => this.setNewData(this.state.avgChartData)}
+          ></i>
+          {/* <MDBBtn onClick={() => this.setNewData(this.state.avgChartData)}>
+            show
+          </MDBBtn> */}
+        </div>
+        {/* peaks */}
+        <div style={{ width: "85px" }} className='h5 text-center'>
+          <i
+            class='fas fa-eye'
+            onClick={() => this.setNewData(this.state.maxChartData)}
+          ></i>
 
-      // </div>
+          {/* <MDBBtn onClick={() => this.setNewData(this.state.maxChartData)}>
+            show
+          </MDBBtn> */}
+        </div>
+      </div>
     );
   }
 }

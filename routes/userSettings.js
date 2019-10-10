@@ -17,6 +17,7 @@ router.post(
   "/add/image",
   uploadCloud.single("profilePicture"),
   (req, res, next) => {
+    console.log(req.file);
     // console.log('file is: ', req.file)
     // <console className="l">se </console>og(req.file);
     if (!req.file) {
@@ -35,7 +36,7 @@ router.put("/:id", (req, res) => {
     fullName,
     username,
     newPasswordTest,
-    profilePicture,
+    // profilePicture,
     oldPasswordTest
   } = req.body;
   console.log(req.body);
@@ -62,11 +63,9 @@ router.put("/:id", (req, res) => {
       }
 
       if (newPasswordTest.length < 8) {
-        return res
-          .status(400)
-          .json({
-            message: "Please make sure your password has 8 characters, at least"
-          });
+        return res.status(400).json({
+          message: "Please make sure your password has 8 characters, at least"
+        });
       }
 
       let password;
@@ -80,12 +79,13 @@ router.put("/:id", (req, res) => {
       }
 
       // const password = newPasswordTest ? newHashPass : dbUser.password;
-      const profilePicture = profilePicture
-        ? profilePicture
-        : dbUser.profilePicture;
+      // const profilePicture = profilePicture
+      //   ? profilePicture
+      //   : dbUser.profilePicture;
       User.findByIdAndUpdate(
         req.params.id,
-        { username, fullName, profilePicture, password },
+        { username, fullName, password },
+        // { username, fullName, profilePicture, password },
         { new: true }
       )
         .then(response => {

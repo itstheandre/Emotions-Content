@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ReactPlayer from "react-player";
+import ReactAudioPlayer from "react-audio-player";
+import { Link } from "react-router-dom";
 
 // Written with Hooks. Same as below
 
@@ -10,6 +13,9 @@ const Post = props => {
   // const [owner, setOwner] = useState("");
   const [fullName, setFullName] = useState("");
   const [textToCopy, setTextToCopy] = useState("");
+  const [message, setMessage] = useState("");
+  const [contentType, setContentType] = useState("");
+  const [urlPath, setUrlPath] = useState("");
 
   // const getPostData = () => {
   //   const { unique } = props.match.params;
@@ -35,34 +41,70 @@ const Post = props => {
   useEffect(() => {
     const { unique } = props.match.params;
     axios.get(`/api/content/${unique}`).then(response => {
+      console.log("HEER", response.data);
       const post = response.data;
-      const { title, body } = post;
+      const { title, body, urlPath, contentType } = post;
       const id = post._id;
       const owner = post.owner.username;
       const { fullName } = post.owner;
       setTitle(title);
       setBody(body);
-      // setId(id);
+      setUrlPath(urlPath);
+      setContentType(contentType);
       // setOwner(owner);
       setFullName(fullName);
       setTextToCopy(`https://motus-app.herokuapp.com//u/${owner}/${id}`);
     });
   }, []);
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(textToCopy);
+    setMessage("Your link has been copied to the cliboard");
+    setTimeout(() => {
+      setMessage("");
+    }, 2000);
+  };
+
+  const video = contentType === "video";
+  const audio = contentType === "audio";
+  const image = contentType === "image";
+  console.log(urlPath);
   return (
     <div>
-      <button onClick={() => props.history.goBack()}>
-        <i class='fas fa-3x fa-angle-left'></i>
-      </button>
-      <h1>{title}</h1>
-      <p>{body}</p>
-      <button
-        onClick={() => {
-          navigator.clipboard.writeText(textToCopy);
-        }}
-      >
-        Share this link and check the emotional responses.
-      </button>
+      <i
+        className='fas fa-3x fa-angle-left'
+        onClick={() => props.history.goBack()}
+      ></i>
+
+      <div className='motusHeader'>
+        {/* <iframe
+          style={{ pointerEvents: "none" }}
+          src='https://giphy.com/embed/d2YVPRhQXI5FxJRe'
+          width='480'
+          height='240'
+          frameBorder='0'
+          className='giphy-embed'
+        ></iframe> */}
+        <h1>{title}</h1>
+        {image && <img src={urlPath} />}
+        {video && (
+          <div className='videoPlayer'>
+            <div className='embed-responsive'>
+              <ReactPlayer url={urlPath} controls={true} />
+            </div>
+          </div>
+        )}
+        {audio && <ReactAudioPlayer src={urlPath} controls />}
+
+        <p>{body}</p>
+        <i
+          className='fas fa-2x fa-share-square'
+          style={{ cursor: "pointer" }}
+          onClick={handleCopy}
+        ></i>
+
+        <p>{message}</p>
+      </div>
     </div>
   );
 };

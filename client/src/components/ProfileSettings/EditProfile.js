@@ -65,8 +65,8 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
               name='fullName'
               id='fullName'
               value={user.fullName}
-              onChange={e =>
-                setUser({ ...user, [e.target.name]: e.target.value })
+              onChange={({ target: { name, value } }) =>
+                setUser({ ...user, [name]: value })
               }
             />
             {/* <label htmlFor="username">Username</label> */}
@@ -76,8 +76,8 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
               name='username'
               id='username'
               value={user.username}
-              onChange={e =>
-                setUser({ ...user, [e.target.name]: e.target.value })
+              onChange={({ target: { name, value } }) =>
+                setUser({ ...user, [name]: value })
               }
             />
             {/* <label htmlFor="oldPasswordTest">Old Password</label> */}
@@ -87,8 +87,8 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
               name='oldPasswordTest'
               id='oldPasswordTest'
               value={user.oldPasswordTest}
-              onChange={e =>
-                setUser({ ...user, [e.target.name]: e.target.value })
+              onChange={({ target: { name, value } }) =>
+                setUser({ ...user, [name]: value })
               }
             />
             {/* <label htmlFor="newPasswordTest">Password</label> */}
@@ -98,8 +98,8 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
               name='newPasswordTest'
               id='newPasswordTest'
               value={user.newPasswordTest}
-              onChange={e =>
-                setUser({ ...user, [e.target.name]: e.target.value })
+              onChange={({ target: { name, value } }) =>
+                setUser({ ...user, [name]: value })
               }
             />
             {/* <label htmlFor="file">Profile Picture</label>
@@ -109,7 +109,7 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
               id="profilePictureTest"
               onChange={onImageUpload}
             /> */}
-            <div className='input-group'>
+            {/* <div className='input-group'>
               <div className='custom-file'>
                 <input
                   type='file'
@@ -123,7 +123,7 @@ const EditProfile = ({ setUser, handleSubmit, onImageUpload, user }) => {
                   choose file
                 </label>
               </div>
-            </div>
+            </div> */}
             <div className='text-center'>
               <MDBBtn type='submit'>Save</MDBBtn>
             </div>

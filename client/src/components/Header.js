@@ -9,6 +9,7 @@ import React from "react";
 //   MDBInput,
 //   MDBLabel
 // } from "mdbreact";
+
 import "../App.css";
 
 const Header = () => {
@@ -26,7 +27,10 @@ const Header = () => {
         className=" motusHeader giphy-embed"
         allowFullScreen
       ></iframe>
-      <p style={{ fontSize: "2rem" }} className="motusHeader">
+      <p
+        style={{ fontSize: "2rem", color: "darkgrey", lineHeight: "0.9" }}
+        className="motusHeader"
+      >
         the app that makes analitics of a content in terms of user's emotions,
         age, gender and time spent on a page
       </p>
