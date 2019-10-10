@@ -14,7 +14,8 @@ export default class Chart extends Component {
     views: 0,
     content: [],
     viewsArr: [],
-    title: ""
+    title: "",
+    time: ""
   };
   componentDidMount = () => {
     const user = this.props.user.username;
@@ -63,12 +64,7 @@ export default class Chart extends Component {
         let avg = sum / array.length;
         return avg;
       };
-      function getMaxEmotion(emotion) {
-        const emotionArr = maxEmotion.map(el => {
-          return el[emotion];
-        });
-        return getAverage(emotionArr);
-      }
+
       let neutralityArr = [];
       averageEmotion.forEach(elem => {
         neutralityArr.push(elem.neutralAvg);
@@ -80,14 +76,26 @@ export default class Chart extends Component {
         ageAverage.push(elem.age);
       });
       let timeArr = [];
-      // views.forEach(el => {
-      //   el.time.forEach(elem => {
-      //     elem.fullTime.forEach(single => {
-      //       single.push;
-      //     });
-      //   });
-      // });
-      console.log("Time-----", viewsArr[0].time);
+      viewsArr.forEach(el => {
+        timeArr.push(el.time.min * 60);
+        timeArr.push(el.time.sec);
+      });
+      function myTime(time) {
+        const hr = ~~(time / 3600);
+        const min = ~~((time % 3600) / 60);
+        const sec = time % 60;
+        let sec_min = "";
+        if (hr > 0) {
+          sec_min += "" + hr + ":" + (min < 10 ? "0" : "");
+        }
+        sec_min += "" + min + ":" + (sec < 10 ? "0" : "");
+        sec_min += "" + sec;
+        return sec_min + " min";
+      }
+      const secsAvg = Math.round(getAverage(timeArr));
+      const time = myTime(secsAvg);
+
+      console.log("Time-----", time);
       let age = Math.floor(getAverage(ageAverage));
       let genderArr = [];
       viewsArr.forEach(elem => {
@@ -138,17 +146,20 @@ export default class Chart extends Component {
         ]
       };
 
+      const title = "All";
+      //console.log("CHECKING STUFF", time, title);
       this.updateState(
         chartData,
         emotionalImpact,
         malePercent,
         femalePercent,
         age,
-        views
+        views,
+        title,
+        time
       );
     }
   };
-
   updateState = (
     chartData,
     emotionalImpact,
@@ -156,7 +167,9 @@ export default class Chart extends Component {
     femalePercent,
     age,
     views,
-    title = "All"
+    title = "All",
+    time
+
     // content
   ) => {
     this.setState({
@@ -166,7 +179,8 @@ export default class Chart extends Component {
       malePercent: malePercent,
       emotionalImpact: emotionalImpact,
       views: views,
-      title: title
+      title: title,
+      time: time
       //   content: content
     });
   };
@@ -177,7 +191,7 @@ export default class Chart extends Component {
   };
 
   render() {
-    console.log("SCARY SHIT INDEED, ", this.state);
+    console.log("SCARY SHIT INDEED, ", this.state.time);
     return (
       <>
         <h1>{this.state.title} </h1>
@@ -194,6 +208,7 @@ export default class Chart extends Component {
               <h5>Male:{this.state.malePercent}%</h5>
               <h5>Female:{this.state.femalePercent}%</h5>
               <h5>Total views:{this.state.views}</h5>
+              <h5>Time: {this.state.time}</h5>
             </div>
 
             <button onClick={() => this.resetData()}>Show all Data</button>

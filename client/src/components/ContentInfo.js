@@ -11,7 +11,8 @@ export default class Chart extends Component {
     femalePercent: 0,
     age: 0,
     views: 0,
-    content: []
+    content: [],
+    time: ""
   };
 
   componentDidMount = () => {
@@ -38,6 +39,25 @@ export default class Chart extends Component {
         }, 0);
         return sum;
       }
+      let timeArr = [];
+      viewsArr.forEach(el => {
+        timeArr.push(el.time.min * 60);
+        timeArr.push(el.time.sec);
+      });
+      function myTime(time) {
+        const hr = ~~(time / 3600);
+        const min = ~~((time % 3600) / 60);
+        const sec = time % 60;
+        let sec_min = "";
+        if (hr > 0) {
+          sec_min += "" + hr + ":" + (min < 10 ? "0" : "");
+        }
+        sec_min += "" + min + ":" + (sec < 10 ? "0" : "");
+        sec_min += "" + sec;
+        return sec_min + " min";
+      }
+      const secsAvg = Math.round(getAverage(timeArr));
+      const time = myTime(secsAvg);
 
       function getAverage(array) {
         let sum = array.reduce((previous, current) => (current += previous));
@@ -143,7 +163,8 @@ export default class Chart extends Component {
         femalePercent: femalePercent,
         malePercent: malePercent,
         emotionalImpact: emotionalImpact,
-        views: views
+        views: views,
+        time: time
         //   content: content
       });
     }
@@ -160,7 +181,8 @@ export default class Chart extends Component {
       this.state.femalePercent,
       this.state.age,
       this.state.views,
-      this.props.content.title
+      this.props.content.title,
+      this.state.time
     );
   };
 
