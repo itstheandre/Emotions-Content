@@ -61,7 +61,7 @@ const Settings = ({ user: { _id }, history }) => {
     const uploadData = new FormData();
     // imageUrl => this name has to be the same as in the model since we pass
     // req.body to .create() method when creating a new thing in '/api/things/create' POST route
-    uploadData.append("profilePicture", files);
+    uploadData.append("profilePictureTest", files);
     axios.post("/api/userSettings/add/image", uploadData).then(response => {
       const profilePicture = response.data.secure_url;
       setUser({ ...user, profilePicture });
@@ -70,16 +70,16 @@ const Settings = ({ user: { _id }, history }) => {
 
   return (
     <div>
-      <h1>Heverything is here</h1>
+      <h1 className=" text-center mb-4 logIn">Edit your profile</h1>
       {/* <button onClick={checkDatabase}>Click for console.log</button> */}
-      <h2>{user.username} </h2>
+      {/* <h2>{user.username} </h2> */}
       <EditProfile
         setUser={setUser}
         handleSubmit={handleSubmit}
         onImageUpload={onImageUpload}
         user={user}
       />
-      {message}
+      <p style={{ textAlign: "center" }}>{message}</p>
     </div>
   );
 };

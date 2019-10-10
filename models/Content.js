@@ -11,8 +11,6 @@ const contentSchema = new Schema({
   views: Number,
   date: String,
   urlPath: String,
-  // videoUrl: String,
-  // audioUrl: String,
   title: String,
   body: String,
   views: [{ type: Schema.Types.ObjectId, ref: "Views" }]

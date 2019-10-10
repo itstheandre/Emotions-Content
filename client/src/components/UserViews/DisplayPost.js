@@ -7,23 +7,29 @@ import ReactAudioPlayer from "react-audio-player";
 // Written in a functional component. Same as below.
 
 const DisplayPost = props => {
-  console.log("PROPS: ", props.contentType);
-
   const video = props.contentType === "video";
   const audio = props.contentType === "audio";
   const image = props.contentType === "image";
 
   return (
-    <div>
-      {image && <img src={props.urlPath} />}
-      {video && <ReactPlayer url={props.urlPath} controls={true} />}
-      {audio && <ReactAudioPlayer src={props.urlPath} controls />}
-      <br />
-      HERE {props.views} views
-      <br />
-      <Link to={`/u/${props.owner}`}>Check the creator's page</Link>
-      <FaceApi id={props.viewId} />
-    </div>
+    <>
+      <div>
+        {image && <img src={props.urlPath} />}
+        {video && (
+          <div className="videoPlayer">
+            <div className="embed-responsive">
+              <ReactPlayer url={props.urlPath} controls={true} />
+            </div>
+          </div>
+        )}
+        {audio && <ReactAudioPlayer src={props.urlPath} controls />}
+        <br />
+        HERE {props.views} views
+        <br />
+        <Link to={`/u/${props.owner}`}>Check the creator's page</Link>
+        <FaceApi id={props.viewId} />
+      </div>
+    </>
   );
 };
 

@@ -73,7 +73,7 @@ const Post = props => {
 
   return (
     <div>
-      <h1>{contentType}</h1>
+      {/* <h1>{contentType}</h1>
       <br />
       <h1>#of Views {viewTotal}</h1>
       <h1>{title} </h1>
@@ -81,7 +81,7 @@ const Post = props => {
       <h3>CONTENT ID: {contentId}</h3>
       <h4>OWNER: {owner} </h4>
       <h5>OWNERID: {ownerId} </h5>
-      <h6>viewID: {viewId} </h6>
+      <h6>viewID: {viewId} </h6> */}
 
       <DisplayPost {...state} />
     </div>

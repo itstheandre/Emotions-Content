@@ -21,7 +21,7 @@ const Header = () => {
         style={{ pointerEvents: "none" }}
         src="https://giphy.com/embed/KD1vTHZYe5l8TcPZHo"
         width="480"
-        height="480"
+        height="300"
         frameBorder="0"
         className=" motusHeader giphy-embed"
         allowFullScreen

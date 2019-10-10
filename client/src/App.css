@@ -94,6 +94,8 @@ label {
   margin-top: 30px;
 }
 
+
+
 .heyUser {
   padding-top: 9px;
   font-size: 1.2rem;
@@ -107,4 +109,30 @@ label {
   width: 50%;
   text-align: center;
 
+}
+
+.plusIcon {
+  align-items: right;
+}
+
+.dashCard {
+  margin-bottom: 40px;
+}
+
+.addBtn {
+  margin: 20px 20px 20px 82%;
+
+}
+
+i {
+  margin: 8px;
+}
+
+.borderCard {
+  border: #00CCB7;
+  border-radius: 5%;
+}
+
+.videoPlayer {
+  margin: 1% 1%;
 }
