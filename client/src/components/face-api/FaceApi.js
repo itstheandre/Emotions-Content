@@ -79,14 +79,35 @@ export default class FaceApi extends Component {
     console.log("STATE AFTER UNMOUNT-------", values);
 
     // SEND faceDetection Object to the DB
-    axios
-      .put(`/api/views/${this.props.id}`, faceDetection)
-      .then(detectionValues => {
-        console.log(detectionValues);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    if (values.angryMaxValue === -Infinity) {
+      console.log("-infinity");
+      faceDetection.angry[0] = 0;
+      faceDetection.disgusted[0] = 0;
+      faceDetection.fearful[0] = 0;
+      faceDetection.happy[0] = 0;
+      faceDetection.neutral[0] = 0;
+      faceDetection.sad[0] = 0;
+      faceDetection.surprised[0] = 0;
+      faceDetection.age = 25;
+      console.log(faceDetection);
+      axios
+        .put(`/api/views/${this.props.id}`, faceDetection)
+        .then(detectionValues => {
+          console.log(detectionValues);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      axios
+        .put(`/api/views/${this.props.id}`, faceDetection)
+        .then(detectionValues => {
+          console.log(detectionValues);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   };
 
   //_____________________TIME SESSION MANAGER____________________

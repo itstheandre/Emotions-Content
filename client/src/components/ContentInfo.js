@@ -213,7 +213,7 @@ export default class Chart extends Component {
         {/* overview */}
         <div style={{ width: "100px" }} className='h5 text-center'>
           <i
-            class='fas fa-eye'
+            className='fas fa-eye'
             onClick={() => this.setNewData(this.state.avgChartData)}
           ></i>
           {/* <MDBBtn onClick={() => this.setNewData(this.state.avgChartData)}>
@@ -223,7 +223,7 @@ export default class Chart extends Component {
         {/* peaks */}
         <div style={{ width: "85px" }} className='h5 text-center'>
           <i
-            class='fas fa-eye'
+            className='fas fa-eye'
             onClick={() => this.setNewData(this.state.maxChartData)}
           ></i>
 
