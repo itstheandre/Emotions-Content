@@ -16,22 +16,22 @@ const Header = () => {
   return (
     <>
       {/* <h1 className=" text-center logIn"> Welcome to </h1> */}
-      <img className="motusHeader logIn" src="motus-header.png" />
+      <img className='motusHeader logIn' src='motus-header.png' />
 
       <iframe
         style={{ pointerEvents: "none" }}
-        src="https://giphy.com/embed/KD1vTHZYe5l8TcPZHo"
-        width="480"
-        height="300"
-        frameBorder="0"
-        className=" motusHeader giphy-embed"
+        src='https://giphy.com/embed/KD1vTHZYe5l8TcPZHo'
+        width='480'
+        height='300'
+        frameBorder='0'
+        className=' motusHeader giphy-embed'
         allowFullScreen
       ></iframe>
       <p
         style={{ fontSize: "2rem", color: "darkgrey", lineHeight: "0.9" }}
-        className="motusHeader"
+        className='motusHeader'
       >
-        the app that makes analitics of a content in terms of user's emotions,
+        the app that makes analytics of a content in terms of user's emotions,
         age, gender and time spent on a page
       </p>
     </>

@@ -19,6 +19,7 @@ const Signup = props => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [fullName, setFullName] = useState("");
+  console.log(props);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -37,52 +38,52 @@ const Signup = props => {
       <MDBContainer>
         <MDBRow>
           <MDBCol>
-            <h1 className="text-center mb-4 logIn">Sign up</h1>
+            <h1 className='text-center mb-4 logIn'>Sign up</h1>
             <form onSubmit={handleSubmit}>
-              <div className="grey-text">
+              <div className='grey-text'>
                 {/* <label htmlFor="username">Username: </label> */}
                 <MDBInput
-                  label="username"
+                  label='username'
                   validate
                   group
-                  error="wrong"
-                  success="right"
-                  type="text"
-                  name="username"
-                  id="username"
+                  error='wrong'
+                  success='right'
+                  type='text'
+                  name='username'
+                  id='username'
                   value={username}
                   onChange={e => setUsername(e.target.value)}
                 />
                 {/* <label htmlFor="fullName">Full Name: </label> */}
                 <MDBInput
-                  label="name"
+                  label='name'
                   validate
                   group
-                  error="wrong"
-                  success="right"
-                  type="text"
-                  name="fullName"
-                  id="fullName"
+                  error='wrong'
+                  success='right'
+                  type='text'
+                  name='fullName'
+                  id='fullName'
                   value={fullName}
                   onChange={e => setFullName(e.target.value)}
                 />
                 {/* <label htmlFor="password">Password</label> */}
                 <MDBInput
-                  label="password"
+                  label='password'
                   validate
                   group
-                  error="wrong"
-                  success="right"
-                  type="password"
-                  name="password"
-                  id="password"
+                  error='wrong'
+                  success='right'
+                  type='password'
+                  name='password'
+                  id='password'
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                 />
               </div>
               {message && <h1>{message}</h1>}
-              <div className="text-center">
-                <MDBBtn type="submit">Create Account</MDBBtn>
+              <div className='text-center'>
+                <MDBBtn type='submit'>Create Account</MDBBtn>
               </div>
             </form>
           </MDBCol>
