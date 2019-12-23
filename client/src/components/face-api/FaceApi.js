@@ -99,6 +99,7 @@ export default class FaceApi extends Component {
           console.log(err);
         });
     } else {
+      console.log("Hi");
       axios
         .put(`/api/views/${this.props.id}`, faceDetection)
         .then(detectionValues => {
