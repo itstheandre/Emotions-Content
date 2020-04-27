@@ -27,40 +27,40 @@ class App extends React.Component {
   render() {
     console.log(this.state.user);
     return (
-      <div className='App'>
+      <div className="App">
         <Navbar user={this.state.user} setUser={this.setUser} />
         <Switch>
           {" "}
           <Route
             exact
-            path='/signup'
+            path="/signup"
             render={props => <Signup setUser={this.setUser} {...props} />}
           />
           <Route
             exact
-            path='/login'
+            path="/login"
             render={props => <Login setUser={this.setUser} {...props} />}
           />
           <Route
             exact
-            path='/content-dashboard'
+            path="/content-dashboard"
             render={props => (
               <ContentManager user={this.state.user} {...props} />
             )}
           />
           <Route
             exact
-            path='/content'
+            path="/content"
             render={props => (
               <ContentManager user={this.state.user} {...props} />
             )}
           />
-          <Route exact path='/content-dashboard/add' component={AddContent} />
-          <Route exact path='/content-dashboard/:unique' component={Post} />
-          <Route exact path='/edit/:editPost' component={EditContent} />
+          <Route exact path="/content-dashboard/add" component={AddContent} />
+          <Route exact path="/content-dashboard/:unique" component={Post} />
+          <Route exact path="/edit/:editPost" component={EditContent} />
           <Route exact path={"/u/:user"} component={CreatorPage} />
           <Route exact path={`/u/:user/:id`} component={DetectEmotion} />
-          <Route exact path='/' component={Header} />
+          <Route exact path="/" component={Header} />
           {/*   <Route
             exact
             path='/chart/:user'
@@ -68,12 +68,12 @@ class App extends React.Component {
           /> */}
           <Route
             exact
-            path='/chart'
+            path="/chart"
             render={props => <Chart user={this.state.user} />}
           />
           <Route
             exact
-            path='/settings'
+            path="/settings"
             render={props => <Settings user={this.state.user} {...props} />}
           />
         </Switch>

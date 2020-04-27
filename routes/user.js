@@ -4,22 +4,54 @@ const Content = require("../models/Content");
 const User = require("../models/User");
 const Views = require("../models/Views");
 
-//Getting all the documents from a user
-router.get("/api/:user", (req, res) => {
-  const user = req.params.user;
-  User.find({ username: user }).then(allContent => {
-    // console.log("here", allContent);
-    const id = allContent[0]._id;
+const catchErrors = fn => {
+  return function(...params) {
+    console.log(params);
+    return fn(...params).catch(err => {
+      console.log(err.message);
+    });
+  };
+};
 
-    Content.find({ owner: id })
-      .then(userDetails => {
-        res.json(userDetails);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  });
-});
+async function findUser(req, res, next) {
+  const user = req.params.user;
+  const allContent = await User.find({ username: user });
+  const [{ _id }] = allContent;
+  const userDetails = await Content.find({ owner: _id });
+  res.json(userDetails);
+
+  // User.find({ username: user }).then(allContent => {
+  //   // console.log("here", allContent);
+  //   const id = allContent[0]._id;
+
+  //   Content.find({ owner: id })
+  //     .then(userDetails => {
+  //       res.json(userDetails);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // });
+}
+
+//Getting all the documents from a user
+// router.get("/api/:user", (req, res) => {
+//   const user = req.params.user;
+//   User.find({ username: user }).then(allContent => {
+//     // console.log("here", allContent);
+//     const id = allContent[0]._id;
+
+//     Content.find({ owner: id })
+//       .then(userDetails => {
+//         res.json(userDetails);
+//       })
+//       .catch(err => {
+//         console.log(err);
+//       });
+//   });
+// });
+
+router.get("/api/:user", catchErrors(findUser));
 
 // Get all the data from a content Id and a User
 router.get("/api/:user/:id", (req, res) => {
@@ -100,13 +132,24 @@ router.get("/api/:user/:id", (req, res) => {
 //   });
 // });
 
-router.put("/api/views/:id", (req, res) => {
+async function getViews(req, res) {
   const views = req.body.views;
-  Content.findByIdAndUpdate(req.params.id, { views }, { new: true })
-    .populate("owner")
-    .then(updated => {
-      res.json(updated);
-    });
-});
+  const updated = await Content.findByIdAndUpdate(
+    req.params.id,
+    { views },
+    { new: true }
+  ).populate("owner");
+
+  res.json(updated);
+}
+router.put("/api/views/:id", catchErrors(getViews));
+// router.put("/api/views/:id", (req, res) => {
+//   const views = req.body.views;
+//   Content.findByIdAndUpdate(req.params.id, { views }, { new: true })
+//     .populate("owner")
+//     .then(updated => {
+//       res.json(updated);
+//     });
+// });
 
 module.exports = router;

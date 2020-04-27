@@ -31,7 +31,7 @@ const CreatorPage = props => {
   return (
     <>
       <div>
-        <h2 style={{ textAlign: "center" }} className='logIn h3'>
+        <h2 style={{ textAlign: "center" }} className="logIn h3">
           My Content Dashboard
         </h2>
 

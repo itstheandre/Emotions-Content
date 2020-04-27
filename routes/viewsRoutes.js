@@ -4,6 +4,14 @@ const Content = require("../models/Content");
 const User = require("../models/User");
 const Views = require("../models/Views");
 
+const catchErrors = fn => {
+  console.log("inside the catch errors func");
+  return function(...params) {
+    console.log(params);
+    return fn(...params).catch(err => err.message);
+  };
+};
+
 //CREATE NEW VIEW WITH CONTENT ID REF
 router.post("/:id", (req, res) => {
   const contentId = req.params.id;

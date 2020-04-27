@@ -5,13 +5,30 @@ const uploadCloud = require("../config/cloudinary-profile");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
-router.get("/:id", (req, res, next) => {
-  console.log(req.params.id);
+const catchErrors = fn => {
+  console.log("inside the catch errors func");
+  return function(...params) {
+    console.log(params);
+    return fn(...params).catch(err => err.message);
+  };
+};
+
+async function user(req, res, next) {
+  console.log("hello");
   const { id } = req.params;
-  User.findById(id).then(response => {
-    res.json(response);
-  });
-});
+  const user = await User.findById(id);
+  res.json(user);
+}
+
+router.get("/:id", catchErrors(user));
+
+// router.get("/:id", (req, res, next) => {
+//   console.log(req.params.id);
+//   const { id } = req.params;
+//   User.findById(id).then(response => {
+//     res.json(response);
+//   });
+// });
 
 router.post(
   "/add/image",

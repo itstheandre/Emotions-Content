@@ -235,12 +235,26 @@ export default class FaceApi extends Component {
   // stop all the webcams
   webcam = () => {
     const video = document.getElementById("video");
-    navigator.getUserMedia(
-      { video: {} },
-      stream =>
-        (video.srcObject = stream.getVideoTracks().forEach(x => x.stop())),
-      err => console.error(err)
-    );
+
+    async function getMedia2(constraints) {
+      let stream = null;
+
+      try {
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = stream.getVideoTracks().forEach(x => x.stop());
+        /* use the stream */
+      } catch (err) {
+        /* handle the error */
+      }
+    }
+
+    getMedia2();
+    // navigator.getUserMedia(
+    //   { video: {} },
+    //   stream =>
+    //     (video.srcObject = stream.getVideoTracks().forEach(x => x.stop())),
+    //   err => console.error(err)
+    // );
   };
 
   //__________________________Face API________________________//
@@ -254,10 +268,23 @@ export default class FaceApi extends Component {
       faceapi.nets.faceRecognitionNet.loadFromUri("/assets"),
       faceapi.nets.faceExpressionNet.loadFromUri("/assets"),
       faceapi.nets.ageGenderNet.loadFromUri("/assets")
-    ]).then(startVideo);
+    ]).then(getMedia);
 
     // start webcam
     // JUST WAIT A BIT: THE CAMERA IS OFF, BUT THE LED WILL STAY ON FOR A FEW SECs
+
+    async function getMedia(constraints) {
+      let stream = null;
+
+      try {
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = stream;
+        /* use the stream */
+      } catch (err) {
+        /* handle the error */
+      }
+    }
+
     function startVideo() {
       navigator.getUserMedia(
         { video: {} },

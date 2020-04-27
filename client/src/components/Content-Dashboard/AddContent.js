@@ -51,7 +51,8 @@ const AddContent = props => {
         })
         .then(() => {
           props.history.push("/content-dashboard");
-        });
+        })
+        .catch(err => setMessage(err.message));
     } else {
       setMessage("Please fill out the whole form");
     }

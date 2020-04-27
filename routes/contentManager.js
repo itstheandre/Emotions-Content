@@ -57,10 +57,18 @@ router.post(
   }
 );
 
-// Create content
-router.post("/add", (req, res) => {
-  // , uploadCloud.single("imagePath")
+const displayError = async (err, req, res, next) => {
+  res.status(err.status || 500);
+};
 
+const catchErrors = fn => {
+  console.log("inside the catch errors func");
+  return function(req, res, next) {
+    return fn(req, res).catch(next);
+  };
+};
+
+async function addContent(req, res, next) {
   const { url, title, contentType, body, urlPath } = req.body;
 
   const owner = req.user;
@@ -68,9 +76,8 @@ router.post("/add", (req, res) => {
     .toJSON()
     .slice(0, 10)
     .replace(/-/g, "/");
-
-  User.findById(req.user._id).then(found => {
-    Content.create({
+  try {
+    const created = await Content.create({
       url,
       title,
       date,
@@ -78,13 +85,43 @@ router.post("/add", (req, res) => {
       owner,
       body,
       urlPath
-    }).then(response => {
-      console.log("response here: ", response);
-      console.log("aaaaaaaa", response);
-      res.json(response);
     });
-  });
-});
+
+    res.json(created);
+  } catch (error) {
+    next();
+  }
+}
+
+router.post("/add", displayError, catchErrors(addContent));
+// // Create content
+// router.post("/add", (req, res) => {
+//   // , uploadCloud.single("imagePath")
+
+//   const { url, title, contentType, body, urlPath } = req.body;
+
+//   const owner = req.user;
+//   const date = new Date()
+//     .toJSON()
+//     .slice(0, 10)
+//     .replace(/-/g, "/");
+
+//   User.findById(req.user._id).then(found => {
+//     Content.create({
+//       url,
+//       title,
+//       date,
+//       contentType,
+//       owner,
+//       body,
+//       urlPath
+//     }).then(response => {
+//       console.log("response here: ", response);
+//       console.log("aaaaaaaa", response);
+//       res.json(response);
+//     });
+//   });
+// });
 
 // Delete Content
 router.delete("/:id", (req, res) => {
